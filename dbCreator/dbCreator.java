@@ -1,7 +1,7 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Savepoint;
 import java.sql.Statement;
 
 /**
@@ -24,6 +24,8 @@ public class dbCreator {
             Class.forName(driverName);
             connection = DriverManager.getConnection(url + ":" + port + "/" + dbName, 
                                                      username, password);
+            connection.setAutoCommit(false);
+
             Statement statement = connection.createStatement();
             statement.executeUpdate(queryGetter.userCreationQuery());
             System.out.println("userInfo table created");
@@ -35,7 +37,7 @@ public class dbCreator {
             System.out.println("car table created");
             
             statement.executeUpdate(queryGetter.carPoolCreationQuery());
-            System.out.println("carpool table created");
+            System.out.println("carPool table created");
 
             statement.executeUpdate(queryGetter.trajectoryCreationQuery());
             System.out.println("trajectory table created");
@@ -43,7 +45,19 @@ public class dbCreator {
             statement.executeUpdate(queryGetter.tripPlanCreationQuery());
             System.out.println("tripPlan table created");
 
+            System.out.println("------Everything works--------");
+            System.out.println("------Now Commiting--------");
+            connection.commit();
+
         } catch (Exception e) {
+            System.out.println("------Error--------");
+            System.out.println("------Now Rolling Back--------");
+            try {
+                connection.rollback();
+                System.out.println(e);
+            } catch(SQLException esq) {
+                System.out.println(esq);
+            }
             System.out.println(e);
         } finally {
             try{

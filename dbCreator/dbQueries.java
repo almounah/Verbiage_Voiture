@@ -5,7 +5,7 @@
 public class dbQueries {
 
     public String userCreationQuery() {
-        String query = "CREATE TABLE UserInfo" +
+        String query = "CREATE TABLE userInfo" +
                        "(mailUser VARCHAR(255)," +
                        " userLastName VARCHAR(255)," +
                        " userfirstName VARCHAR(255)," +
@@ -19,7 +19,7 @@ public class dbQueries {
 
 
     public String sectionsCreationQuery() {
-        String query = "CREATE TABLE Sections" +
+        String query = "CREATE TABLE sections" +
                        "(trajectId INT," +
                        " sectionId INT," +
                        " cityArrival VARCHAR(255)," +
@@ -40,7 +40,7 @@ public class dbQueries {
 
 
     public String trajectoryCreationQuery() {
-        String query = "CREATE TABLE Trajectory" +
+        String query = "CREATE TABLE trajectory" +
                        "(trajectId INT," +
                        " drivenLicenseCar VARCHAR(255)," +
                        " PRIMARY KEY (trajectId, drivenLicenseCar));";
@@ -53,7 +53,7 @@ public class dbQueries {
         String query = "CREATE TABLE carPool" +
                        "(trajectId INT," +
                        " mailUser VARCHAR(255)," +
-                       " userStatus ENUM('driver', 'passenger')," +
+                       " userStatus ENUM ('driver', 'passenger')," +
                        " PRIMARY KEY (trajectId, mailUser, userStatus));";
 
         return query;
@@ -62,11 +62,11 @@ public class dbQueries {
 
     public String carCreationQuery() {
         String query = "CREATE TABLE car" +
-                       "(licensePlate VARCHAR(255)" +
+                       "(licensePlate VARCHAR(255)," +
                        " carBrand VARCHAR(255)," +
-                       " carEnergy ENUM('essence', 'diesel', 'hybride', 'electrique')," +
+                       " carEnergy ENUM ('essence', 'diesel', 'hybride', 'electrique')," +
                        " carFiscalPower FLOAT CHECK (carFiscalPower>0)," +
-                       " intialSeatsNumber INT CHECK (intialSeatsNumber>0)" +
+                       " intialSeatsNumber INT CHECK (intialSeatsNumber>0)," +
                        " PRIMARY KEY (licensePlate));";
 
         return query;
@@ -74,7 +74,7 @@ public class dbQueries {
 
 
     public String tripPlanCreationQuery() {
-        String query = "CREATE TABLE carPool" +
+        String query = "CREATE TABLE tripPlan" +
                        "(tripId INT," +
                        " trajectId INT," +
                        " sectionId INT," +
