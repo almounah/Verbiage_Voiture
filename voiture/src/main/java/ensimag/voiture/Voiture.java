@@ -5,6 +5,9 @@
 
 package ensimag.voiture;
 
+import ensimag.voiture.controller.Controller;
+import ensimag.voiture.view.HomePage;
+
 /**
  *
  * @author almounah
@@ -12,6 +15,8 @@ package ensimag.voiture;
 public class Voiture {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        Controller controller = new Controller();
+        HomePage page = new HomePage();
+        page.show();
     }
 }

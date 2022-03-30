@@ -13,17 +13,17 @@ import java.util.logging.Logger;
  *
  * @author almounah
  */
-public class user {
-    private String email;
-    private String password;
+public class User {
+    private static String email;
+    private static String password;
 
-    public user() {
-        this.email = null;
-        this.password = null;
+    public User() {
+        email = null;
+        password = null;
     }
     
     
-    public boolean login(String email, String password) {
+    public static boolean login(String email, String password) {
         boolean result = false;
         try {
             String query = "SELECT * FROM userInfo WHERE" +
@@ -32,7 +32,7 @@ public class user {
             ResultSet rslt = QueriesRunner.QueryGetter(query);
             result = !rslt.first();
         } catch (SQLException ex) {
-            Logger.getLogger(user.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
     }

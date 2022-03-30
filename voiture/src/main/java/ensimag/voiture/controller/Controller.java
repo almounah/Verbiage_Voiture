@@ -9,6 +9,16 @@ package ensimag.voiture.controller;
  * @author almounah
  */
 public class Controller {
+    private buttonHandler butHandler;
+    private QueriesRunner queriesRunner;
+    private User user;
+
+    public Controller() {
+        this.butHandler = new buttonHandler();
+        this.queriesRunner = new QueriesRunner();
+        this.user = new User();
+    }
+    
     
     
 }
