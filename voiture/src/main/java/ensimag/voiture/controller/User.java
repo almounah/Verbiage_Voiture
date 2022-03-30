@@ -26,9 +26,10 @@ public class User {
     public static boolean login(String email, String password) {
         boolean result = false;
         try {
-            String query = "SELECT * FROM userInfo WHERE" +
-                    "mailUser=" + email + " AND" +
-                    "userPassword=" + password + ";";
+            String query = "SELECT * FROM userInfo WHERE " +
+                    "mailUser=\"" + email + "\" AND " +
+                    "userPassword=\"" + password + "\";";
+            System.out.println(query);
             ResultSet rslt = QueriesRunner.QueryGetter(query);
             result = !rslt.first();
         } catch (SQLException ex) {

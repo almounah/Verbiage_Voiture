@@ -1,9 +1,11 @@
 ensimag/voiture/view/HomePage$2.class
+ensimag/voiture/controller/buttonHandler.class
 ensimag/voiture/view/HomePage.class
 ensimag/voiture/Voiture.class
-ensimag/voiture/controller/user.class
+ensimag/voiture/view/LoginPage$2.class
 ensimag/voiture/view/LoginPage.class
 ensimag/voiture/view/HomePage$1.class
 ensimag/voiture/view/LoginPage$1.class
 ensimag/voiture/controller/QueriesRunner.class
+ensimag/voiture/controller/User.class
 ensimag/voiture/controller/Controller.class

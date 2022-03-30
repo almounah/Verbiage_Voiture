@@ -87,7 +87,8 @@ public class LoginPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        boolean b = buttonHandler.notifyLogin(emailLab.getText(), passLab.getText());
+        boolean b = buttonHandler.notifyLogin(enteredEmail.getText(),
+                                              enteredPassword.getText());
         if (b) {
             jLabel1.setText("Login SUCCESS");
         } else {
