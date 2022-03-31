@@ -4,7 +4,7 @@
  */
 package ensimag.voiture.view;
 
-import ensimag.voiture.controller.buttonHandler;
+import ensimag.voiture.controller.ButtonHandler;
 import java.awt.Color;
 
 /**
@@ -134,7 +134,7 @@ public class RegisterPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
-        boolean b = buttonHandler.notifyRegister(enteredEmail.getText(),
+        boolean b = ButtonHandler.notifyRegister(enteredEmail.getText(),
                                                  enteredPassword.getText(),
                                                  enteredCity.getText(),
                                                  enteredFName.getText(),

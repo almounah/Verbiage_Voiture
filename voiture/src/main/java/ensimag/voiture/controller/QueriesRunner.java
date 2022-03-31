@@ -26,7 +26,7 @@ public class QueriesRunner {
     private static final String dbName = "sql11482296";
     private static final String username = "sql11482296";
     private static final String password = "UehqPxJDnW";
-    private static final String driverName = "com.mysql.jdbc.Driver";
+    private static final String driverName = "com.mysql.cj.jdbc.Driver";
 
     public QueriesRunner() {
     }

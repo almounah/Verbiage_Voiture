@@ -4,11 +4,9 @@
  */
 package ensimag.voiture.controller;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *
@@ -37,7 +35,7 @@ public class User {
         System.out.println(rslt);
         result = !rslt.isEmpty();
         if (result) {
-            
+            User.email = (String) rslt.get(0);
         }
         return result;
     }
@@ -65,6 +63,22 @@ public class User {
         User.city = city;
     }
 
+    public static String getCity() {
+        return city;
+    }
+
+    public static String getFirstName() {
+        return firstName;
+    }
+
+    public static String getLastName() {
+        return lastName;
+    }
+
+    public static int getUserWallet() {
+        return userWallet;
+    }
+
     public static void setFirstName(String firstName) {
         User.firstName = firstName;
     }
@@ -74,7 +88,7 @@ public class User {
     }
 
     public static void setWalletl(int Walletl) {
-        User.Walletl = Walletl;
+        User.userWallet = Walletl;
     }
 
     public String getEmail() {

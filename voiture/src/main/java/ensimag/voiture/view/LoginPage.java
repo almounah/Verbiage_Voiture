@@ -4,7 +4,8 @@
  */
 package ensimag.voiture.view;
 
-import ensimag.voiture.controller.buttonHandler;
+import ensimag.voiture.controller.ButtonHandler;
+import javax.swing.JLabel;
 
 /**
  *
@@ -33,11 +34,11 @@ public class LoginPage extends javax.swing.JFrame {
         enteredPassword = new javax.swing.JPasswordField();
         emailLab = new javax.swing.JLabel();
         passLab = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        statusLab = new javax.swing.JLabel();
         registerButton = new javax.swing.JButton();
         apptitle = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         loginButton.setText("Login");
         loginButton.addActionListener(new java.awt.event.ActionListener() {
@@ -50,7 +51,7 @@ public class LoginPage extends javax.swing.JFrame {
 
         passLab.setText("Password");
 
-        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
+        statusLab.setForeground(new java.awt.Color(255, 0, 0));
 
         registerButton.setText("Register");
         registerButton.addActionListener(new java.awt.event.ActionListener() {
@@ -86,7 +87,7 @@ public class LoginPage extends javax.swing.JFrame {
                                 .addComponent(apptitle))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(156, 156, 156)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(statusLab, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(44, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -95,7 +96,7 @@ public class LoginPage extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addComponent(apptitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(statusLab, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(enteredEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -115,13 +116,8 @@ public class LoginPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        boolean b = buttonHandler.notifyLogin(enteredEmail.getText(),
-                                              enteredPassword.getText());
-        if (b) {
-            jLabel1.setText("Login SUCCESS");
-        } else {
-            jLabel1.setText("Login Fail, Register");
-        }
+        ButtonHandler.notifyLogin(enteredEmail.getText(),
+                                  enteredPassword.getText(), this);
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
@@ -129,49 +125,20 @@ public class LoginPage extends javax.swing.JFrame {
         registerPage.show();
     }//GEN-LAST:event_registerButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LoginPage().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel apptitle;
     private javax.swing.JLabel emailLab;
     private javax.swing.JTextField enteredEmail;
     private javax.swing.JPasswordField enteredPassword;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton loginButton;
     private javax.swing.JLabel passLab;
     private javax.swing.JButton registerButton;
+    private javax.swing.JLabel statusLab;
     // End of variables declaration//GEN-END:variables
+
+    public JLabel getStatusLab() {
+        return statusLab;
+    }
 }

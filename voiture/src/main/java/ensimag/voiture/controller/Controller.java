@@ -4,21 +4,30 @@
  */
 package ensimag.voiture.controller;
 
+import ensimag.voiture.view.View;
+
 /**
  *
  * @author almounah
  */
 public class Controller {
-    private buttonHandler butHandler;
+    private ButtonHandler butHandler;
     private QueriesRunner queriesRunner;
+    private ViewUpdater viewUpdater;
     private User user;
+    private View view;
 
-    public Controller() {
-        this.butHandler = new buttonHandler();
+    public Controller(View view) {
+        this.viewUpdater = new ViewUpdater(view);
+        this.butHandler = new ButtonHandler(viewUpdater);
         this.queriesRunner = new QueriesRunner();
         this.user = new User();
+        this.view = view;
     }
     
-    
+    public void run() {
+        view.getLoginPage().show();
+        
+    }
     
 }
