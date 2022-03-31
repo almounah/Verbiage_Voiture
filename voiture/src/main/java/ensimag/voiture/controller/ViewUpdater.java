@@ -5,6 +5,7 @@
 package ensimag.voiture.controller;
 
 import ensimag.voiture.view.LoginPage;
+import ensimag.voiture.view.UserProfile;
 import ensimag.voiture.view.UserWelcomePage;
 import ensimag.voiture.view.View;
 
@@ -28,6 +29,16 @@ public class ViewUpdater {
         UserWelcomePage userWelcomePage = new UserWelcomePage();
         userWelcomePage.getWelcomeTextLab().setText("Welcome " + name);
         userWelcomePage.show();
+    }
+    
+    public static void viewProfile() {
+        UserProfile userProfile = new UserProfile();
+        userProfile.getEnteredCity().setText(User.getCity());
+        userProfile.getEnteredEmail().setText(User.getEmail());
+        userProfile.getEnteredFName().setText(User.getFirstName());
+        userProfile.getEnteredLastName().setText(User.getLastName());
+        userProfile.show();
+        
     }
     
 }

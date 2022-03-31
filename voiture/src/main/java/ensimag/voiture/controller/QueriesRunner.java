@@ -64,7 +64,7 @@ public class QueriesRunner {
         return resultList;
     }
     
-    public static boolean QuerySetter(String query) {
+    public static boolean QuerySetter(String query, boolean autocommit) {
         System.out.println(query);
         Connection connection = null;
         boolean rslt = false;
@@ -72,9 +72,12 @@ public class QueriesRunner {
             Class.forName(driverName);
             connection = DriverManager.getConnection(url + ":" + port + "/" + dbName, 
                                                      username, password);
+            connection.setAutoCommit(false);
             Statement statement = connection.createStatement();
             statement.executeUpdate(query);
             rslt = true;
+            if (autocommit)
+                connection.commit();
         } catch (SQLException e) {
             System.out.println(e);
         } catch (ClassNotFoundException ex) {

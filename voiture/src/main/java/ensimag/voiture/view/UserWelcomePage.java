@@ -4,6 +4,7 @@
  */
 package ensimag.voiture.view;
 
+import ensimag.voiture.controller.ButtonHandler;
 import javax.swing.JLabel;
 
 /**
@@ -50,6 +51,11 @@ public class UserWelcomePage extends javax.swing.JFrame {
         proposeTrajButton.setText("Propose a Trajectory");
 
         editProfileButton.setText("View/Edit Profile");
+        editProfileButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editProfileButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -96,6 +102,10 @@ public class UserWelcomePage extends javax.swing.JFrame {
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_searchButtonActionPerformed
+
+    private void editProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProfileButtonActionPerformed
+        ButtonHandler.notifyViewProfile();
+    }//GEN-LAST:event_editProfileButtonActionPerformed
 
     /**
      * @param args the command line arguments

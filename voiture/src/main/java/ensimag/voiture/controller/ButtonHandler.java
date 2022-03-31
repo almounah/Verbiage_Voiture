@@ -34,4 +34,8 @@ public class ButtonHandler {
                                          String lastName) {
         return User.createAccount(email, pass, city, firstName, lastName);
     }
+    
+    public static void notifyViewProfile() {
+        ViewUpdater.viewProfile();
+    }
 }

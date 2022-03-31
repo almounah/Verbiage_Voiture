@@ -18,7 +18,7 @@ public class User {
     private static String city;
     private static String firstName;
     private static String lastName;
-    private static int userWallet;
+    private static float userWallet;
 
 
 
@@ -36,6 +36,10 @@ public class User {
         result = !rslt.isEmpty();
         if (result) {
             User.email = (String) rslt.get(0);
+            User.lastName = (String) rslt.get(1);
+            User.firstName = (String) rslt.get(2);
+            User.city = (String) rslt.get(4);
+            User.userWallet = (float) rslt.get(5);
         }
         return result;
     }
@@ -48,7 +52,7 @@ public class User {
                        "(\"" + email + "\",\"" + lastName + "\",\"" +
                         firstName + "\",\"" + city + "\",\"" + password +
                        "\",0);";
-        return QueriesRunner.QuerySetter(query);
+        return QueriesRunner.QuerySetter(query, true);
     }
 
     public void setPassword(String password) {
@@ -75,7 +79,7 @@ public class User {
         return lastName;
     }
 
-    public static int getUserWallet() {
+    public static float getUserWallet() {
         return userWallet;
     }
 
@@ -91,11 +95,11 @@ public class User {
         User.userWallet = Walletl;
     }
 
-    public String getEmail() {
+    public static String getEmail() {
         return email;
     }
 
-    public String getPassword() {
+    public static String getPassword() {
         return password;
     }
 }
