@@ -12,4 +12,10 @@ public class buttonHandler {
     public static boolean notifyLogin(String email, String pass) {
         return User.login(email, pass);
     }
+    
+    public static boolean notifyRegister(String email, String pass,
+                                         String city, String firstName,
+                                         String lastName) {
+        return User.createAccount(email, pass, city, firstName, lastName);
+    }
 }

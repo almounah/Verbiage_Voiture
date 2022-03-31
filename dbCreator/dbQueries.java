@@ -10,6 +10,7 @@ public class dbQueries {
                        " userLastName VARCHAR(255)," +
                        " userfirstName VARCHAR(255)," +
                        " userPassword VARCHAR(255)," +
+		       " userCity VARCHAR(255)," +
                        " userWallet FLOAT CHECK (userWallet>=0)," +
                        " PRIMARY KEY (mailUser));";
 

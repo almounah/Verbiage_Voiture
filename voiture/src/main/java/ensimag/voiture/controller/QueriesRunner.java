@@ -33,8 +33,9 @@ public class QueriesRunner {
     
     
     public static List QueryGetter(String query) {
+        System.out.println(query);
         Connection connection = null;
-        ResultSet rslt = null;
+        ResultSet rslt;
         
         List resultList = new ArrayList<>();
         try {
@@ -63,18 +64,19 @@ public class QueriesRunner {
         return resultList;
     }
     
-    public static int QuerySetter(String query) {
+    public static boolean QuerySetter(String query) {
+        System.out.println(query);
         Connection connection = null;
-        int rslt = 0;
+        boolean rslt = false;
         try {
             Class.forName(driverName);
             connection = DriverManager.getConnection(url + ":" + port + "/" + dbName, 
                                                      username, password);
             Statement statement = connection.createStatement();
             statement.executeUpdate(query);
+            rslt = true;
         } catch (SQLException e) {
             System.out.println(e);
-            rslt = 1;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(QueriesRunner.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -82,7 +84,6 @@ public class QueriesRunner {
                 connection.close();
             } catch (SQLException ex) {
                 System.out.println(ex);
-                rslt = 1;
             }
         }
         return rslt;

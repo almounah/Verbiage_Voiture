@@ -17,10 +17,14 @@ import java.util.logging.Logger;
 public class User {
     private static String email;
     private static String password;
+    private static String city;
+    private static String firstName;
+    private static String lastName;
+    private static int userWallet;
+
+
 
     public User() {
-        email = null;
-        password = null;
     }
     
     
@@ -29,27 +33,48 @@ public class User {
         String query = "SELECT * FROM userInfo WHERE " +
                 "mailUser=\"" + email + "\" AND " +
                 "userPassword=\"" + password + "\";";
-        System.out.println(query);
         List rslt = QueriesRunner.QueryGetter(query);
+        System.out.println(rslt);
         result = !rslt.isEmpty();
+        if (result) {
+            
+        }
         return result;
     }
     
-    public void createAccount(String email, String password,
+    public static boolean createAccount(String email, String password,
                               String city, String firstName, String lastName) {
         String query = "INSERT INTO userInfo " +
-                       "(mailUser, userLastName, userFirstName, userPassword, userWallet) " +
+                       "(mailUser, userLastName, userFirstName, userCity, userPassword, userWallet) " +
                        "VALUES " +
-                       "(" + email + "," + lastName + "," + firstName + "," + password + ",0);";
-        QueriesRunner.QuerySetter(query);
+                       "(\"" + email + "\",\"" + lastName + "\",\"" +
+                        firstName + "\",\"" + city + "\",\"" + password +
+                       "\",0);";
+        return QueriesRunner.QuerySetter(query);
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        User.password = password;
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        User.email = email;
+    }
+    
+        public static void setCity(String city) {
+        User.city = city;
+    }
+
+    public static void setFirstName(String firstName) {
+        User.firstName = firstName;
+    }
+
+    public static void setLastName(String lastName) {
+        User.lastName = lastName;
+    }
+
+    public static void setWalletl(int Walletl) {
+        User.Walletl = Walletl;
     }
 
     public String getEmail() {
