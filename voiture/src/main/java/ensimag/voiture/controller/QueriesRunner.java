@@ -1,10 +1,12 @@
 package ensimag.voiture.controller;
 
+import java.util.List;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,15 +32,23 @@ public class QueriesRunner {
     }
     
     
-    public static ResultSet QueryGetter(String query) {
+    public static List QueryGetter(String query) {
         Connection connection = null;
         ResultSet rslt = null;
+        
+        List resultList = new ArrayList<>();
         try {
             Class.forName(driverName);
             connection = DriverManager.getConnection(url + ":" + port + "/" + dbName, 
                                                      username, password);
             Statement statement = connection.createStatement();
             rslt = statement.executeQuery(query);
+            int columnCount = rslt.getMetaData().getColumnCount();
+            while (rslt.next()) {
+                int columnNumber = 1;
+                while (columnNumber <= columnCount)
+                    resultList.add(rslt.getObject(columnNumber++));
+            }
         } catch (SQLException e) {
             System.out.println(e);
         } catch (ClassNotFoundException ex) {
@@ -50,7 +60,7 @@ public class QueriesRunner {
                 System.out.println(ex);
             }
         }
-        return rslt;
+        return resultList;
     }
     
     public static int QuerySetter(String query) {

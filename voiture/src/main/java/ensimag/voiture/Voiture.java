@@ -6,7 +6,7 @@
 package ensimag.voiture;
 
 import ensimag.voiture.controller.Controller;
-import ensimag.voiture.view.HomePage;
+import ensimag.voiture.view.LoginPage;
 
 /**
  *
@@ -16,7 +16,7 @@ public class Voiture {
 
     public static void main(String[] args) {
         Controller controller = new Controller();
-        HomePage page = new HomePage();
-        page.show();
+        LoginPage loginPage = new LoginPage();
+        loginPage.show();
     }
 }

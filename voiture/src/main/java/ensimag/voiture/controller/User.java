@@ -6,6 +6,7 @@ package ensimag.voiture.controller;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,17 +25,13 @@ public class User {
     
     
     public static boolean login(String email, String password) {
-        boolean result = false;
-        try {
-            String query = "SELECT * FROM userInfo WHERE " +
-                    "mailUser=\"" + email + "\" AND " +
-                    "userPassword=\"" + password + "\";";
-            System.out.println(query);
-            ResultSet rslt = QueriesRunner.QueryGetter(query);
-            result = !rslt.first();
-        } catch (SQLException ex) {
-            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        boolean result;
+        String query = "SELECT * FROM userInfo WHERE " +
+                "mailUser=\"" + email + "\" AND " +
+                "userPassword=\"" + password + "\";";
+        System.out.println(query);
+        List rslt = QueriesRunner.QueryGetter(query);
+        result = !rslt.isEmpty();
         return result;
     }
     
