@@ -34,6 +34,7 @@ public class UserWelcomePage extends javax.swing.JFrame {
         viewTripButton = new javax.swing.JButton();
         proposeTrajButton = new javax.swing.JButton();
         editProfileButton = new javax.swing.JButton();
+        manageCarButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,7 +49,7 @@ public class UserWelcomePage extends javax.swing.JFrame {
 
         viewTripButton.setText("View Upcoming Trips");
 
-        proposeTrajButton.setText("Propose a Trajectory");
+        proposeTrajButton.setText("Manage Proposed Trajectory");
 
         editProfileButton.setText("View/Edit Profile");
         editProfileButton.addActionListener(new java.awt.event.ActionListener() {
@@ -57,43 +58,57 @@ public class UserWelcomePage extends javax.swing.JFrame {
             }
         });
 
+        manageCarButton.setText("Manage Car Ownership");
+        manageCarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manageCarButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(welcomeTextLab, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(77, 77, 77))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(viewTripButton, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(90, 90, 90)
-                                .addComponent(welcomeTextLab, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(75, 75, 75)
-                                .addComponent(proposeTrajButton, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(121, 121, 121)
-                        .addComponent(searchButton))
+                        .addGap(92, 92, 92)
+                        .addComponent(viewTripButton, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(118, 118, 118)
-                        .addComponent(editProfileButton)))
-                .addContainerGap(112, Short.MAX_VALUE))
+                        .addComponent(searchButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(115, 115, 115)
+                        .addComponent(editProfileButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(109, 109, 109)
+                        .addComponent(manageCarButton)))
+                .addContainerGap(108, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(proposeTrajButton, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addComponent(welcomeTextLab)
-                .addGap(44, 44, 44)
+                .addGap(18, 18, 18)
                 .addComponent(searchButton)
                 .addGap(18, 18, 18)
                 .addComponent(viewTripButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(editProfileButton)
                 .addGap(18, 18, 18)
                 .addComponent(proposeTrajButton)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(manageCarButton)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
@@ -106,6 +121,10 @@ public class UserWelcomePage extends javax.swing.JFrame {
     private void editProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProfileButtonActionPerformed
         ButtonHandler.notifyViewProfile();
     }//GEN-LAST:event_editProfileButtonActionPerformed
+
+    private void manageCarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageCarButtonActionPerformed
+        ButtonHandler.notifyViewCar(true);
+    }//GEN-LAST:event_manageCarButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -144,6 +163,7 @@ public class UserWelcomePage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton editProfileButton;
+    private javax.swing.JButton manageCarButton;
     private javax.swing.JButton proposeTrajButton;
     private javax.swing.JButton searchButton;
     private javax.swing.JButton viewTripButton;

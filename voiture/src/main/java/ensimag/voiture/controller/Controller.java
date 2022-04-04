@@ -4,6 +4,7 @@
  */
 package ensimag.voiture.controller;
 
+import ensimag.voiture.model.User;
 import ensimag.voiture.view.View;
 
 /**

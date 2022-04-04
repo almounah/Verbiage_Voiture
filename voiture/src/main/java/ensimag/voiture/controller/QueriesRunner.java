@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,12 +34,12 @@ public class QueriesRunner {
     }
     
     
-    public static List QueryGetter(String query) {
+    public static Map<Integer, List> QueryGetter(String query) {
         System.out.println(query);
         Connection connection = null;
         ResultSet rslt;
         
-        List resultList = new ArrayList<>();
+        Map resultMap = new HashMap<Integer, List>();
         try {
             Class.forName(driverName);
             connection = DriverManager.getConnection(url + ":" + port + "/" + dbName, 
@@ -45,10 +47,15 @@ public class QueriesRunner {
             Statement statement = connection.createStatement();
             rslt = statement.executeQuery(query);
             int columnCount = rslt.getMetaData().getColumnCount();
+            
+            int rowIndex = 0;
             while (rslt.next()) {
                 int columnNumber = 1;
+                List rowContent = new ArrayList<>();
                 while (columnNumber <= columnCount)
-                    resultList.add(rslt.getObject(columnNumber++));
+                    rowContent.add(rslt.getObject(columnNumber++));
+                resultMap.put(rowIndex, rowContent);
+                rowIndex++;
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -61,7 +68,7 @@ public class QueriesRunner {
                 System.out.println(ex);
             }
         }
-        return resultList;
+        return resultMap;
     }
     
     public static boolean QuerySetter(String query, boolean autocommit) {

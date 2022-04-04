@@ -4,6 +4,10 @@
  */
 package ensimag.voiture.controller;
 
+import ensimag.voiture.model.Car;
+import ensimag.voiture.model.CarEnergy;
+import ensimag.voiture.model.User;
+import ensimag.voiture.view.CarHomePage;
 import ensimag.voiture.view.LoginPage;
 
 /**
@@ -37,5 +41,28 @@ public class ButtonHandler {
     
     public static void notifyViewProfile() {
         ViewUpdater.viewProfile();
+    }
+    
+    public static void notifyViewCar(boolean next) {
+        User.getListOfCarDB();
+        ViewUpdater.showCar(next);
+    }
+    
+    public static void notifyViewCar(boolean next, CarHomePage carHomePage) {
+        ViewUpdater.showCar(next, carHomePage);
+    }
+    
+    public static void notifyValidateNewCar(String licensePlate, String carBrand,
+                                            String carModel, String carEnergy,
+                                            String carfiscalPower,String initialSeatsNumber) {
+        boolean b = Car.addCarToDB(licensePlate, carBrand, carModel, CarEnergy.valueOf(carEnergy),
+                                   Float.parseFloat(carfiscalPower), Integer.parseInt(initialSeatsNumber));
+        boolean b2 = User.addCarOwnership(licensePlate);
+        User.getCarOwned().add(new Car(licensePlate, carBrand, carModel,
+                               CarEnergy.valueOf(carEnergy),
+                               Float.parseFloat(carfiscalPower),
+                               Integer.parseInt(initialSeatsNumber)));
+        
+        
     }
 }
