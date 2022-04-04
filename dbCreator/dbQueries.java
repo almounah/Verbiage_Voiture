@@ -10,7 +10,7 @@ public class dbQueries {
                        " userLastName VARCHAR(255)," +
                        " userfirstName VARCHAR(255)," +
                        " userPassword VARCHAR(255)," +
-		       " userCity VARCHAR(255)," +
+		               " userCity VARCHAR(255)," +
                        " userWallet FLOAT CHECK (userWallet>=0)," +
                        " PRIMARY KEY (mailUser));";
 
@@ -18,6 +18,30 @@ public class dbQueries {
 
     }
 
+    public String carCreationQuery() {
+        String query = "CREATE TABLE carInfo" +
+                       "(licensePlate VARCHAR(255)," +
+                       " carBrand VARCHAR(255)," +
+                       " carModel VARCHAR(255)," +
+                       " carEnergy ENUM ('essence', 'diesel', 'hybride', 'electrique')," +
+                       " carFiscalPower FLOAT CHECK (carFiscalPower>0)," +
+                       " intialSeatsNumber INT CHECK (intialSeatsNumber>0)," +
+                       " PRIMARY KEY (licensePlate));";
+
+        return query;
+    }
+
+    public String trajectoryCreationQuery() {
+        String query = "CREATE TABLE trajectory" +
+                       "(trajectId INT," +
+                       " drivenLicenseCar VARCHAR(255)," +
+                       " driverMail VARCHAR(255)," +
+                       " PRIMARY KEY (trajectId)," +
+                       " FOREIGN KEY (driverMail) REFERENCES userInfo(mailUser)," +
+                       " FOREIGN KEY (drivenLicenseCar) REFERENCES carInfo(licensePlate));";
+
+        return query;
+    }
 
     public String sectionsCreationQuery() {
         String query = "CREATE TABLE sections" +
@@ -40,35 +64,25 @@ public class dbQueries {
     }
 
 
-    public String trajectoryCreationQuery() {
-        String query = "CREATE TABLE trajectory" +
-                       "(trajectId INT," +
-                       " drivenLicenseCar VARCHAR(255)," +
-                       " PRIMARY KEY (trajectId, drivenLicenseCar));";
-
-        return query;
-    }
-
 
     public String carPoolCreationQuery() {
         String query = "CREATE TABLE carPool" +
-                       "(trajectId INT," +
+                       "(tripId INT," +
                        " mailUser VARCHAR(255)," +
-                       " userStatus ENUM ('driver', 'passenger')," +
-                       " PRIMARY KEY (trajectId, mailUser, userStatus));";
+                       " PRIMARY KEY (tripId)," +
+                       " FOREIGN KEY (mailUser) REFERENCES userInfo(mailUser));";
 
         return query;
     }
 
 
-    public String carCreationQuery() {
-        String query = "CREATE TABLE car" +
+
+    public String carOwnerSHipQuery() {
+        String query = "CREATE TABLE carOwnership" +
                        "(licensePlate VARCHAR(255)," +
-                       " carBrand VARCHAR(255)," +
-                       " carEnergy ENUM ('essence', 'diesel', 'hybride', 'electrique')," +
-                       " carFiscalPower FLOAT CHECK (carFiscalPower>0)," +
-                       " intialSeatsNumber INT CHECK (intialSeatsNumber>0)," +
-                       " PRIMARY KEY (licensePlate));";
+                       " mailUser VARCHAR(255)," +
+                       " FOREIGN KEY (mailUser) REFERENCES userInfo(mailUser)," +
+                       " FOREIGN KEY (licensePlate) REFERENCES carInfo(licensePlate));";
 
         return query;
     }
@@ -79,7 +93,8 @@ public class dbQueries {
                        "(tripId INT," +
                        " trajectId INT," +
                        " sectionId INT," +
-                       " PRIMARY KEY (trajectId, tripId, sectionId));";
+                       " FOREIGN KEY (tripId) REFERENCES carPool(tripId)," +
+                       " FOREIGN KEY (trajectId, sectionId) REFERENCES sections(trajectId, sectionId));";
 
         return query;
     }

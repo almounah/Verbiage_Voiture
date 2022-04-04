@@ -30,17 +30,20 @@ public class dbCreator {
             statement.executeUpdate(queryGetter.userCreationQuery());
             System.out.println("userInfo table created");
 
+            statement.executeUpdate(queryGetter.carCreationQuery());
+            System.out.println("carInfo table created");
+
+            statement.executeUpdate(queryGetter.trajectoryCreationQuery());
+            System.out.println("trajectory table created");
+
             statement.executeUpdate(queryGetter.sectionsCreationQuery());
             System.out.println("section table created");
-
-            statement.executeUpdate(queryGetter.carCreationQuery());
-            System.out.println("car table created");
             
             statement.executeUpdate(queryGetter.carPoolCreationQuery());
             System.out.println("carPool table created");
 
-            statement.executeUpdate(queryGetter.trajectoryCreationQuery());
-            System.out.println("trajectory table created");
+            statement.executeUpdate(queryGetter.carOwnerSHipQuery());
+            System.out.println("carOwnership table created");
 
             statement.executeUpdate(queryGetter.tripPlanCreationQuery());
             System.out.println("tripPlan table created");

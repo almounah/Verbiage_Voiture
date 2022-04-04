@@ -23,23 +23,28 @@ public class dbDestroy {
             connection = DriverManager.getConnection(url + ":" + port + "/" + dbName, 
                                                      username, password);
             Statement statement = connection.createStatement();
-            statement.executeUpdate("DROP TABLE userInfo;");
-            System.out.println("userInfo table deleted");
-
-            statement.executeUpdate("DROP TABLE sections;");
-            System.out.println("sections table deleted");
-
-            statement.executeUpdate("DROP TABLE car;");
-            System.out.println("car table deleted");
             
-            statement.executeUpdate("DROP TABLE carPool;");
-            System.out.println("carPool table deleted");
+            statement.executeUpdate("DROP TABLE carOwnership;");
+            System.out.println("carOwnership table deleted");
+
+            statement.executeUpdate("DROP TABLE tripPlan;");
+            System.out.println("tripPlan table deleted");
 
             statement.executeUpdate("DROP TABLE trajectory;");
             System.out.println("trajectory table deleted");
 
-            statement.executeUpdate("DROP TABLE tripPlan;");
-            System.out.println("tripPlan table deleted");
+            statement.executeUpdate("DROP TABLE sections;");
+            System.out.println("sections table deleted");
+            
+            statement.executeUpdate("DROP TABLE carPool;");
+            System.out.println("carPool table deleted");
+            
+            statement.executeUpdate("DROP TABLE userInfo;");
+            System.out.println("userInfo table deleted");
+
+            statement.executeUpdate("DROP TABLE carInfo;");
+            System.out.println("carInfo table deleted");
+
 
         } catch (Exception e) {
             System.out.println(e);
