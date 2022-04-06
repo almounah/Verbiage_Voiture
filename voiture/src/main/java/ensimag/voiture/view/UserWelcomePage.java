@@ -50,6 +50,11 @@ public class UserWelcomePage extends javax.swing.JFrame {
         viewTripButton.setText("View Upcoming Trips");
 
         proposeTrajButton.setText("Manage Proposed Trajectory");
+        proposeTrajButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                proposeTrajButtonActionPerformed(evt);
+            }
+        });
 
         editProfileButton.setText("View/Edit Profile");
         editProfileButton.addActionListener(new java.awt.event.ActionListener() {
@@ -125,6 +130,10 @@ public class UserWelcomePage extends javax.swing.JFrame {
     private void manageCarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageCarButtonActionPerformed
         ButtonHandler.notifyViewCar(true);
     }//GEN-LAST:event_manageCarButtonActionPerformed
+
+    private void proposeTrajButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proposeTrajButtonActionPerformed
+        ButtonHandler.notifyViewTrajectory();
+    }//GEN-LAST:event_proposeTrajButtonActionPerformed
 
     /**
      * @param args the command line arguments

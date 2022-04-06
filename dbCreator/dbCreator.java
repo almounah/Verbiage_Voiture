@@ -13,9 +13,9 @@ public class dbCreator {
     public static void main(String[] args) {
         String url = "jdbc:mysql://sql11.freemysqlhosting.net";
         String port = "3306";
-        String dbName = "sql11482296";
-        String username = "sql11482296";
-        String password = "UehqPxJDnW";
+        String dbName = "sql11483800";
+        String username = "sql11483800";
+        String password = "LjgBLSmS6K";
         dbQueries queryGetter = new dbQueries();
         Connection connection = null;
         String driverName = "com.mysql.jdbc.Driver";

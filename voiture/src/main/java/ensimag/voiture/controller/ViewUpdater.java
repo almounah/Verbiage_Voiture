@@ -12,6 +12,7 @@ import ensimag.voiture.view.UserProfile;
 import ensimag.voiture.view.UserWelcomePage;
 import ensimag.voiture.view.View;
 import ensimag.voiture.view.CarHomePage;
+import ensimag.voiture.view.TrajectoryHomePage;
 import java.util.List;
 
 /**
@@ -81,4 +82,8 @@ public class ViewUpdater {
         addCarPage.show();
     }
     
+    public static void showTrajectory() {
+        TrajectoryHomePage trajectoryHomePage = new TrajectoryHomePage();
+        trajectoryHomePage.show();
+    }
 }

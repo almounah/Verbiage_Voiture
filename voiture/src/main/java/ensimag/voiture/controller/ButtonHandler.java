@@ -65,4 +65,8 @@ public class ButtonHandler {
         
         
     }
+    
+    public static void notifyViewTrajectory() {
+        ViewUpdater.showTrajectory();
+    }
 }

@@ -23,11 +23,11 @@ import java.util.logging.Logger;
  */
 public class QueriesRunner {
     
-    private static final String url = "jdbc:mysql://sql11.freemysqlhosting.net";
-    private static final String port = "3306";
-    private static final String dbName = "sql11482296";
-    private static final String username = "sql11482296";
-    private static final String password = "UehqPxJDnW";
+    private static String url = "jdbc:mysql://sql11.freemysqlhosting.net";
+    private static String port = "3306";
+    private static String dbName = "sql11483800";
+    private static String username = "sql11483800";
+    private static String password = "LjgBLSmS6K";
     private static final String driverName = "com.mysql.cj.jdbc.Driver";
 
     public QueriesRunner() {
