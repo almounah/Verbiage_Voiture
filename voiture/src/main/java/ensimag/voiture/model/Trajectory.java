@@ -15,4 +15,13 @@ public class Trajectory {
     private String driverMail;
     private String drivenLicenseCar;
     private List<TrajectoryChunck> trajectoryChunckList;
+
+    public Trajectory(String trajectoryId, String driverMail, String drivenLicenseCar, List<TrajectoryChunck> trajectoryChunckList) {
+        this.trajectoryId = trajectoryId;
+        this.driverMail = driverMail;
+        this.drivenLicenseCar = drivenLicenseCar;
+        this.trajectoryChunckList = trajectoryChunckList;
+    }
+    
+    
 }

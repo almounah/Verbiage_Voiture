@@ -5,8 +5,10 @@
 package ensimag.voiture.controller;
 
 import ensimag.voiture.model.Car;
+import ensimag.voiture.model.Trajectory;
 import ensimag.voiture.model.User;
 import ensimag.voiture.view.AddCarPage;
+import ensimag.voiture.view.AddTrajPage;
 import ensimag.voiture.view.LoginPage;
 import ensimag.voiture.view.UserProfile;
 import ensimag.voiture.view.UserWelcomePage;
@@ -84,6 +86,24 @@ public class ViewUpdater {
     
     public static void showTrajectory() {
         TrajectoryHomePage trajectoryHomePage = new TrajectoryHomePage();
+        showTrajectory(true, trajectoryHomePage);
+    }
+    
+    public static void showTrajectory(boolean next, TrajectoryHomePage trajectoryHomePage) {
+        List<Trajectory> userTrajList = User.getListProposedTraj();
+        if (userTrajList.isEmpty()) {
+            trajectoryHomePage.getNotrajlab().setText("NO TRAJ YET");
+            trajectoryHomePage.getChunckIndexLab().setText("Chunck 0/0");
+        }
         trajectoryHomePage.show();
+    }
+    
+    public static void showNewTrajPage() {
+        List<Car> clist = User.getCarOwned();
+        AddTrajPage addTrajPage = new AddTrajPage();
+        for (Car car : clist) {
+            addTrajPage.getCarSelectBox().addItem(car.getLicensePlate());
+        }
+        addTrajPage.show();
     }
 }

@@ -67,6 +67,12 @@ public class ButtonHandler {
     }
     
     public static void notifyViewTrajectory() {
+        User.getListOfTrajectoryDB();
         ViewUpdater.showTrajectory();
+    }
+    
+    public static void notifyAddTrajectory() {
+        User.getListOfCarDB();
+        ViewUpdater.showNewTrajPage();
     }
 }
