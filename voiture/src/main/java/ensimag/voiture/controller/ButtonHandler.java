@@ -6,6 +6,7 @@ package ensimag.voiture.controller;
 
 import ensimag.voiture.model.Car;
 import ensimag.voiture.model.CarEnergy;
+import ensimag.voiture.model.TrajectoryChunck;
 import ensimag.voiture.model.User;
 import ensimag.voiture.view.CarHomePage;
 import ensimag.voiture.view.LoginPage;
@@ -74,5 +75,24 @@ public class ButtonHandler {
     public static void notifyAddTrajectory() {
         User.getListOfCarDB();
         ViewUpdater.showNewTrajPage();
+    }
+    
+    public static void notifyAddAnotherChunck(Integer chunckIndex,
+                                              String startDate,
+                                              String startTime,
+                                              String depCity,
+                                              String arrCity,
+                                              String travDist,
+                                              String travDuration,
+                                              String waitDelay,
+                                              String depLat,
+                                              String depLong,
+                                              String arrLat,
+                                              String arrLong,
+                                              String selectedCarLicense) {
+        TrajectoryChunck.addChunckToDB(chunckIndex, startDate, startTime,
+                                       depCity, arrCity, travDist, travDuration,
+                                       waitDelay, depLat, depLong, arrLat, arrLong, selectedCarLicense);
+        
     }
 }

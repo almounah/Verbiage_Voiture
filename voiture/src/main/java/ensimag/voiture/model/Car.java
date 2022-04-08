@@ -5,6 +5,7 @@
 package ensimag.voiture.model;
 
 import ensimag.voiture.controller.QueriesRunner;
+import java.util.List;
 
 /**
  *
@@ -61,6 +62,16 @@ public class Car {
                        "\",\"" + carModel + "\"," + carFiscalPower + "," + intialSeatsNumber +
                        ");";
         return QueriesRunner.QuerySetter(query, true);
+    }
+    
+    public static Integer getAvailableSeatsFromLicence(String cl, List<Car> lc) {
+        for (Car c : lc) {
+            if (c.getLicensePlate().equals(cl)) {
+                return c.getIntialSeatsNumber();
+            }
+        }
+        
+        return -1;
     }
      
     

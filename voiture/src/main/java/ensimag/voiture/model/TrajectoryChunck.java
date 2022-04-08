@@ -4,6 +4,8 @@
  */
 package ensimag.voiture.model;
 
+import java.nio.charset.Charset;
+import java.security.MessageDigest;
 import java.util.Date;
 
 /**
@@ -34,5 +36,30 @@ public class TrajectoryChunck {
         this.cityDeparture = cityDeparture;
         this.sectionStartDate = sectionStartDate;
     }
-  
+    
+    public static void addChunckToDB(Integer chunckIndex,
+                                    String startDate,
+                                    String startTime,
+                                    String depCity,
+                                    String arrCity,
+                                    String travDist,
+                                    String travDuration,
+                                    String waitDelay,
+                                    String depLat,
+                                    String depLong,
+                                    String arrLat,
+                                    String arrLong,
+                                    String selectetCarLicense) {
+        Integer trajectId = User.getEmail().hashCode() + startDate.hashCode();
+        Integer availableSeats = Car.getAvailableSeatsFromLicence(selectetCarLicense, User.getCarOwned());
+        String query = "INSERT INTO sections " +
+                       "(trajectoryId, sectionId, sectionWaitingDelay, availableSeats,"+
+                       " travelDistance, travelDuration, cityArrival, cityDeparture, latArrival," +
+                       " longArrival, latDeparture, longDeparture, sectionStartDate) " +
+                       "VALUES " +
+                       "(" + trajectId + "," + chunckIndex + "," + waitDelay +
+                         availableSeats + "," + travDist + "," + travDuration +
+                       ",\"" + arrCity + "\",\"" + depCity + "\"," + arrLat + "," +
+                         arrLong + "," + depLat + "," + depLong;
+    }
 }
