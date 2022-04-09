@@ -4,9 +4,9 @@
  */
 package ensimag.voiture.controller;
 
-import ensimag.voiture.model.Car;
-import ensimag.voiture.model.Trajectory;
-import ensimag.voiture.model.User;
+import ensimag.voiture.model.dataBase.Car;
+import ensimag.voiture.model.dataBase.Trajectory;
+import ensimag.voiture.model.dataBase.User;
 import ensimag.voiture.view.AddCarPage;
 import ensimag.voiture.view.AddTrajPage;
 import ensimag.voiture.view.LoginPage;

@@ -1,9 +1,12 @@
+package ensimag.voiture.model.dataBase;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package ensimag.voiture.model;
 
+
+import ensimag.voiture.model.dataBase.Car;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.util.Date;
@@ -60,6 +63,7 @@ public class TrajectoryChunck {
                        "(" + trajectId + "," + chunckIndex + "," + waitDelay +
                          availableSeats + "," + travDist + "," + travDuration +
                        ",\"" + arrCity + "\",\"" + depCity + "\"," + arrLat + "," +
-                         arrLong + "," + depLat + "," + depLong;
+                         arrLong + "," + depLat + "," + depLong + "," + "convert(datetime, \'" +
+                         startDate;
     }
 }

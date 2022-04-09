@@ -66,6 +66,11 @@ public class AddTrajPage extends javax.swing.JFrame {
         jLabel8.setText("Start Date");
 
         startDateText.setText("JJ/MM/YYYY");
+        startDateText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startDateTextActionPerformed(evt);
+            }
+        });
 
         finishButton.setText("Finish");
 
@@ -260,6 +265,10 @@ public class AddTrajPage extends javax.swing.JFrame {
                                              arrLongText.getText(),
                                              (String) carSelectBox.getSelectedItem());
     }//GEN-LAST:event_addAnotherChunckButtonActionPerformed
+
+    private void startDateTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startDateTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_startDateTextActionPerformed
 
     /**
      * @param args the command line arguments

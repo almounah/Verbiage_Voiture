@@ -1,10 +1,13 @@
+package ensimag.voiture.model.dataBase;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package ensimag.voiture.model;
 
-import ensimag.voiture.controller.QueriesRunner;
+
+import ensimag.voiture.model.QueriesRunner;
+import ensimag.voiture.model.CarEnergy;
 import java.util.List;
 
 /**

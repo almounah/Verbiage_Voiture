@@ -4,10 +4,10 @@
  */
 package ensimag.voiture.controller;
 
-import ensimag.voiture.model.Car;
+import ensimag.voiture.model.dataBase.Car;
 import ensimag.voiture.model.CarEnergy;
-import ensimag.voiture.model.TrajectoryChunck;
-import ensimag.voiture.model.User;
+import ensimag.voiture.model.dataBase.TrajectoryChunck;
+import ensimag.voiture.model.dataBase.User;
 import ensimag.voiture.view.CarHomePage;
 import ensimag.voiture.view.LoginPage;
 

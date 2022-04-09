@@ -1,4 +1,4 @@
-package ensimag.voiture.controller;
+package ensimag.voiture.model;
 
 import java.util.List;
 import java.sql.Connection;
