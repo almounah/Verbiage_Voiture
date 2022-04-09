@@ -35,7 +35,7 @@ public class TrajectoryHomePage extends javax.swing.JFrame {
         proposedTrajBox = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         addTrajButton = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        nextChunckButt = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         depCityText = new javax.swing.JTextField();
@@ -74,6 +74,11 @@ public class TrajectoryHomePage extends javax.swing.JFrame {
                 proposedTrajBoxItemStateChanged(evt);
             }
         });
+        proposedTrajBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                proposedTrajBoxActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Select your proposed Trajectory ");
 
@@ -84,10 +89,10 @@ public class TrajectoryHomePage extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Next Chunck");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        nextChunckButt.setText("Next Chunck");
+        nextChunckButt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                nextChunckButtActionPerformed(evt);
             }
         });
 
@@ -219,9 +224,8 @@ public class TrajectoryHomePage extends javax.swing.JFrame {
                                         .addComponent(availSeatsText, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(waitDelayText, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(startDateText, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(arrCityText, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
-                                            .addComponent(depCityText, javax.swing.GroupLayout.Alignment.LEADING)))))
+                                        .addComponent(arrCityText, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+                                        .addComponent(depCityText))))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(chunckIndexLab)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -236,7 +240,7 @@ public class TrajectoryHomePage extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(notrajlab)
                 .addGap(51, 51, 51)
-                .addComponent(jButton2)
+                .addComponent(nextChunckButt)
                 .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
@@ -306,7 +310,7 @@ public class TrajectoryHomePage extends javax.swing.JFrame {
                     .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2)
+                            .addComponent(nextChunckButt)
                             .addComponent(notrajlab))
                         .addGap(9, 9, 9)))
                 .addComponent(addTrajButton)
@@ -318,17 +322,21 @@ public class TrajectoryHomePage extends javax.swing.JFrame {
 
     private void addTrajButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTrajButtonActionPerformed
         // TODO add your handling code here:
-        ButtonHandler.notifyAddTrajectory();
+        ButtonHandler.notifyAddTrajectory(this);
     }//GEN-LAST:event_addTrajButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        ButtonHandler.notifyViewNextTraj(this, true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void nextChunckButtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextChunckButtActionPerformed
+        ButtonHandler.notifyViewNextChunck(this, true);
+    }//GEN-LAST:event_nextChunckButtActionPerformed
 
     private void proposedTrajBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_proposedTrajBoxItemStateChanged
         // TODO add your handling code here:
-        ButtonHandler.notifyViewNextTraj(this, true);
+        ButtonHandler.notifyViewNextChunck(this, true);
     }//GEN-LAST:event_proposedTrajBoxItemStateChanged
+
+    private void proposedTrajBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proposedTrajBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_proposedTrajBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -379,7 +387,6 @@ public class TrajectoryHomePage extends javax.swing.JFrame {
     private javax.swing.JTextField depLong;
     private javax.swing.JTextField globArrCityText;
     private javax.swing.JTextField globDepCityText;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -393,6 +400,7 @@ public class TrajectoryHomePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JButton nextChunckButt;
     private javax.swing.JLabel notrajlab;
     private javax.swing.JComboBox<String> proposedTrajBox;
     private javax.swing.JTextField startDateText;

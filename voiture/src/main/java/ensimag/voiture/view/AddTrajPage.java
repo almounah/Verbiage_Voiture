@@ -267,6 +267,7 @@ public class AddTrajPage extends javax.swing.JFrame {
                                      arrLongText.getText(),
                                      (String) carSelectBox.getSelectedItem(),
                                      this, true);
+        ButtonHandler.notifyViewTrajectory();
     }//GEN-LAST:event_finishButtonActionPerformed
 
     /**

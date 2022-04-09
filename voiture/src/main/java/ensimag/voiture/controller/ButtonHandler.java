@@ -6,6 +6,7 @@ package ensimag.voiture.controller;
 
 import ensimag.voiture.model.dataBase.Car;
 import ensimag.voiture.model.CarEnergy;
+import ensimag.voiture.model.TimeCalculator;
 import ensimag.voiture.model.dataBase.Trajectory;
 import ensimag.voiture.model.dataBase.TrajectoryChunck;
 import ensimag.voiture.model.dataBase.User;
@@ -78,12 +79,13 @@ public class ButtonHandler {
         ViewUpdater.showTrajectory();
     }
     
-    public static void notifyAddTrajectory() {
+    public static void notifyAddTrajectory(TrajectoryHomePage thp) {
         User.getListOfCarDB();
         ViewUpdater.showNewTrajPage();
+        thp.dispose();
     }
     
-    public static void notifyViewNextTraj(TrajectoryHomePage thp, boolean next) {
+    public static void notifyViewNextChunck(TrajectoryHomePage thp, boolean next) {
         ViewUpdater.showTrajectory(true, thp);
     }
     
@@ -106,6 +108,7 @@ public class ButtonHandler {
         if (chunckIndex == 1) {
             Trajectory.addTrajDB(User.getEmail().hashCode() + startDateTime.hashCode(),
                                  User.getEmail(), selectedCarLicense);
+            TimeCalculator.setPreviousChunckEndDate(startDateTime);
         }
         TrajectoryChunck.addChunckToDB(chunckIndex,
                                        startDateTime,
@@ -120,6 +123,7 @@ public class ButtonHandler {
                                        selectedCarLicense);
         if (lastChunck) {
             atp.dispose();
+            User.getListOfTrajectoryDB();
         } else {
             ViewUpdater.showAddNextChunck(atp);
         }

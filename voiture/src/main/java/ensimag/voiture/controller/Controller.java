@@ -4,6 +4,7 @@
  */
 package ensimag.voiture.controller;
 
+import ensimag.voiture.model.Model;
 import ensimag.voiture.model.QueriesRunner;
 import ensimag.voiture.model.dataBase.User;
 import ensimag.voiture.view.View;
@@ -14,15 +15,16 @@ import ensimag.voiture.view.View;
  */
 public class Controller {
     private ButtonHandler butHandler;
-    private QueriesRunner queriesRunner;
     private ViewUpdater viewUpdater;
     private User user;
     private View view;
+    private Model model;
+    
 
     public Controller(View view) {
         this.viewUpdater = new ViewUpdater(view);
         this.butHandler = new ButtonHandler(viewUpdater);
-        this.queriesRunner = new QueriesRunner();
+        this.model = new Model();
         this.user = new User();
         this.view = view;
     }

@@ -163,8 +163,8 @@ public class User {
                 Integer sectionId = (Integer) chunckInfo.getValue().get(0);
                 Integer sectionWaitingDelay = (Integer) chunckInfo.getValue().get(1);
                 Integer availableSeats = (Integer) chunckInfo.getValue().get(2);
-                float travelDistance = (float) chunckInfo.getValue().get(3);
-                float travelDuration = (float) chunckInfo.getValue().get(4);
+                Integer travelDistance = (Integer) chunckInfo.getValue().get(3);
+                Integer travelDuration = (Integer) chunckInfo.getValue().get(4);
                 City cityArrival = new City((String) chunckInfo.getValue().get(5),
                                             (float) chunckInfo.getValue().get(7),
                                             (float) chunckInfo.getValue().get(8));

@@ -99,10 +99,8 @@
                                       <Component id="availSeatsText" alignment="0" min="-2" pref="113" max="-2" attributes="0"/>
                                       <Component id="waitDelayText" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
                                       <Component id="startDateText" min="-2" pref="199" max="-2" attributes="0"/>
-                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="arrCityText" alignment="0" pref="94" max="32767" attributes="0"/>
-                                          <Component id="depCityText" alignment="0" max="32767" attributes="0"/>
-                                      </Group>
+                                      <Component id="arrCityText" alignment="0" pref="94" max="32767" attributes="0"/>
+                                      <Component id="depCityText" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -125,7 +123,7 @@
               <EmptySpace max="32767" attributes="0"/>
               <Component id="notrajlab" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
-              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+              <Component id="nextChunckButt" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -213,7 +211,7 @@
                   <Component id="jButton3" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="nextChunckButt" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="notrajlab" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
@@ -234,6 +232,7 @@
       </Properties>
       <Events>
         <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="proposedTrajBoxItemStateChanged"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="proposedTrajBoxActionPerformed"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -252,12 +251,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addTrajButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="nextChunckButt">
       <Properties>
         <Property name="text" type="java.lang.String" value="Next Chunck"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nextChunckButtActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton3">

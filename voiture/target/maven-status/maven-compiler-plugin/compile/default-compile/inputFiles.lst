@@ -1,4 +1,5 @@
 /home/almounah/Desktop/ENSIMAG/2A/semestre_2/projetBD/projet_sgbd/voiture/src/main/java/ensimag/voiture/view/LoginPage.java
+/home/almounah/Desktop/ENSIMAG/2A/semestre_2/projetBD/projet_sgbd/voiture/src/main/java/ensimag/voiture/model/TimeCalculator.java
 /home/almounah/Desktop/ENSIMAG/2A/semestre_2/projetBD/projet_sgbd/voiture/src/main/java/ensimag/voiture/view/UserProfile.java
 /home/almounah/Desktop/ENSIMAG/2A/semestre_2/projetBD/projet_sgbd/voiture/src/main/java/ensimag/voiture/model/dataBase/User.java
 /home/almounah/Desktop/ENSIMAG/2A/semestre_2/projetBD/projet_sgbd/voiture/src/main/java/ensimag/voiture/view/CarHomePage.java
@@ -14,6 +15,7 @@
 /home/almounah/Desktop/ENSIMAG/2A/semestre_2/projetBD/projet_sgbd/voiture/src/main/java/ensimag/voiture/controller/Controller.java
 /home/almounah/Desktop/ENSIMAG/2A/semestre_2/projetBD/projet_sgbd/voiture/src/main/java/ensimag/voiture/Voiture.java
 /home/almounah/Desktop/ENSIMAG/2A/semestre_2/projetBD/projet_sgbd/voiture/src/main/java/ensimag/voiture/view/AddCarPage.java
+/home/almounah/Desktop/ENSIMAG/2A/semestre_2/projetBD/projet_sgbd/voiture/src/main/java/ensimag/voiture/model/Model.java
 /home/almounah/Desktop/ENSIMAG/2A/semestre_2/projetBD/projet_sgbd/voiture/src/main/java/ensimag/voiture/model/QueriesRunner.java
 /home/almounah/Desktop/ENSIMAG/2A/semestre_2/projetBD/projet_sgbd/voiture/src/main/java/ensimag/voiture/view/RegisterPage.java
 /home/almounah/Desktop/ENSIMAG/2A/semestre_2/projetBD/projet_sgbd/voiture/src/main/java/ensimag/voiture/model/dataBase/Car.java

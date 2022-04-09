@@ -54,8 +54,8 @@ public class dbQueries {
                        " latDeparture FLOAT," +
                        " longDeparture FLOAT," +
                        " availableSeats INT CHECK (availableSeats>=0)," +
-                       " travelDistance FLOAT CHECK (travelDistance>0)," +
-                       " travelDuration FLOAT CHECK (travelDuration>0)," +
+                       " travelDistance INT CHECK (travelDistance>0)," +
+                       " travelDuration INT CHECK (travelDuration>0)," +
                        " sectionWaitingDelay INT CHECK (sectionWaitingDelay>=0)," +
                        " sectionStartDate DATETIME," +
                        " PRIMARY KEY (trajectId, sectionId)," +

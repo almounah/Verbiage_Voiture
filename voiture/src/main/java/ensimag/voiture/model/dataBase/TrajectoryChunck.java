@@ -7,6 +7,7 @@ package ensimag.voiture.model.dataBase;
 
 
 import ensimag.voiture.model.QueriesRunner;
+import ensimag.voiture.model.TimeCalculator;
 import ensimag.voiture.model.dataBase.Car;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
@@ -28,14 +29,14 @@ public class TrajectoryChunck {
     
     private Integer sectionId;
     private Integer sectionWaitingDelay;
-    private Float travelDistance;
-    private Float travelDuration;
+    private Integer travelDistance;
+    private Integer travelDuration;
     private Integer availableSeats;
     private City cityArrival;
     private City cityDeparture;
     private LocalDateTime sectionStartDate;
 
-    public TrajectoryChunck(Integer trajectoryId, int sectionId, int sectionWaitingDelay, float travelDistance, float travelDuration, int availableSeats, City cityArrival, City cityDeparture, LocalDateTime sectionStartDate) {
+    public TrajectoryChunck(Integer trajectoryId, int sectionId, int sectionWaitingDelay, Integer travelDistance, Integer travelDuration, int availableSeats, City cityArrival, City cityDeparture, LocalDateTime sectionStartDate) {
         this.trajectoryId = trajectoryId;
         this.sectionId = sectionId;
         this.sectionWaitingDelay = sectionWaitingDelay;
@@ -61,7 +62,8 @@ public class TrajectoryChunck {
                                     String selectetCarLicense) {
         Integer trajectId = User.getEmail().hashCode() + startDate.hashCode();
         Integer availableSeats = Car.getAvailableSeatsFromLicence(selectetCarLicense, User.getCarOwned());
-        Timestamp sectionStartDate = Timestamp.valueOf(startDate);
+        Timestamp sectionStartDate = Timestamp.valueOf(TimeCalculator.getPreviousChunckEndDate());
+        TimeCalculator.calculateNextChunckStartTime(travDuration, waitDelay);
         String query = "INSERT INTO sections " +
                        "(trajectId, sectionId, sectionWaitingDelay, availableSeats,"+
                        " travelDistance, travelDuration, cityArrival, cityDeparture, latArrival," +
@@ -89,11 +91,11 @@ public class TrajectoryChunck {
         return sectionWaitingDelay;
     }
 
-    public Float getTravelDistance() {
+    public Integer getTravelDistance() {
         return travelDistance;
     }
 
-    public Float getTravelDuration() {
+    public Integer getTravelDuration() {
         return travelDuration;
     }
 
