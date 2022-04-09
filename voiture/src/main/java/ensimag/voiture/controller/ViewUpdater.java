@@ -6,6 +6,7 @@ package ensimag.voiture.controller;
 
 import ensimag.voiture.model.dataBase.Car;
 import ensimag.voiture.model.dataBase.Trajectory;
+import ensimag.voiture.model.dataBase.TrajectoryChunck;
 import ensimag.voiture.model.dataBase.User;
 import ensimag.voiture.view.AddCarPage;
 import ensimag.voiture.view.AddTrajPage;
@@ -86,17 +87,55 @@ public class ViewUpdater {
     
     public static void showTrajectory() {
         TrajectoryHomePage trajectoryHomePage = new TrajectoryHomePage();
+        for (int i = 0; i < User.getListProposedTraj().size() ; i++) {
+            trajectoryHomePage.getProposedTrajBox().addItem("Traj" + (i+1));
+        }
         showTrajectory(true, trajectoryHomePage);
     }
+    
+    
+    public static void showChunck(TrajectoryChunck c, TrajectoryHomePage thp) {
+        thp.getAvailSeatsText().setText(c.getAvailableSeats().toString());
+        thp.getDepCityText().setText(c.getCityDeparture().getCityName());
+        thp.getArrCityText().setText(c.getCityArrival().getCityName());
+        thp.getTravDistText().setText(c.getTravelDistance().toString());
+        thp.getTravDurText().setText(c.getTravelDuration().toString());
+        thp.getWaitDelayText().setText(c.getSectionWaitingDelay().toString());
+        thp.getStartDateText().setText(c.getSectionStartDate().toString());
+        
+    }
+    
     
     public static void showTrajectory(boolean next, TrajectoryHomePage trajectoryHomePage) {
         List<Trajectory> userTrajList = User.getListProposedTraj();
         if (userTrajList.isEmpty()) {
             trajectoryHomePage.getNotrajlab().setText("NO TRAJ YET");
-            trajectoryHomePage.getChunckIndexLab().setText("Chunck 0/0");
+            trajectoryHomePage.getChunckIndex().setText(null);
+            trajectoryHomePage.getTotalChunck().setText("/");
+        } else {
+            
+            Integer trajIndex = trajectoryHomePage.getProposedTrajBox().getSelectedIndex() + 1;
+            Trajectory viewedTraj = userTrajList.get(trajIndex);
+            List<TrajectoryChunck> chunckList = viewedTraj.getTrajectoryChunckList();
+            
+            Integer chunckIndex = Integer.parseInt(trajectoryHomePage.getChunckIndex().getText());
+            if (next) {
+                chunckIndex = (chunckIndex + 1)%chunckList.size();
+            } else {
+                chunckIndex = (chunckIndex + chunckList.size() - 1)%chunckList.size();
+            }
+            trajectoryHomePage.getChunckIndex().setText((chunckIndex).toString());
+            trajectoryHomePage.getTotalChunck().setText("/" + (chunckList.size() - 1));
+            trajectoryHomePage.getCarLicenceText().setText(viewedTraj.getDrivenLicenseCar());
+            trajectoryHomePage.getGlobDepCityText().setText(chunckList.get(0).getCityDeparture().getCityName());
+            trajectoryHomePage.getGlobArrCityText().setText(chunckList.get(chunckList.size()-1).getCityArrival().getCityName());
+            
+            showChunck(viewedTraj.getTrajectoryChunckList().get(chunckIndex), trajectoryHomePage);
+            
         }
         trajectoryHomePage.show();
     }
+    
     
     public static void showNewTrajPage() {
         List<Car> clist = User.getCarOwned();

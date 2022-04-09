@@ -33,7 +33,7 @@ public class dbQueries {
 
     public String trajectoryCreationQuery() {
         String query = "CREATE TABLE trajectory" +
-                       "(trajectId VARCHAR(255)," +
+                       "(trajectId INT," +
                        " drivenLicenseCar VARCHAR(255)," +
                        " driverMail VARCHAR(255)," +
                        " PRIMARY KEY (trajectId)," +
@@ -45,7 +45,7 @@ public class dbQueries {
 
     public String sectionsCreationQuery() {
         String query = "CREATE TABLE sections" +
-                       "(trajectId VARCHAR(255)," +
+                       "(trajectId INT," +
                        " sectionId INT," +
                        " cityArrival VARCHAR(255)," +
                        " latArrival FLOAT," +
@@ -58,7 +58,8 @@ public class dbQueries {
                        " travelDuration FLOAT CHECK (travelDuration>0)," +
                        " sectionWaitingDelay INT CHECK (sectionWaitingDelay>=0)," +
                        " sectionStartDate DATE," +
-                       " PRIMARY KEY (trajectId, sectionId));";
+                       " PRIMARY KEY (trajectId, sectionId)," +
+                       " FOREIGN KEY (trajectId) REFERENCES trajectory(trajectId));";
 
         return query;
     }
@@ -91,7 +92,7 @@ public class dbQueries {
     public String tripPlanCreationQuery() {
         String query = "CREATE TABLE tripPlan" +
                        "(tripId INT," +
-                       " trajectId VARCHAR(255)," +
+                       " trajectId INT," +
                        " sectionId INT," +
                        " FOREIGN KEY (tripId) REFERENCES carPool(tripId)," +
                        " FOREIGN KEY (trajectId, sectionId) REFERENCES sections(trajectId, sectionId));";

@@ -14,6 +14,7 @@ import ensimag.voiture.view.TrajectoryHomePage;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -86,7 +87,7 @@ public class User {
                 + "ci.carFiscalPower, "
                 + "ci.intialSeatsNumber "
                 + "FROM carOwnership co, carInfo ci WHERE "
-                + "mailUser= ? AND "
+                + "mailUser=? AND "
                 + "ci.licensePlate=co.licensePlate;";
         List param = new ArrayList<>();
         param.add(email);
@@ -110,19 +111,19 @@ public class User {
                 "INSERT INTO carOwnership "
                 + "(licensePlate, mailUser) "
                 + "VALUES "
-                + "(\"" + licensePlate + "\", \"" + User.email + "\");";
+                + "(?, ?);";
         List param = Arrays.asList(licensePlate, User.email);
         List<String> paramType = Arrays.asList("String", "String");
-        return QueriesRunner.QuerySetter(query, param, paramType, false);
+        return QueriesRunner.QuerySetter(query, param, paramType, true);
     }
     
     public static void getListOfTrajectoryDB() {
         String query = 
                 "SELECT "
-                + "trajectoryId, "
-                + "driverLicenseCar "
+                + "trajectId, "
+                + "drivenLicenseCar "
                 + "FROM trajectory WHERE "
-                + "mailUser= ? ;";
+                + "driverMail= ? ;";
         List param = new ArrayList<>();
         param.add(email);
         
@@ -130,10 +131,10 @@ public class User {
             List.of("String"));
         Map<Integer, List> trajList = QueriesRunner.QueryGetter(query, param, paramType);
         for (Map.Entry<Integer, List> entry : trajList.entrySet()) {
-            String trajectoryId = (String) entry.getValue().get(0);
+            Integer trajectoryId = (Integer) entry.getValue().get(0);
             String driverLicenseCar = (String) entry.getValue().get(1);
             
-            List<TrajectoryChunck> listChunck = new ArrayList<TrajectoryChunck>();
+            List<TrajectoryChunck> listChunck = new ArrayList<>();
             query = 
                 "SELECT "
                 + "sectionId, "
@@ -143,23 +144,25 @@ public class User {
                 + "travelDuration, "
                 + "cityArrival, "
                 + "cityDeparture, "
-                + "latArrival" 
+                + "latArrival, " 
                 + "longArrival, "
                 + "latDeparture, " 
                 + "longDeparture, "
-                + "sectionStartDate"
+                + "sectionStartDate "
                 + "FROM sections WHERE "
-                + "trajectoryId= ?;";
+                + "trajectId=?;";
             param = new ArrayList<>();
             param.add(trajectoryId);
+            paramType = new ArrayList<>();
+            paramType.add("Integer");
             
             Map<Integer, List> chunckList = QueriesRunner.QueryGetter(query, param, paramType);
             for (Map.Entry<Integer, List> chunckInfo : chunckList.entrySet()) {
                 Integer sectionId = (Integer) chunckInfo.getValue().get(0);
                 Integer sectionWaitingDelay = (Integer) chunckInfo.getValue().get(1);
                 Integer availableSeats = (Integer) chunckInfo.getValue().get(2);
-                Integer travelDistance = (Integer) chunckInfo.getValue().get(3);
-                Integer travelDuration = (Integer) chunckInfo.getValue().get(4);
+                float travelDistance = (float) chunckInfo.getValue().get(3);
+                float travelDuration = (float) chunckInfo.getValue().get(4);
                 City cityArrival = new City((String) chunckInfo.getValue().get(5),
                                             (float) chunckInfo.getValue().get(7),
                                             (float) chunckInfo.getValue().get(8));
@@ -176,7 +179,7 @@ public class User {
             
             Trajectory trajectory = new Trajectory(trajectoryId, User.email,
                     driverLicenseCar, listChunck);
-            listProposedTraj.add(trajectory);
+            User.listProposedTraj.add(trajectory);
         }
         
     }

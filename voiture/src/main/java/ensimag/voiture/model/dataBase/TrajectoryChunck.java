@@ -24,18 +24,18 @@ import java.util.List;
  */
 public class TrajectoryChunck {
     
-    private String trajectoryId;
+    private Integer trajectoryId;
     
-    private int sectionId;
-    private int sectionWaitingDelay;
-    private int travelDistance;
-    private int travelDuration;
-    private int availableSeats;
+    private Integer sectionId;
+    private Integer sectionWaitingDelay;
+    private Float travelDistance;
+    private Float travelDuration;
+    private Integer availableSeats;
     private City cityArrival;
     private City cityDeparture;
     private Date sectionStartDate;
 
-    public TrajectoryChunck(String trajectoryId, int sectionId, int sectionWaitingDelay, int travelDistance, int travelDuration, int availableSeats, City cityArrival, City cityDeparture, Date sectionStartDate) {
+    public TrajectoryChunck(Integer trajectoryId, int sectionId, int sectionWaitingDelay, float travelDistance, float travelDuration, int availableSeats, City cityArrival, City cityDeparture, Date sectionStartDate) {
         this.trajectoryId = trajectoryId;
         this.sectionId = sectionId;
         this.sectionWaitingDelay = sectionWaitingDelay;
@@ -74,6 +74,50 @@ public class TrajectoryChunck {
         List<String> paramType = Arrays.asList("Integer", "Integer", "Integer", "Integer",
                                                "Integer", "Integer", "String", "String",
                                                "Float", "Float", "Float", "Float", "Date");
-        return QueriesRunner.QuerySetter(query, param, paramType, false);
+        return QueriesRunner.QuerySetter(query, param, paramType, true);
     }
+
+    public Integer getTrajectoryId() {
+        return trajectoryId;
+    }
+
+    public Integer getSectionId() {
+        return sectionId;
+    }
+
+    public Integer getSectionWaitingDelay() {
+        return sectionWaitingDelay;
+    }
+
+    public Float getTravelDistance() {
+        return travelDistance;
+    }
+
+    public Float getTravelDuration() {
+        return travelDuration;
+    }
+
+    public Integer getAvailableSeats() {
+        return availableSeats;
+    }
+
+    public City getCityArrival() {
+        return cityArrival;
+    }
+
+    public City getCityDeparture() {
+        return cityDeparture;
+    }
+
+    public Date getSectionStartDate() {
+        return sectionStartDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Chunck:" + cityDeparture.getCityName() + "-->" + cityArrival.getCityName();
+    }
+    
+    
+    
 }

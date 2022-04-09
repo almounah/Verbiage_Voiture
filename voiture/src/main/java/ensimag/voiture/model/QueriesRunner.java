@@ -86,6 +86,7 @@ public class QueriesRunner {
                 resultMap.put(rowIndex, rowContent);
                 rowIndex++;
             }
+            System.out.println(resultMap);
         } catch (SQLException e) {
             System.out.println(e);
         } catch (ClassNotFoundException ex) {

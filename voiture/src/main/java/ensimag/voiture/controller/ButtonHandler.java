@@ -6,11 +6,13 @@ package ensimag.voiture.controller;
 
 import ensimag.voiture.model.dataBase.Car;
 import ensimag.voiture.model.CarEnergy;
+import ensimag.voiture.model.dataBase.Trajectory;
 import ensimag.voiture.model.dataBase.TrajectoryChunck;
 import ensimag.voiture.model.dataBase.User;
 import ensimag.voiture.view.AddTrajPage;
 import ensimag.voiture.view.CarHomePage;
 import ensimag.voiture.view.LoginPage;
+import ensimag.voiture.view.TrajectoryHomePage;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -81,6 +83,10 @@ public class ButtonHandler {
         ViewUpdater.showNewTrajPage();
     }
     
+    public static void notifyViewNextTraj(TrajectoryHomePage thp, boolean next) {
+        ViewUpdater.showTrajectory(true, thp);
+    }
+    
     public static void notifyAddAnotherChunck(Integer chunckIndex,
                                               LocalDate startDate,
                                               LocalTime startTime,
@@ -94,8 +100,13 @@ public class ButtonHandler {
                                               String arrLat,
                                               String arrLong,
                                               String selectedCarLicense,
-                                              AddTrajPage atp) {
+                                              AddTrajPage atp,
+                                              boolean lastChunck) {
         LocalDateTime startDateTime = startDate.atTime(startTime);
+        if (chunckIndex == 1) {
+            Trajectory.addTrajDB(User.getEmail().hashCode() + startDateTime.hashCode(),
+                                 User.getEmail(), selectedCarLicense);
+        }
         TrajectoryChunck.addChunckToDB(chunckIndex,
                                        startDateTime,
                                        depCity, arrCity,
@@ -107,7 +118,11 @@ public class ButtonHandler {
                                        Float.parseFloat(arrLat),
                                        Float.parseFloat(arrLong),
                                        selectedCarLicense);
-        ViewUpdater.showAddNextChunck(atp);
-        
+        if (lastChunck) {
+            atp.dispose();
+        } else {
+            ViewUpdater.showAddNextChunck(atp);
+        }
     }
+    
 }

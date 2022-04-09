@@ -5,7 +5,10 @@
 package ensimag.voiture.view;
 
 import ensimag.voiture.controller.ButtonHandler;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -55,6 +58,8 @@ public class TrajectoryHomePage extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         carLicenceText = new javax.swing.JTextField();
         notrajlab = new javax.swing.JLabel();
+        chunckIndex = new javax.swing.JTextField();
+        totalChunck = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -68,6 +73,11 @@ public class TrajectoryHomePage extends javax.swing.JFrame {
         });
 
         jButton2.setText("Next Chunck");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Previous Chunck");
 
@@ -101,7 +111,7 @@ public class TrajectoryHomePage extends javax.swing.JFrame {
 
         chunckIndexLab.setBackground(new java.awt.Color(153, 255, 255));
         chunckIndexLab.setFont(new java.awt.Font("Cantarell", 0, 18)); // NOI18N
-        chunckIndexLab.setText("Chunck 1 / 2");
+        chunckIndexLab.setText("Chunck");
 
         globDepCityText.setEditable(false);
 
@@ -114,6 +124,12 @@ public class TrajectoryHomePage extends javax.swing.JFrame {
         carLicenceText.setEditable(false);
 
         notrajlab.setText("No Trajectory Yet");
+
+        chunckIndex.setEditable(false);
+        chunckIndex.setText("-1");
+
+        totalChunck.setEditable(false);
+        totalChunck.setText("/0");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -161,7 +177,12 @@ public class TrajectoryHomePage extends javax.swing.JFrame {
                                     .addComponent(availSeatsText, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(waitDelayText, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(startDateText, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addComponent(chunckIndexLab, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(chunckIndexLab)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(chunckIndex, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(totalChunck, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(78, 78, 78))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
@@ -187,7 +208,10 @@ public class TrajectoryHomePage extends javax.swing.JFrame {
                     .addComponent(jLabel11)
                     .addComponent(carLicenceText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
-                .addComponent(chunckIndexLab)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(chunckIndexLab)
+                    .addComponent(chunckIndex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(totalChunck, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
@@ -217,7 +241,7 @@ public class TrajectoryHomePage extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel8))
                     .addComponent(startDateText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -236,6 +260,10 @@ public class TrajectoryHomePage extends javax.swing.JFrame {
         // TODO add your handling code here:
         ButtonHandler.notifyAddTrajectory();
     }//GEN-LAST:event_addTrajButtonActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        ButtonHandler.notifyViewNextTraj(this, true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -277,6 +305,7 @@ public class TrajectoryHomePage extends javax.swing.JFrame {
     private javax.swing.JTextField arrCityText;
     private javax.swing.JTextField availSeatsText;
     private javax.swing.JTextField carLicenceText;
+    private javax.swing.JTextField chunckIndex;
     private javax.swing.JLabel chunckIndexLab;
     private javax.swing.JTextField depCityText;
     private javax.swing.JTextField globArrCityText;
@@ -296,6 +325,7 @@ public class TrajectoryHomePage extends javax.swing.JFrame {
     private javax.swing.JLabel notrajlab;
     private javax.swing.JComboBox<String> proposedTrajBox;
     private javax.swing.JTextField startDateText;
+    private javax.swing.JTextField totalChunck;
     private javax.swing.JTextField travDistText;
     private javax.swing.JTextField travDurText;
     private javax.swing.JTextField waitDelayText;
@@ -307,6 +337,62 @@ public class TrajectoryHomePage extends javax.swing.JFrame {
 
     public JLabel getChunckIndexLab() {
         return chunckIndexLab;
+    }
+
+    public JButton getAddTrajButton() {
+        return addTrajButton;
+    }
+
+    public JTextField getArrCityText() {
+        return arrCityText;
+    }
+
+    public JTextField getAvailSeatsText() {
+        return availSeatsText;
+    }
+
+    public JTextField getCarLicenceText() {
+        return carLicenceText;
+    }
+
+    public JTextField getDepCityText() {
+        return depCityText;
+    }
+
+    public JTextField getGlobArrCityText() {
+        return globArrCityText;
+    }
+
+    public JTextField getGlobDepCityText() {
+        return globDepCityText;
+    }
+
+    public JComboBox<String> getProposedTrajBox() {
+        return proposedTrajBox;
+    }
+
+    public JTextField getStartDateText() {
+        return startDateText;
+    }
+
+    public JTextField getTravDistText() {
+        return travDistText;
+    }
+
+    public JTextField getTravDurText() {
+        return travDurText;
+    }
+
+    public JTextField getWaitDelayText() {
+        return waitDelayText;
+    }
+
+    public JTextField getChunckIndex() {
+        return chunckIndex;
+    }
+
+    public JTextField getTotalChunck() {
+        return totalChunck;
     }
     
 

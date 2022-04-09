@@ -248,11 +248,25 @@ public class AddTrajPage extends javax.swing.JFrame {
                                              arrLatText.getText(),
                                              arrLongText.getText(),
                                              (String) carSelectBox.getSelectedItem(),
-                                             this);
+                                             this, false);
     }//GEN-LAST:event_addAnotherChunckButtonActionPerformed
 
     private void finishButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finishButtonActionPerformed
         // TODO add your handling code here:
+        ButtonHandler.notifyAddAnotherChunck(Integer.parseInt(chunckIndex.getText()),
+                                     selectedDate.datePicker.getDate(),
+                                     selectedDate.timePicker.getTime(),
+                                     depCityText.getText(),
+                                     arrCityText.getText(),
+                                     travDistText.getText(),
+                                     travDurText.getText(),
+                                     waitDelayText.getText(),
+                                     depLatText.getText(),
+                                     depLongText.getText(),
+                                     arrLatText.getText(),
+                                     arrLongText.getText(),
+                                     (String) carSelectBox.getSelectedItem(),
+                                     this, true);
     }//GEN-LAST:event_finishButtonActionPerformed
 
     /**
