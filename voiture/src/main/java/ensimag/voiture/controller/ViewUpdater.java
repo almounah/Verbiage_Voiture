@@ -102,6 +102,10 @@ public class ViewUpdater {
         thp.getTravDurText().setText(c.getTravelDuration().toString());
         thp.getWaitDelayText().setText(c.getSectionWaitingDelay().toString());
         thp.getStartDateText().setText(c.getSectionStartDate().toString());
+        thp.getDepLat().setText(c.getCityDeparture().getLatetude().toString());
+        thp.getDepLong().setText(c.getCityDeparture().getLongetude().toString());
+        thp.getArrLong().setText(c.getCityArrival().getLongetude().toString());
+        thp.getArrLat().setText(c.getCityArrival().getLatetude().toString());
         
     }
     
@@ -114,7 +118,7 @@ public class ViewUpdater {
             trajectoryHomePage.getTotalChunck().setText("/");
         } else {
             
-            Integer trajIndex = trajectoryHomePage.getProposedTrajBox().getSelectedIndex() + 1;
+            Integer trajIndex = trajectoryHomePage.getProposedTrajBox().getSelectedIndex();
             Trajectory viewedTraj = userTrajList.get(trajIndex);
             List<TrajectoryChunck> chunckList = viewedTraj.getTrajectoryChunckList();
             

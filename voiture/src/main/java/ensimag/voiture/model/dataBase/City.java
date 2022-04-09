@@ -12,8 +12,8 @@ package ensimag.voiture.model.dataBase;
  */
 public class City {
     private String cityName;
-    private float latetude;
-    private float longetude;
+    private Float latetude;
+    private Float longetude;
 
     public City(String cityName, float latetude, float longetude) {
         this.cityName = cityName;
@@ -25,11 +25,11 @@ public class City {
         return cityName;
     }
 
-    public float getLatetude() {
+    public Float getLatetude() {
         return latetude;
     }
 
-    public float getLongetude() {
+    public Float getLongetude() {
         return longetude;
     }
     

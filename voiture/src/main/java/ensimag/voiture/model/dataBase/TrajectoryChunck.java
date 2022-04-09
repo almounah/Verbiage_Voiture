@@ -33,9 +33,9 @@ public class TrajectoryChunck {
     private Integer availableSeats;
     private City cityArrival;
     private City cityDeparture;
-    private Date sectionStartDate;
+    private LocalDateTime sectionStartDate;
 
-    public TrajectoryChunck(Integer trajectoryId, int sectionId, int sectionWaitingDelay, float travelDistance, float travelDuration, int availableSeats, City cityArrival, City cityDeparture, Date sectionStartDate) {
+    public TrajectoryChunck(Integer trajectoryId, int sectionId, int sectionWaitingDelay, float travelDistance, float travelDuration, int availableSeats, City cityArrival, City cityDeparture, LocalDateTime sectionStartDate) {
         this.trajectoryId = trajectoryId;
         this.sectionId = sectionId;
         this.sectionWaitingDelay = sectionWaitingDelay;
@@ -109,7 +109,7 @@ public class TrajectoryChunck {
         return cityDeparture;
     }
 
-    public Date getSectionStartDate() {
+    public LocalDateTime getSectionStartDate() {
         return sectionStartDate;
     }
 

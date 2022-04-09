@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -130,6 +131,7 @@ public class User {
         List<String> paramType = new ArrayList<>(
             List.of("String"));
         Map<Integer, List> trajList = QueriesRunner.QueryGetter(query, param, paramType);
+        User.listProposedTraj = new ArrayList<>();
         for (Map.Entry<Integer, List> entry : trajList.entrySet()) {
             Integer trajectoryId = (Integer) entry.getValue().get(0);
             String driverLicenseCar = (String) entry.getValue().get(1);
@@ -169,7 +171,7 @@ public class User {
                 City cityDeparture = new City((String) chunckInfo.getValue().get(6),
                                             (float) chunckInfo.getValue().get(9),
                                             (float) chunckInfo.getValue().get(10));
-                Date sectionStartDate = (Date) chunckInfo.getValue().get(11);
+                LocalDateTime sectionStartDate = (LocalDateTime) chunckInfo.getValue().get(11);
                 
                 TrajectoryChunck trajectoryChunck = new TrajectoryChunck(trajectoryId,
                         sectionId, sectionWaitingDelay, travelDistance,

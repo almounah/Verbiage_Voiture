@@ -57,7 +57,7 @@ public class dbQueries {
                        " travelDistance FLOAT CHECK (travelDistance>0)," +
                        " travelDuration FLOAT CHECK (travelDuration>0)," +
                        " sectionWaitingDelay INT CHECK (sectionWaitingDelay>=0)," +
-                       " sectionStartDate DATE," +
+                       " sectionStartDate DATETIME," +
                        " PRIMARY KEY (trajectId, sectionId)," +
                        " FOREIGN KEY (trajectId) REFERENCES trajectory(trajectId));";
 
