@@ -8,8 +8,12 @@ import ensimag.voiture.model.dataBase.Car;
 import ensimag.voiture.model.CarEnergy;
 import ensimag.voiture.model.dataBase.TrajectoryChunck;
 import ensimag.voiture.model.dataBase.User;
+import ensimag.voiture.view.AddTrajPage;
 import ensimag.voiture.view.CarHomePage;
 import ensimag.voiture.view.LoginPage;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 /**
  *
@@ -78,8 +82,8 @@ public class ButtonHandler {
     }
     
     public static void notifyAddAnotherChunck(Integer chunckIndex,
-                                              String startDate,
-                                              String startTime,
+                                              LocalDate startDate,
+                                              LocalTime startTime,
                                               String depCity,
                                               String arrCity,
                                               String travDist,
@@ -89,10 +93,21 @@ public class ButtonHandler {
                                               String depLong,
                                               String arrLat,
                                               String arrLong,
-                                              String selectedCarLicense) {
-        TrajectoryChunck.addChunckToDB(chunckIndex, startDate, startTime,
-                                       depCity, arrCity, travDist, travDuration,
-                                       waitDelay, depLat, depLong, arrLat, arrLong, selectedCarLicense);
+                                              String selectedCarLicense,
+                                              AddTrajPage atp) {
+        LocalDateTime startDateTime = startDate.atTime(startTime);
+        TrajectoryChunck.addChunckToDB(chunckIndex,
+                                       startDateTime,
+                                       depCity, arrCity,
+                                       Integer.parseInt(travDist),
+                                       Integer.parseInt(travDuration),
+                                       Integer.parseInt(waitDelay),
+                                       Float.parseFloat(depLat),
+                                       Float.parseFloat(depLong),
+                                       Float.parseFloat(arrLat),
+                                       Float.parseFloat(arrLong),
+                                       selectedCarLicense);
+        ViewUpdater.showAddNextChunck(atp);
         
     }
 }

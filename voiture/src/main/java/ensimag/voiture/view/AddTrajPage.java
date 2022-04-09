@@ -4,8 +4,10 @@
  */
 package ensimag.voiture.view;
 
+import com.github.lgooddatepicker.components.DateTimePicker;
 import ensimag.voiture.controller.ButtonHandler;
 import javax.swing.JComboBox;
+import javax.swing.JTextField;
 
 /**
  *
@@ -32,7 +34,6 @@ public class AddTrajPage extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         waitDelayText = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        startDateText = new javax.swing.JTextField();
         finishButton = new javax.swing.JButton();
         addAnotherChunckButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -49,8 +50,6 @@ public class AddTrajPage extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        startTimeText = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
         depLatText = new javax.swing.JTextField();
         depLongText = new javax.swing.JTextField();
         arrLatText = new javax.swing.JTextField();
@@ -58,6 +57,7 @@ public class AddTrajPage extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         chunckIndex = new javax.swing.JTextField();
+        selectedDate = new com.github.lgooddatepicker.components.DateTimePicker();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -65,14 +65,12 @@ public class AddTrajPage extends javax.swing.JFrame {
 
         jLabel8.setText("Start Date");
 
-        startDateText.setText("JJ/MM/YYYY");
-        startDateText.addActionListener(new java.awt.event.ActionListener() {
+        finishButton.setText("Finish");
+        finishButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                startDateTextActionPerformed(evt);
+                finishButtonActionPerformed(evt);
             }
         });
-
-        finishButton.setText("Finish");
 
         addAnotherChunckButton.setText("Add Another Chunck");
         addAnotherChunckButton.addActionListener(new java.awt.event.ActionListener() {
@@ -89,21 +87,17 @@ public class AddTrajPage extends javax.swing.JFrame {
 
         jLabel5.setText("Travel Duration");
 
-        jLabel1.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
         jLabel1.setText("Chunck Info");
+        jLabel1.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
 
         jLabel9.setText("Select Car for the entire trajectory");
 
-        jLabel6.setFont(new java.awt.Font("Cantarell", 2, 10)); // NOI18N
         jLabel6.setText("if you don't have a car, you can't propose a trajectory");
+        jLabel6.setFont(new java.awt.Font("Cantarell", 2, 10)); // NOI18N
 
         jLabel10.setText("km");
 
         jLabel11.setText("min");
-
-        startTimeText.setText("hh:mm");
-
-        jLabel12.setText("Start time");
 
         jLabel13.setText("lat");
 
@@ -161,15 +155,9 @@ public class AddTrajPage extends javax.swing.JFrame {
                         .addComponent(chunckIndex, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(258, 258, 258))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(startTimeText, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(startDateText, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel8)
+                        .addGap(18, 18, 18)
+                        .addComponent(selectedDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -199,12 +187,8 @@ public class AddTrajPage extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(startDateText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(startTimeText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(selectedDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(chunckIndex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -250,10 +234,10 @@ public class AddTrajPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addAnotherChunckButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAnotherChunckButtonActionPerformed
-        // TODO add your handling code here:
+
         ButtonHandler.notifyAddAnotherChunck(Integer.parseInt(chunckIndex.getText()),
-                                             startDateText.getText(),
-                                             startTimeText.getText(),
+                                             selectedDate.datePicker.getDate(),
+                                             selectedDate.timePicker.getTime(),
                                              depCityText.getText(),
                                              arrCityText.getText(),
                                              travDistText.getText(),
@@ -263,12 +247,13 @@ public class AddTrajPage extends javax.swing.JFrame {
                                              depLongText.getText(),
                                              arrLatText.getText(),
                                              arrLongText.getText(),
-                                             (String) carSelectBox.getSelectedItem());
+                                             (String) carSelectBox.getSelectedItem(),
+                                             this);
     }//GEN-LAST:event_addAnotherChunckButtonActionPerformed
 
-    private void startDateTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startDateTextActionPerformed
+    private void finishButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finishButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_startDateTextActionPerformed
+    }//GEN-LAST:event_finishButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -319,7 +304,6 @@ public class AddTrajPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
@@ -330,8 +314,7 @@ public class AddTrajPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField startDateText;
-    private javax.swing.JTextField startTimeText;
+    private com.github.lgooddatepicker.components.DateTimePicker selectedDate;
     private javax.swing.JTextField travDistText;
     private javax.swing.JTextField travDurText;
     private javax.swing.JTextField waitDelayText;
@@ -340,6 +323,51 @@ public class AddTrajPage extends javax.swing.JFrame {
     public JComboBox<String> getCarSelectBox() {
         return carSelectBox;
     }
+
+    public JTextField getArrCityText() {
+        return arrCityText;
+    }
+
+    public JTextField getArrLatText() {
+        return arrLatText;
+    }
+
+    public JTextField getArrLongText() {
+        return arrLongText;
+    }
+
+    public JTextField getDepCityText() {
+        return depCityText;
+    }
+
+    public JTextField getDepLatText() {
+        return depLatText;
+    }
+
+    public JTextField getDepLongText() {
+        return depLongText;
+    }
+
+    public DateTimePicker getSelectedDate() {
+        return selectedDate;
+    }
+
+    public JTextField getTravDistText() {
+        return travDistText;
+    }
+
+    public JTextField getTravDurText() {
+        return travDurText;
+    }
+
+    public JTextField getWaitDelayText() {
+        return waitDelayText;
+    }
+
+    public JTextField getChunckIndex() {
+        return chunckIndex;
+    }
+
 
     
 }

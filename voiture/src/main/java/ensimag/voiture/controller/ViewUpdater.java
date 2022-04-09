@@ -106,4 +106,29 @@ public class ViewUpdater {
         }
         addTrajPage.show();
     }
+    
+    public static void showAddNextChunck(AddTrajPage atp) {
+        Integer chunckIndex = Integer.parseInt(atp.getChunckIndex().getText()) + 1;
+        atp.getChunckIndex().setText(chunckIndex.toString());
+        
+        atp.getSelectedDate().datePicker.disable();
+        atp.getSelectedDate().timePicker.disable();
+        atp.getCarSelectBox().disable();
+        atp.getDepCityText().disable();
+        atp.getDepLatText().disable();
+        atp.getDepLongText().disable();
+        
+        atp.getDepCityText().setText(atp.getArrCityText().getText());
+        atp.getDepLatText().setText(atp.getArrLatText().getText());
+        atp.getDepLongText().setText(atp.getArrLongText().getText());
+        
+        atp.getArrCityText().setText(null);
+        atp.getArrLatText().setText(null);
+        atp.getArrLongText().setText(null);
+        
+        atp.getTravDistText().setText(null);
+        atp.getTravDurText().setText(null);
+        
+        atp.getWaitDelayText().setText(null);
+    }
 }

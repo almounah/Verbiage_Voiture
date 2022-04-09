@@ -13,7 +13,7 @@ import ensimag.voiture.model.dataBase.Car;
 import ensimag.voiture.view.TrajectoryHomePage;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;

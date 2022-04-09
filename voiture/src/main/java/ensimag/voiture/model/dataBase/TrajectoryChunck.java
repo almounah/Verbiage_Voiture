@@ -11,7 +11,11 @@ import ensimag.voiture.model.dataBase.Car;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.util.Arrays;
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 /**
@@ -44,32 +48,32 @@ public class TrajectoryChunck {
     }
     
     public static boolean addChunckToDB(Integer chunckIndex,
-                                    String startDate,
-                                    String startTime,
+                                    LocalDateTime startDate,
                                     String depCity,
                                     String arrCity,
-                                    String travDist,
-                                    String travDuration,
-                                    String waitDelay,
-                                    String depLat,
-                                    String depLong,
-                                    String arrLat,
-                                    String arrLong,
+                                    Integer travDist,
+                                    Integer travDuration,
+                                    Integer waitDelay,
+                                    float depLat,
+                                    float depLong,
+                                    float arrLat,
+                                    float arrLong,
                                     String selectetCarLicense) {
         Integer trajectId = User.getEmail().hashCode() + startDate.hashCode();
         Integer availableSeats = Car.getAvailableSeatsFromLicence(selectetCarLicense, User.getCarOwned());
+        Timestamp sectionStartDate = Timestamp.valueOf(startDate);
         String query = "INSERT INTO sections " +
-                       "(trajectoryId, sectionId, sectionWaitingDelay, availableSeats,"+
+                       "(trajectId, sectionId, sectionWaitingDelay, availableSeats,"+
                        " travelDistance, travelDuration, cityArrival, cityDeparture, latArrival," +
                        " longArrival, latDeparture, longDeparture, sectionStartDate) " +
                        "VALUES " +
-                       "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, convert(datetime(?)));";
+                       "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
         List param = Arrays.asList(trajectId, chunckIndex, waitDelay, availableSeats,
                                    travDist, travDuration, arrCity, depCity, arrLat,
-                                   arrLong, depLat, depLong, startDate);
-        List<String> paramType = Arrays.asList("String", "Integer", "Integer", "Integer",
+                                   arrLong, depLat, depLong, sectionStartDate);
+        List<String> paramType = Arrays.asList("Integer", "Integer", "Integer", "Integer",
                                                "Integer", "Integer", "String", "String",
-                                               "Float", "Float", "Float", "Float", "String");
+                                               "Float", "Float", "Float", "Float", "Date");
         return QueriesRunner.QuerySetter(query, param, paramType, false);
     }
 }

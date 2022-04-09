@@ -2,11 +2,13 @@ package ensimag.voiture.model;
 
 import java.util.List;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -44,6 +46,9 @@ public class QueriesRunner {
                         break;
                     case "Float":
                         p.setFloat(i+1, (float) param.get(i));
+                        break;
+                    case "Date":
+                        p.setTimestamp(i+1, (Timestamp) param.get(i));
                         break;
                     default:
                         p.setInt(i+1, (Integer) param.get(i));
