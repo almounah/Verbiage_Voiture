@@ -3,6 +3,7 @@ package ensimag.voiture.model;
 import java.util.List;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -34,8 +35,29 @@ public class QueriesRunner {
     }
     
     
-    public static Map<Integer, List> QueryGetter(String query) {
-        System.out.println(query);
+    private static void setParameters(PreparedStatement p, List param, List<String> paramType) {
+        try {
+            for (int i = 0; i < param.size(); i++) {
+                switch (paramType.get(i)) {
+                    case "String":
+                        p.setString(i+1, (String) param.get(i));
+                        break;
+                    case "Float":
+                        p.setFloat(i+1, (float) param.get(i));
+                        break;
+                    default:
+                        p.setInt(i+1, (Integer) param.get(i));
+                        break;
+                }
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(QueriesRunner.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+    
+    
+    public static Map<Integer, List> QueryGetter(String query, List param, 
+                                                 List<String> paramType) {
         Connection connection = null;
         ResultSet rslt;
         
@@ -44,8 +66,10 @@ public class QueriesRunner {
             Class.forName(driverName);
             connection = DriverManager.getConnection(url + ":" + port + "/" + dbName, 
                                                      username, password);
-            Statement statement = connection.createStatement();
-            rslt = statement.executeQuery(query);
+            PreparedStatement pstatement = connection.prepareStatement(query);
+            setParameters(pstatement, param, paramType);
+            System.out.println(pstatement);
+            rslt = pstatement.executeQuery();
             int columnCount = rslt.getMetaData().getColumnCount();
             
             int rowIndex = 0;
@@ -71,8 +95,8 @@ public class QueriesRunner {
         return resultMap;
     }
     
-    public static boolean QuerySetter(String query, boolean autocommit) {
-        System.out.println(query);
+    public static boolean QuerySetter(String query,  List param, 
+                                      List<String> paramType, boolean autocommit) {
         Connection connection = null;
         boolean rslt = false;
         try {
@@ -80,8 +104,10 @@ public class QueriesRunner {
             connection = DriverManager.getConnection(url + ":" + port + "/" + dbName, 
                                                      username, password);
             connection.setAutoCommit(false);
-            Statement statement = connection.createStatement();
-            statement.executeUpdate(query);
+            PreparedStatement pstatement = connection.prepareStatement(query);
+            setParameters(pstatement, param, paramType);
+            System.out.println(pstatement);
+            pstatement.executeUpdate();
             rslt = true;
             if (autocommit)
                 connection.commit();

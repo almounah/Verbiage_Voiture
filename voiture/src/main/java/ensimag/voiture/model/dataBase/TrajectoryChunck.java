@@ -6,10 +6,13 @@ package ensimag.voiture.model.dataBase;
  */
 
 
+import ensimag.voiture.model.QueriesRunner;
 import ensimag.voiture.model.dataBase.Car;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -40,7 +43,7 @@ public class TrajectoryChunck {
         this.sectionStartDate = sectionStartDate;
     }
     
-    public static void addChunckToDB(Integer chunckIndex,
+    public static boolean addChunckToDB(Integer chunckIndex,
                                     String startDate,
                                     String startTime,
                                     String depCity,
@@ -60,10 +63,13 @@ public class TrajectoryChunck {
                        " travelDistance, travelDuration, cityArrival, cityDeparture, latArrival," +
                        " longArrival, latDeparture, longDeparture, sectionStartDate) " +
                        "VALUES " +
-                       "(" + trajectId + "," + chunckIndex + "," + waitDelay +
-                         availableSeats + "," + travDist + "," + travDuration +
-                       ",\"" + arrCity + "\",\"" + depCity + "\"," + arrLat + "," +
-                         arrLong + "," + depLat + "," + depLong + "," + "convert(datetime, \'" +
-                         startDate;
+                       "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, convert(datetime(?)));";
+        List param = Arrays.asList(trajectId, chunckIndex, waitDelay, availableSeats,
+                                   travDist, travDuration, arrCity, depCity, arrLat,
+                                   arrLong, depLat, depLong, startDate);
+        List<String> paramType = Arrays.asList("String", "Integer", "Integer", "Integer",
+                                               "Integer", "Integer", "String", "String",
+                                               "Float", "Float", "Float", "Float", "String");
+        return QueriesRunner.QuerySetter(query, param, paramType, false);
     }
 }

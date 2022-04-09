@@ -8,6 +8,8 @@ package ensimag.voiture.model.dataBase;
 
 import ensimag.voiture.model.QueriesRunner;
 import ensimag.voiture.model.CarEnergy;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -61,10 +63,10 @@ public class Car {
         String query = "INSERT INTO carInfo " +
                        "(licensePlate, carBrand, carEnergy, carModel, carFiscalPower, intialSeatsNumber) " +
                        "VALUES " +
-                       "(\"" + licensePlate + "\",\"" + carBrand + "\",\"" + carEnergy.toString() +
-                       "\",\"" + carModel + "\"," + carFiscalPower + "," + intialSeatsNumber +
-                       ");";
-        return QueriesRunner.QuerySetter(query, true);
+                       "(?, ?, ?, ?, ?, ?);";
+        List param = Arrays.asList(licensePlate, carBrand, carEnergy.toString(), carModel, carFiscalPower, intialSeatsNumber);
+        List<String> paramType = Arrays.asList("String", "String", "String", "String", "Float", "Integer");
+        return QueriesRunner.QuerySetter(query, param, paramType, true);
     }
     
     public static Integer getAvailableSeatsFromLicence(String cl, List<Car> lc) {

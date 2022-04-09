@@ -12,6 +12,7 @@ import ensimag.voiture.model.CarEnergy;
 import ensimag.voiture.model.dataBase.Car;
 import ensimag.voiture.view.TrajectoryHomePage;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -42,9 +43,15 @@ public class User {
     public static boolean login(String email, String password) {
         boolean result;
         String query = "SELECT * FROM userInfo WHERE " +
-                "mailUser=\"" + email + "\" AND " +
-                "userPassword=\"" + password + "\";";
-        Map<Integer, List> rsltMap = QueriesRunner.QueryGetter(query);
+                "mailUser=? and userPassword =?;";
+        List param = new ArrayList<>();
+        param.add(email);
+        param.add(password);
+        
+        List<String> paramType = new ArrayList<>(
+            List.of("String",
+                    "String"));
+        Map<Integer, List> rsltMap = QueriesRunner.QueryGetter(query, param, paramType);
         System.out.println(rsltMap);
         result = !rsltMap.isEmpty();
         if (result) {
@@ -63,10 +70,10 @@ public class User {
         String query = "INSERT INTO userInfo " +
                        "(mailUser, userLastName, userFirstName, userCity, userPassword, userWallet) " +
                        "VALUES " +
-                       "(\"" + email + "\",\"" + lastName + "\",\"" +
-                        firstName + "\",\"" + city + "\",\"" + password +
-                       "\",0);";
-        return QueriesRunner.QuerySetter(query, true);
+                       "(?, ?, ?, ?, ?, 0);";
+        List param = Arrays.asList(email, lastName, firstName, city, password);
+        List<String> paramType = Arrays.asList("String", "String", "String", "String", "String");
+        return QueriesRunner.QuerySetter(query, param, paramType, true);
     }
     
     public static void getListOfCarDB() {
@@ -79,9 +86,14 @@ public class User {
                 + "ci.carFiscalPower, "
                 + "ci.intialSeatsNumber "
                 + "FROM carOwnership co, carInfo ci WHERE "
-                + "mailUser=\"" + User.email + "\" AND "
+                + "mailUser= ? AND "
                 + "ci.licensePlate=co.licensePlate;";
-        Map<Integer, List> rslt = QueriesRunner.QueryGetter(query);
+        List param = new ArrayList<>();
+        param.add(email);
+        
+        List<String> paramType = new ArrayList<>(
+            List.of("String"));
+        Map<Integer, List> rslt = QueriesRunner.QueryGetter(query, param, paramType);
         carOwned = new ArrayList<>();
         for (int i = 0; i < rslt.size(); i++) {
             List rsltList = rslt.get(i);
@@ -99,7 +111,9 @@ public class User {
                 + "(licensePlate, mailUser) "
                 + "VALUES "
                 + "(\"" + licensePlate + "\", \"" + User.email + "\");";
-        return QueriesRunner.QuerySetter(query, true);
+        List param = Arrays.asList(licensePlate, User.email);
+        List<String> paramType = Arrays.asList("String", "String");
+        return QueriesRunner.QuerySetter(query, param, paramType, false);
     }
     
     public static void getListOfTrajectoryDB() {
@@ -108,8 +122,13 @@ public class User {
                 + "trajectoryId, "
                 + "driverLicenseCar "
                 + "FROM trajectory WHERE "
-                + "mailUser=\"" + User.email + "\";";
-        Map<Integer, List> trajList = QueriesRunner.QueryGetter(query);
+                + "mailUser= ? ;";
+        List param = new ArrayList<>();
+        param.add(email);
+        
+        List<String> paramType = new ArrayList<>(
+            List.of("String"));
+        Map<Integer, List> trajList = QueriesRunner.QueryGetter(query, param, paramType);
         for (Map.Entry<Integer, List> entry : trajList.entrySet()) {
             String trajectoryId = (String) entry.getValue().get(0);
             String driverLicenseCar = (String) entry.getValue().get(1);
@@ -130,9 +149,11 @@ public class User {
                 + "longDeparture, "
                 + "sectionStartDate"
                 + "FROM sections WHERE "
-                + "trajectoryId=\"" + trajectoryId + ";";
+                + "trajectoryId= ?;";
+            param = new ArrayList<>();
+            param.add(trajectoryId);
             
-            Map<Integer, List> chunckList = QueriesRunner.QueryGetter(query);
+            Map<Integer, List> chunckList = QueriesRunner.QueryGetter(query, param, paramType);
             for (Map.Entry<Integer, List> chunckInfo : chunckList.entrySet()) {
                 Integer sectionId = (Integer) chunckInfo.getValue().get(0);
                 Integer sectionWaitingDelay = (Integer) chunckInfo.getValue().get(1);
