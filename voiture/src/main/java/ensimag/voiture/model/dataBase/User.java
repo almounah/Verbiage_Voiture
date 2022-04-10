@@ -11,15 +11,20 @@ import ensimag.voiture.model.QueriesRunner;
 import ensimag.voiture.model.CarEnergy;
 import ensimag.voiture.model.dataBase.Car;
 import ensimag.voiture.view.TrajectoryHomePage;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.sql.Date;
-import java.sql.Timestamp;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import oracle.sql.TIMESTAMP;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -45,7 +50,7 @@ public class User {
     public static boolean login(String email, String password) {
         boolean result;
         String query = "SELECT * FROM userInfo WHERE " +
-                "mailUser=? and userPassword =?;";
+                "mailUser=? and userPassword =?";
         List param = new ArrayList<>();
         param.add(email);
         param.add(password);
@@ -62,7 +67,7 @@ public class User {
             User.lastName = (String) rslt.get(1);
             User.firstName = (String) rslt.get(2);
             User.city = (String) rslt.get(4);
-            User.userWallet = (float) rslt.get(5);
+            User.userWallet = ((BigDecimal) rslt.get(5)).floatValue();
         }
         return result;
     }
@@ -72,7 +77,7 @@ public class User {
         String query = "INSERT INTO userInfo " +
                        "(mailUser, userLastName, userFirstName, userCity, userPassword, userWallet) " +
                        "VALUES " +
-                       "(?, ?, ?, ?, ?, 0);";
+                       "(?, ?, ?, ?, ?, 0)";
         List param = Arrays.asList(email, lastName, firstName, city, password);
         List<String> paramType = Arrays.asList("String", "String", "String", "String", "String");
         return QueriesRunner.QuerySetter(query, param, paramType, true);
@@ -89,7 +94,7 @@ public class User {
                 + "ci.intialSeatsNumber "
                 + "FROM carOwnership co, carInfo ci WHERE "
                 + "mailUser=? AND "
-                + "ci.licensePlate=co.licensePlate;";
+                + "ci.licensePlate=co.licensePlate";
         List param = new ArrayList<>();
         param.add(email);
         
@@ -101,7 +106,7 @@ public class User {
             List rsltList = rslt.get(i);
             Car c = new Car( (String) rsltList.get(0), (String) rsltList.get(1),
                     (String) rsltList.get(2),  CarEnergy.valueOf((String) rsltList.get(3)),
-                    (float) rsltList.get(4), (int) rsltList.get(5));
+                    ((BigDecimal) rsltList.get(4)).floatValue(), ((BigDecimal) rsltList.get(5)).intValue());
             carOwned.add(c);
         }
 
@@ -112,7 +117,7 @@ public class User {
                 "INSERT INTO carOwnership "
                 + "(licensePlate, mailUser) "
                 + "VALUES "
-                + "(?, ?);";
+                + "(?, ?)";
         List param = Arrays.asList(licensePlate, User.email);
         List<String> paramType = Arrays.asList("String", "String");
         return QueriesRunner.QuerySetter(query, param, paramType, true);
@@ -124,7 +129,7 @@ public class User {
                 + "trajectId, "
                 + "drivenLicenseCar "
                 + "FROM trajectory WHERE "
-                + "driverMail= ? ;";
+                + "driverMail= ?";
         List param = new ArrayList<>();
         param.add(email);
         
@@ -133,7 +138,7 @@ public class User {
         Map<Integer, List> trajList = QueriesRunner.QueryGetter(query, param, paramType);
         User.listProposedTraj = new ArrayList<>();
         for (Map.Entry<Integer, List> entry : trajList.entrySet()) {
-            Integer trajectoryId = (Integer) entry.getValue().get(0);
+            Integer trajectoryId = ((BigDecimal) entry.getValue().get(0)).intValue();
             String driverLicenseCar = (String) entry.getValue().get(1);
             
             List<TrajectoryChunck> listChunck = new ArrayList<>();
@@ -152,7 +157,7 @@ public class User {
                 + "longDeparture, "
                 + "sectionStartDate "
                 + "FROM sections WHERE "
-                + "trajectId=?;";
+                + "trajectId=?";
             param = new ArrayList<>();
             param.add(trajectoryId);
             paramType = new ArrayList<>();
@@ -160,18 +165,27 @@ public class User {
             
             Map<Integer, List> chunckList = QueriesRunner.QueryGetter(query, param, paramType);
             for (Map.Entry<Integer, List> chunckInfo : chunckList.entrySet()) {
-                Integer sectionId = (Integer) chunckInfo.getValue().get(0);
-                Integer sectionWaitingDelay = (Integer) chunckInfo.getValue().get(1);
-                Integer availableSeats = (Integer) chunckInfo.getValue().get(2);
-                Integer travelDistance = (Integer) chunckInfo.getValue().get(3);
-                Integer travelDuration = (Integer) chunckInfo.getValue().get(4);
+                Integer sectionId = ((BigDecimal) chunckInfo.getValue().get(0)).intValue();
+                Integer sectionWaitingDelay = ((BigDecimal) chunckInfo.getValue().get(1)).intValue();
+                Integer availableSeats = ((BigDecimal) chunckInfo.getValue().get(2)).intValue();
+                Integer travelDistance = ((BigDecimal) chunckInfo.getValue().get(3)).intValue();
+                Integer travelDuration = ((BigDecimal) chunckInfo.getValue().get(4)).intValue();
                 City cityArrival = new City((String) chunckInfo.getValue().get(5),
-                                            (float) chunckInfo.getValue().get(7),
-                                            (float) chunckInfo.getValue().get(8));
+                                            ((BigDecimal) chunckInfo.getValue().get(7)).floatValue(),
+                                            ((BigDecimal) chunckInfo.getValue().get(8)).floatValue());
                 City cityDeparture = new City((String) chunckInfo.getValue().get(6),
-                                            (float) chunckInfo.getValue().get(9),
-                                            (float) chunckInfo.getValue().get(10));
-                LocalDateTime sectionStartDate = (LocalDateTime) chunckInfo.getValue().get(11);
+                                            ((BigDecimal) chunckInfo.getValue().get(9)).floatValue(),
+                                            ((BigDecimal) chunckInfo.getValue().get(10)).floatValue());
+                TIMESTAMP sectionStartDateO = (TIMESTAMP) chunckInfo.getValue().get(11);
+                LocalDate ld;
+                LocalDateTime sectionStartDate = null;
+                try {
+                    ld = sectionStartDateO.dateValue().toLocalDate();
+                    sectionStartDate = ld.atTime(sectionStartDateO.timeValue().toLocalTime());
+                } catch (SQLException ex) {
+                    Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
                 
                 TrajectoryChunck trajectoryChunck = new TrajectoryChunck(trajectoryId,
                         sectionId, sectionWaitingDelay, travelDistance,

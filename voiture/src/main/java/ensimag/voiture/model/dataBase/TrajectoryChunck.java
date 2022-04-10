@@ -69,7 +69,7 @@ public class TrajectoryChunck {
                        " travelDistance, travelDuration, cityArrival, cityDeparture, latArrival," +
                        " longArrival, latDeparture, longDeparture, sectionStartDate) " +
                        "VALUES " +
-                       "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+                       "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         List param = Arrays.asList(trajectId, chunckIndex, waitDelay, availableSeats,
                                    travDist, travDuration, arrCity, depCity, arrLat,
                                    arrLong, depLat, depLong, sectionStartDate);

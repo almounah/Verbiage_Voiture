@@ -3,6 +3,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Savepoint;
 import java.sql.Statement;
+import oracle.jdbc.*;
+import oracle.jdbc.dcn.*;
 
 /**
  * dbCreator
@@ -11,27 +13,23 @@ public class dbCreator {
 
 
     public static void main(String[] args) {
-        String url = "jdbc:mysql://sql11.freemysqlhosting.net";
-        String port = "3306";
-        String dbName = "sql11483800";
-        String username = "sql11483800";
-        String password = "LjgBLSmS6K";
+        String url = "jdbc:oracle:thin:@oracle1.ensimag.fr:1521:oracle1";
         dbQueries queryGetter = new dbQueries();
-        Connection connection = null;
-        String driverName = "com.mysql.jdbc.Driver";
+        OracleConnection connection = null;
 
         try {
-            Class.forName(driverName);
-            connection = DriverManager.getConnection(url + ":" + port + "/" + dbName, 
-                                                     username, password);
+            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+            connection = (OracleConnection) DriverManager.getConnection(url, "almounah", "almounah");
+            System.out.println("Connection Established");
             connection.setAutoCommit(false);
 
             Statement statement = connection.createStatement();
+            statement.executeUpdate(queryGetter.carCreationQuery());
+            System.out.println("carInfo table created");
+            
             statement.executeUpdate(queryGetter.userCreationQuery());
             System.out.println("userInfo table created");
 
-            statement.executeUpdate(queryGetter.carCreationQuery());
-            System.out.println("carInfo table created");
 
             statement.executeUpdate(queryGetter.trajectoryCreationQuery());
             System.out.println("trajectory table created");

@@ -2,6 +2,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import oracle.jdbc.*;
+import oracle.jdbc.dcn.*;
 
 /**
  * dbCreator
@@ -10,40 +12,36 @@ public class dbDestroy {
 
 
     public static void main(String[] args) {
-        String url = "jdbc:mysql://sql11.freemysqlhosting.net";
-        String port = "3306";
-        String dbName = "sql11483800";
-        String username = "sql11483800";
-        String password = "LjgBLSmS6K";
-        Connection connection = null;
-        String driverName = "com.mysql.jdbc.Driver";
+        String url = "jdbc:oracle:thin:@oracle1.ensimag.fr:1521:oracle1";
+        OracleConnection connection = null;
 
         try {
-            Class.forName(driverName);
-            connection = DriverManager.getConnection(url + ":" + port + "/" + dbName, 
-                                                     username, password);
+            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+            connection = (OracleConnection) DriverManager.getConnection(url, "almounah", "almounah");
+            System.out.println("Connection Established");
             Statement statement = connection.createStatement();
+            connection.setAutoCommit(false);
 
-            statement.executeUpdate("DROP TABLE carOwnership;");
+            statement.executeUpdate("DROP TABLE carOwnership");
             System.out.println("carOwnership table deleted");
 
-            statement.executeUpdate("DROP TABLE tripPlan;");
+            statement.executeUpdate("DROP TABLE tripPlan");
             System.out.println("tripPlan table deleted");
 
-            statement.executeUpdate("DROP TABLE sections;");
+            statement.executeUpdate("DROP TABLE sections");
             System.out.println("sections table deleted");
           
-            statement.executeUpdate("DROP TABLE trajectory;");
+            statement.executeUpdate("DROP TABLE trajectory");
             System.out.println("trajectory table deleted");
 
           
-            statement.executeUpdate("DROP TABLE carPool;");
+            statement.executeUpdate("DROP TABLE carPool");
             System.out.println("carPool table deleted");
             
-            statement.executeUpdate("DROP TABLE userInfo;");
+            statement.executeUpdate("DROP TABLE userInfo");
             System.out.println("userInfo table deleted");
 
-            statement.executeUpdate("DROP TABLE carInfo;");
+            statement.executeUpdate("DROP TABLE carInfo");
             System.out.println("carInfo table deleted");
 
 

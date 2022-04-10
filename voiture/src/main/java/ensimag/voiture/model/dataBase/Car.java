@@ -63,7 +63,7 @@ public class Car {
         String query = "INSERT INTO carInfo " +
                        "(licensePlate, carBrand, carEnergy, carModel, carFiscalPower, intialSeatsNumber) " +
                        "VALUES " +
-                       "(?, ?, ?, ?, ?, ?);";
+                       "(?, ?, ?, ?, ?, ?)";
         List param = Arrays.asList(licensePlate, carBrand, carEnergy.toString(), carModel, carFiscalPower, intialSeatsNumber);
         List<String> paramType = Arrays.asList("String", "String", "String", "String", "Float", "Integer");
         return QueriesRunner.QuerySetter(query, param, paramType, true);

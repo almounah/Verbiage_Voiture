@@ -31,7 +31,7 @@ public class Trajectory {
         String query = "Insert INTO trajectory" +
                        "(trajectId, driverMail, drivenLicenseCar) " +
                        "VALUES " +
-                       "(?, ?, ?);";
+                       "(?, ?, ?)";
         List param = Arrays.asList(trajId, driverMail, drivenLicenseCar);
         List<String> paramType = Arrays.asList("Integer", "String", "String");
         return QueriesRunner.QuerySetter(query, param, paramType, true); 

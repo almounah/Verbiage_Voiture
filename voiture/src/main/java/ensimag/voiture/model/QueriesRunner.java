@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import oracle.jdbc.*;
+import oracle.jdbc.dcn.*;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -26,12 +28,9 @@ import java.util.logging.Logger;
  */
 public class QueriesRunner {
     
-    private static String url = "jdbc:mysql://sql11.freemysqlhosting.net";
-    private static String port = "3306";
-    private static String dbName = "sql11483800";
-    private static String username = "sql11483800";
-    private static String password = "LjgBLSmS6K";
-    private static final String driverName = "com.mysql.cj.jdbc.Driver";
+    private static String url = "jdbc:oracle:thin:@oracle1.ensimag.fr:1521:oracle1";
+    private static String username = "almounah";
+    private static String password = "almounah";
 
     public QueriesRunner() {
     }
@@ -63,14 +62,16 @@ public class QueriesRunner {
     
     public static Map<Integer, List> QueryGetter(String query, List param, 
                                                  List<String> paramType) {
-        Connection connection = null;
+        OracleConnection connection = null;
         ResultSet rslt;
         
         Map resultMap = new HashMap<Integer, List>();
         try {
-            Class.forName(driverName);
-            connection = DriverManager.getConnection(url + ":" + port + "/" + dbName, 
-                                                     username, password);
+            System.out.println("Attempting connection");
+            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+            System.out.println("Driver Found");
+            connection = (OracleConnection) DriverManager.getConnection(url, "almounah", "almounah");
+            System.out.println("Connection Established");
             PreparedStatement pstatement = connection.prepareStatement(query);
             setParameters(pstatement, param, paramType);
             System.out.println(pstatement);
@@ -89,8 +90,6 @@ public class QueriesRunner {
             System.out.println(resultMap);
         } catch (SQLException e) {
             System.out.println(e);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(QueriesRunner.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 connection.close();
@@ -106,10 +105,10 @@ public class QueriesRunner {
         Connection connection = null;
         boolean rslt = false;
         try {
-            Class.forName(driverName);
-            connection = DriverManager.getConnection(url + ":" + port + "/" + dbName, 
-                                                     username, password);
+            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+            connection = (OracleConnection) DriverManager.getConnection(url, "almounah", "almounah");
             connection.setAutoCommit(false);
+            System.out.println("Connection Established");
             PreparedStatement pstatement = connection.prepareStatement(query);
             setParameters(pstatement, param, paramType);
             System.out.println(pstatement);
@@ -119,8 +118,6 @@ public class QueriesRunner {
                 connection.commit();
         } catch (SQLException e) {
             System.out.println(e);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(QueriesRunner.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 connection.close();

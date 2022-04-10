@@ -6,13 +6,13 @@ public class dbQueries {
 
     public String userCreationQuery() {
         String query = "CREATE TABLE userInfo" +
-                       "(mailUser VARCHAR(255)," +
+                       " (mailUser VARCHAR(255)," +
                        " userLastName VARCHAR(255)," +
                        " userfirstName VARCHAR(255)," +
                        " userPassword VARCHAR(255)," +
 		               " userCity VARCHAR(255)," +
                        " userWallet FLOAT CHECK (userWallet>=0)," +
-                       " PRIMARY KEY (mailUser));";
+                       " PRIMARY KEY (mailUser))";
 
         return query;
 
@@ -20,13 +20,13 @@ public class dbQueries {
 
     public String carCreationQuery() {
         String query = "CREATE TABLE carInfo" +
-                       "(licensePlate VARCHAR(255)," +
+                       " (licensePlate VARCHAR(255)," +
                        " carBrand VARCHAR(255)," +
                        " carModel VARCHAR(255)," +
-                       " carEnergy ENUM ('essence', 'diesel', 'hybride', 'electrique')," +
+                       " carEnergy VARChAR(255) CHECK(carEnergy IN ('essence', 'diesel', 'hybride', 'electrique'))," +
                        " carFiscalPower FLOAT CHECK (carFiscalPower>0)," +
                        " intialSeatsNumber INT CHECK (intialSeatsNumber>0)," +
-                       " PRIMARY KEY (licensePlate));";
+                       " PRIMARY KEY (licensePlate))";
 
         return query;
     }
@@ -38,7 +38,7 @@ public class dbQueries {
                        " driverMail VARCHAR(255)," +
                        " PRIMARY KEY (trajectId)," +
                        " FOREIGN KEY (driverMail) REFERENCES userInfo(mailUser)," +
-                       " FOREIGN KEY (drivenLicenseCar) REFERENCES carInfo(licensePlate));";
+                       " FOREIGN KEY (drivenLicenseCar) REFERENCES carInfo(licensePlate))";
 
         return query;
     }
@@ -57,9 +57,9 @@ public class dbQueries {
                        " travelDistance INT CHECK (travelDistance>0)," +
                        " travelDuration INT CHECK (travelDuration>0)," +
                        " sectionWaitingDelay INT CHECK (sectionWaitingDelay>=0)," +
-                       " sectionStartDate DATETIME," +
+                       " sectionStartDate TIMESTAMP," +
                        " PRIMARY KEY (trajectId, sectionId)," +
-                       " FOREIGN KEY (trajectId) REFERENCES trajectory(trajectId));";
+                       " FOREIGN KEY (trajectId) REFERENCES trajectory(trajectId))";
 
         return query;
     }
@@ -71,7 +71,7 @@ public class dbQueries {
                        "(tripId INT," +
                        " mailUser VARCHAR(255)," +
                        " PRIMARY KEY (tripId)," +
-                       " FOREIGN KEY (mailUser) REFERENCES userInfo(mailUser));";
+                       " FOREIGN KEY (mailUser) REFERENCES userInfo(mailUser))";
 
         return query;
     }
@@ -83,7 +83,7 @@ public class dbQueries {
                        "(licensePlate VARCHAR(255)," +
                        " mailUser VARCHAR(255)," +
                        " FOREIGN KEY (mailUser) REFERENCES userInfo(mailUser)," +
-                       " FOREIGN KEY (licensePlate) REFERENCES carInfo(licensePlate));";
+                       " FOREIGN KEY (licensePlate) REFERENCES carInfo(licensePlate))";
 
         return query;
     }
@@ -95,7 +95,7 @@ public class dbQueries {
                        " trajectId INT," +
                        " sectionId INT," +
                        " FOREIGN KEY (tripId) REFERENCES carPool(tripId)," +
-                       " FOREIGN KEY (trajectId, sectionId) REFERENCES sections(trajectId, sectionId));";
+                       " FOREIGN KEY (trajectId, sectionId) REFERENCES sections(trajectId, sectionId))";
 
         return query;
     }

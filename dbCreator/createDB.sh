@@ -1,4 +1,4 @@
 #!/bin/bash
 
-javac dbCreator.java
-java -cp mysql-connector-java-8.0.28.jar:. dbCreator
+javac -cp ojdbc6.jar:. dbCreator.java
+java -cp ojdbc6.jar:. dbCreator

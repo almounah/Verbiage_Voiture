@@ -99,8 +99,10 @@
                                       <Component id="availSeatsText" alignment="0" min="-2" pref="113" max="-2" attributes="0"/>
                                       <Component id="waitDelayText" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
                                       <Component id="startDateText" min="-2" pref="199" max="-2" attributes="0"/>
-                                      <Component id="arrCityText" alignment="0" pref="94" max="32767" attributes="0"/>
-                                      <Component id="depCityText" alignment="0" max="32767" attributes="0"/>
+                                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                          <Component id="arrCityText" alignment="1" min="-2" pref="105" max="-2" attributes="0"/>
+                                          <Component id="depCityText" alignment="0" min="-2" pref="105" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
                           </Group>
