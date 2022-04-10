@@ -7,6 +7,7 @@ package ensimag.voiture.controller;
 import ensimag.voiture.model.dataBase.Car;
 import ensimag.voiture.model.dataBase.Trajectory;
 import ensimag.voiture.model.dataBase.TrajectoryChunck;
+import ensimag.voiture.model.dataBase.Trip;
 import ensimag.voiture.model.dataBase.User;
 import ensimag.voiture.view.AddCarPage;
 import ensimag.voiture.view.AddTrajPage;
@@ -179,5 +180,21 @@ public class ViewUpdater {
     public static void showSearchTripPage() {
         SearchPage sp = new SearchPage();
         sp.show();
+    }
+    
+    public static void showSearchTripResults(List<Trip> lt, SearchPage sp, boolean next) {
+        if (lt.isEmpty())
+            return;
+        Integer tripIndex = Integer.parseInt(sp.getTripIndex().getText()) - 1;
+        if (next)
+            tripIndex = (tripIndex + 1)%lt.size();
+        else
+            tripIndex = (tripIndex + lt.size() - 1)%lt.size();
+        Integer newIndex = tripIndex + 1;
+        sp.getTripIndex().setText(newIndex.toString());
+        sp.getTotaltrips().setText("/" + lt.size());
+        Trip tshow = lt.get(tripIndex);
+        sp.getDepCityLabel1().setText(tshow.getListChuncks().get(0).getCityDeparture().getCityName());
+        sp.getArrCityLab1().setText(tshow.getListChuncks().get(lt.size()-1).getCityArrival().getCityName());
     }
 }

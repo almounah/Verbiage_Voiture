@@ -11,10 +11,12 @@ package ensimag.voiture.model;
 public class Model {
     private QueriesRunner queriesRunner;
     private TimeCalculator timeCalculator;
+    private Search search;
 
     public Model() {
         this.queriesRunner = new QueriesRunner();
-        this.timeCalculator =new TimeCalculator();
+        this.timeCalculator = new TimeCalculator();
+        this.search = new Search();
     }
     
 }

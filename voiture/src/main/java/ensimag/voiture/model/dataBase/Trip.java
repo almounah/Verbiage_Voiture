@@ -4,6 +4,7 @@
  */
 package ensimag.voiture.model.dataBase;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,6 +13,35 @@ import java.util.List;
  */
 public class Trip {
     private Integer tripId;
-    private Integer price;
+    private Double price;
     private List<TrajectoryChunck> listChuncks;
+
+    public Trip(Integer tripId) {
+        this.tripId = tripId;
+        listChuncks = new ArrayList<>();
+        price = 0.0;
+    }
+    
+    public void addChunckToTrip(TrajectoryChunck tc) {
+        listChuncks.add(tc);
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Integer getTripId() {
+        return tripId;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public List<TrajectoryChunck> getListChuncks() {
+        return listChuncks;
+    }
+    
+    
+    
 }

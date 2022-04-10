@@ -7,18 +7,22 @@ package ensimag.voiture.controller;
 import ensimag.voiture.model.dataBase.Car;
 import ensimag.voiture.model.CarEnergy;
 import ensimag.voiture.model.QueriesRunner;
+import ensimag.voiture.model.Search;
 import ensimag.voiture.model.TimeCalculator;
 import ensimag.voiture.model.dataBase.Trajectory;
 import ensimag.voiture.model.dataBase.TrajectoryChunck;
+import ensimag.voiture.model.dataBase.Trip;
 import ensimag.voiture.model.dataBase.User;
 import ensimag.voiture.view.AddTrajPage;
 import ensimag.voiture.view.CarHomePage;
 import ensimag.voiture.view.LoginPage;
+import ensimag.voiture.view.SearchPage;
 import ensimag.voiture.view.TrajectoryHomePage;
 import java.sql.Savepoint;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 
 /**
  *
@@ -138,5 +142,17 @@ public class ButtonHandler {
     
     public static void notifyClosedBeforeFinish() {
         QueriesRunner.rollback();
+    }
+    
+    public static void notifySearchForTrips(String depCity, String arrCity,
+                                            LocalDate startDate, LocalTime startTime,
+                                            SearchPage sp, boolean next) {
+        LocalDateTime ldt = startDate.atTime(startTime);
+        List<Trip> tripList = Search.searchForTripNoCorresp(arrCity, arrCity, ldt);
+        ViewUpdater.showSearchTripResults(tripList, sp, next);
+    }
+    
+    public static void notifyShowNextTrip(SearchPage sp, boolean next) {
+        ViewUpdater.showSearchTripResults(Search.getLt(), sp, next);
     }
 }
