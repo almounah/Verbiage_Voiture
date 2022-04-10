@@ -12,5 +12,6 @@ import java.util.List;
  */
 public class Trip {
     private Integer tripId;
+    private Integer price;
     private List<TrajectoryChunck> listChuncks;
 }

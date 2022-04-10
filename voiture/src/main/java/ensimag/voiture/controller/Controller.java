@@ -21,10 +21,10 @@ public class Controller {
     private Model model;
     
 
-    public Controller(View view) {
+    public Controller(View view, Model model) {
         this.viewUpdater = new ViewUpdater(view);
         this.butHandler = new ButtonHandler(viewUpdater);
-        this.model = new Model();
+        this.model = model;
         this.user = new User();
         this.view = view;
     }

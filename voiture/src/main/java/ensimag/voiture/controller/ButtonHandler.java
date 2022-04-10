@@ -6,6 +6,7 @@ package ensimag.voiture.controller;
 
 import ensimag.voiture.model.dataBase.Car;
 import ensimag.voiture.model.CarEnergy;
+import ensimag.voiture.model.QueriesRunner;
 import ensimag.voiture.model.TimeCalculator;
 import ensimag.voiture.model.dataBase.Trajectory;
 import ensimag.voiture.model.dataBase.TrajectoryChunck;
@@ -14,6 +15,7 @@ import ensimag.voiture.view.AddTrajPage;
 import ensimag.voiture.view.CarHomePage;
 import ensimag.voiture.view.LoginPage;
 import ensimag.voiture.view.TrajectoryHomePage;
+import java.sql.Savepoint;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -123,10 +125,18 @@ public class ButtonHandler {
                                        selectedCarLicense);
         if (lastChunck) {
             atp.dispose();
+            QueriesRunner.commit();
             User.getListOfTrajectoryDB();
         } else {
             ViewUpdater.showAddNextChunck(atp);
         }
     }
     
+    public static void notifyViewSearchTripPage() {
+        ViewUpdater.showSearchTripPage();
+    }
+    
+    public static void notifyClosedBeforeFinish() {
+        QueriesRunner.rollback();
+    }
 }

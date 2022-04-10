@@ -60,6 +60,11 @@ public class AddTrajPage extends javax.swing.JFrame {
         selectedDate = new com.github.lgooddatepicker.components.DateTimePicker();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jLabel7.setText("Waiting Delay");
 
@@ -269,6 +274,11 @@ public class AddTrajPage extends javax.swing.JFrame {
                                      this, true);
         ButtonHandler.notifyViewTrajectory();
     }//GEN-LAST:event_finishButtonActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        ButtonHandler.notifyClosedBeforeFinish();
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

@@ -37,6 +37,11 @@ public class UserWelcomePage extends javax.swing.JFrame {
         manageCarButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         welcomeTextLab.setText("Welcome back            ");
 
@@ -121,6 +126,7 @@ public class UserWelcomePage extends javax.swing.JFrame {
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
+        ButtonHandler.notifyViewSearchTripPage();
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void editProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProfileButtonActionPerformed
@@ -134,6 +140,11 @@ public class UserWelcomePage extends javax.swing.JFrame {
     private void proposeTrajButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proposeTrajButtonActionPerformed
         ButtonHandler.notifyViewTrajectory();
     }//GEN-LAST:event_proposeTrajButtonActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        ButtonHandler.notifyClosedBeforeFinish();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

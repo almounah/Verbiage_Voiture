@@ -76,7 +76,7 @@ public class TrajectoryChunck {
         List<String> paramType = Arrays.asList("Integer", "Integer", "Integer", "Integer",
                                                "Integer", "Integer", "String", "String",
                                                "Float", "Float", "Float", "Float", "Date");
-        return QueriesRunner.QuerySetter(query, param, paramType, true);
+        return QueriesRunner.QuerySetter(query, param, paramType, false);
     }
 
     public Integer getTrajectoryId() {

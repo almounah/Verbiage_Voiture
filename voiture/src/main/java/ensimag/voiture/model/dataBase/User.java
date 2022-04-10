@@ -140,61 +140,11 @@ public class User {
         for (Map.Entry<Integer, List> entry : trajList.entrySet()) {
             Integer trajectoryId = ((BigDecimal) entry.getValue().get(0)).intValue();
             String driverLicenseCar = (String) entry.getValue().get(1);
-            
-            List<TrajectoryChunck> listChunck = new ArrayList<>();
-            query = 
-                "SELECT "
-                + "sectionId, "
-                + "sectionWaitingDelay, "
-                + "availableSeats, "
-                + "travelDistance, "
-                + "travelDuration, "
-                + "cityArrival, "
-                + "cityDeparture, "
-                + "latArrival, " 
-                + "longArrival, "
-                + "latDeparture, " 
-                + "longDeparture, "
-                + "sectionStartDate "
-                + "FROM sections WHERE "
-                + "trajectId=?";
-            param = new ArrayList<>();
-            param.add(trajectoryId);
-            paramType = new ArrayList<>();
-            paramType.add("Integer");
-            
-            Map<Integer, List> chunckList = QueriesRunner.QueryGetter(query, param, paramType);
-            for (Map.Entry<Integer, List> chunckInfo : chunckList.entrySet()) {
-                Integer sectionId = ((BigDecimal) chunckInfo.getValue().get(0)).intValue();
-                Integer sectionWaitingDelay = ((BigDecimal) chunckInfo.getValue().get(1)).intValue();
-                Integer availableSeats = ((BigDecimal) chunckInfo.getValue().get(2)).intValue();
-                Integer travelDistance = ((BigDecimal) chunckInfo.getValue().get(3)).intValue();
-                Integer travelDuration = ((BigDecimal) chunckInfo.getValue().get(4)).intValue();
-                City cityArrival = new City((String) chunckInfo.getValue().get(5),
-                                            ((BigDecimal) chunckInfo.getValue().get(7)).floatValue(),
-                                            ((BigDecimal) chunckInfo.getValue().get(8)).floatValue());
-                City cityDeparture = new City((String) chunckInfo.getValue().get(6),
-                                            ((BigDecimal) chunckInfo.getValue().get(9)).floatValue(),
-                                            ((BigDecimal) chunckInfo.getValue().get(10)).floatValue());
-                TIMESTAMP sectionStartDateO = (TIMESTAMP) chunckInfo.getValue().get(11);
-                LocalDate ld;
-                LocalDateTime sectionStartDate = null;
-                try {
-                    ld = sectionStartDateO.dateValue().toLocalDate();
-                    sectionStartDate = ld.atTime(sectionStartDateO.timeValue().toLocalTime());
-                } catch (SQLException ex) {
-                    Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-                
-                TrajectoryChunck trajectoryChunck = new TrajectoryChunck(trajectoryId,
-                        sectionId, sectionWaitingDelay, travelDistance,
-                        travelDuration, availableSeats, cityArrival, cityDeparture, sectionStartDate);
-                listChunck.add(trajectoryChunck);
-            }
-            
             Trajectory trajectory = new Trajectory(trajectoryId, User.email,
-                    driverLicenseCar, listChunck);
+                                                   driverLicenseCar);
+            List<TrajectoryChunck> listChunck = trajectory.getTrajectoryInforFromDB(trajectoryId);
+            
+            trajectory.setTrajectoryChunckList(listChunck);
             User.listProposedTraj.add(trajectory);
         }
         

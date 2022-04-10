@@ -15,6 +15,7 @@ import ensimag.voiture.view.UserProfile;
 import ensimag.voiture.view.UserWelcomePage;
 import ensimag.voiture.view.View;
 import ensimag.voiture.view.CarHomePage;
+import ensimag.voiture.view.SearchPage;
 import ensimag.voiture.view.TrajectoryHomePage;
 import java.util.List;
 
@@ -173,5 +174,10 @@ public class ViewUpdater {
         atp.getTravDurText().setText(null);
         
         atp.getWaitDelayText().setText(null);
+    }
+    
+    public static void showSearchTripPage() {
+        SearchPage sp = new SearchPage();
+        sp.show();
     }
 }

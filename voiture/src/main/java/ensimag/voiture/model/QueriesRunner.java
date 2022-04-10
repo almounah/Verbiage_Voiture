@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Savepoint;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ public class QueriesRunner {
     private static String url = "jdbc:oracle:thin:@oracle1.ensimag.fr:1521:oracle1";
     private static String username = "almounah";
     private static String password = "almounah";
+    private static OracleConnection connection;
 
     public QueriesRunner() {
     }
@@ -58,20 +60,30 @@ public class QueriesRunner {
             Logger.getLogger(QueriesRunner.class.getName()).log(Level.SEVERE, null, e);
         }
     }
+   
     
-    
-    public static Map<Integer, List> QueryGetter(String query, List param, 
-                                                 List<String> paramType) {
-        OracleConnection connection = null;
-        ResultSet rslt;
-        
-        Map resultMap = new HashMap<Integer, List>();
+    public static void getConnection() {
         try {
-            System.out.println("Attempting connection");
+            System.out.println("Attempting connection ....");
             DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
             System.out.println("Driver Found");
             connection = (OracleConnection) DriverManager.getConnection(url, "almounah", "almounah");
             System.out.println("Connection Established");
+            connection.setAutoCommit(false);
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+    
+    public static Map<Integer, List> QueryGetter(String query, List param, 
+                                                 List<String> paramType) {
+        ResultSet rslt;
+        
+        Map resultMap = new HashMap<Integer, List>();
+        try {
+            if (connection==null || connection.isClosed()) {
+                getConnection();
+            }
             PreparedStatement pstatement = connection.prepareStatement(query);
             setParameters(pstatement, param, paramType);
             System.out.println(pstatement);
@@ -93,6 +105,7 @@ public class QueriesRunner {
         } finally {
             try {
                 connection.close();
+                System.out.println("Connection Closed");
             } catch (SQLException ex) {
                 System.out.println(ex);
             }
@@ -101,30 +114,73 @@ public class QueriesRunner {
     }
     
     public static boolean QuerySetter(String query,  List param, 
-                                      List<String> paramType, boolean autocommit) {
-        Connection connection = null;
+                                      List<String> paramType, boolean close) {
         boolean rslt = false;
         try {
-            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-            connection = (OracleConnection) DriverManager.getConnection(url, "almounah", "almounah");
-            connection.setAutoCommit(false);
-            System.out.println("Connection Established");
+            if (connection==null || connection.isClosed()) {
+                getConnection();
+            }
             PreparedStatement pstatement = connection.prepareStatement(query);
             setParameters(pstatement, param, paramType);
-            System.out.println(pstatement);
+            System.out.println(pstatement.toString());
             pstatement.executeUpdate();
             rslt = true;
-            if (autocommit)
-                connection.commit();
         } catch (SQLException e) {
             System.out.println(e);
         } finally {
             try {
-                connection.close();
+                if (close) {
+                    connection.close();
+                    System.out.println("Connection Closed");
+                }
             } catch (SQLException ex) {
                 System.out.println(ex);
             }
         }
         return rslt;
     }
+    
+    public static void commit() {
+        try {
+            if (!connection.isClosed()) {
+                connection.commit();
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(QueriesRunner.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (!connection.isClosed()) {
+                    connection.close();
+                    System.out.println("Connection Closed");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(QueriesRunner.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }
+    
+    
+    public static void rollback() {
+        try {
+            System.out.println("Rolling Back");
+            if (!connection.isClosed()) {
+                connection.rollback();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(QueriesRunner.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (!connection.isClosed()) {
+                    connection.close();
+                    System.out.println("Connection Closed");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(QueriesRunner.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    
 }
