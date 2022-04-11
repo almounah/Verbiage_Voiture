@@ -86,7 +86,6 @@ public class QueriesRunner {
             }
             PreparedStatement pstatement = connection.prepareStatement(query);
             setParameters(pstatement, param, paramType);
-            System.out.println(pstatement);
             rslt = pstatement.executeQuery();
             int columnCount = rslt.getMetaData().getColumnCount();
             

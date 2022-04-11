@@ -148,8 +148,10 @@ public class ButtonHandler {
                                             LocalDate startDate, LocalTime startTime,
                                             SearchPage sp, boolean next) {
         LocalDateTime ldt = startDate.atTime(startTime);
-        List<Trip> tripList = Search.searchForTripNoCorresp(arrCity, arrCity, ldt);
-        ViewUpdater.showSearchTripResults(tripList, sp, next);
+        Search.searchForTripNoCorresp(depCity, arrCity, ldt);
+        Search.searchForTripOneCorresp(depCity, arrCity, ldt);
+        System.out.println("lt:" + Search.getLt());
+        ViewUpdater.showSearchTripResults(Search.getLt(), sp, next);
     }
     
     public static void notifyShowNextTrip(SearchPage sp, boolean next) {

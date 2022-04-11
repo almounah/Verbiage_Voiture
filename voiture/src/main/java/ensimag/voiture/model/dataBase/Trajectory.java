@@ -63,7 +63,8 @@ public class Trajectory {
             + "longDeparture, "
             + "sectionStartDate "
             + "FROM sections WHERE "
-            + "trajectId=?";
+            + "trajectId=?"
+            + "ORDER BY sectionId";
         List param = new ArrayList<>();
         param.add(trajectoryId);
         List<String> paramType = new ArrayList<>();

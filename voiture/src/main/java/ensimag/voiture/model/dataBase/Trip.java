@@ -15,6 +15,7 @@ public class Trip {
     private Integer tripId;
     private Double price;
     private List<TrajectoryChunck> listChuncks;
+    private Boolean correspondanceBool;
 
     public Trip(Integer tripId) {
         this.tripId = tripId;
@@ -41,6 +42,24 @@ public class Trip {
     public List<TrajectoryChunck> getListChuncks() {
         return listChuncks;
     }
+
+    public Boolean getCorrespondanceBool() {
+        return correspondanceBool;
+    }
+
+    public void setTripId(Integer tripId) {
+        this.tripId = tripId;
+    }
+
+    public void setCorrespondanceBool(Boolean correspondanceBool) {
+        this.correspondanceBool = correspondanceBool;
+    }
+
+    @Override
+    public String toString() {
+        return listChuncks.toString();
+    }
+    
     
     
     

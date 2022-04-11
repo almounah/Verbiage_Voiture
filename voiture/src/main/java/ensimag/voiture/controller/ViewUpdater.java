@@ -18,6 +18,7 @@ import ensimag.voiture.view.View;
 import ensimag.voiture.view.CarHomePage;
 import ensimag.voiture.view.SearchPage;
 import ensimag.voiture.view.TrajectoryHomePage;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -177,14 +178,75 @@ public class ViewUpdater {
         atp.getWaitDelayText().setText(null);
     }
     
+    public static void hideSearchResultPage(SearchPage sp, Boolean noCorresPart, Boolean correspPart) {
+        
+        if (noCorresPart) {
+            sp.getArrCityLab1().hide();
+            sp.getArrTime1().hide();
+            sp.getDepCityLabel1().hide();
+            sp.getDepTime1().hide();
+            sp.getPassedByCityBox1().hide();
+            sp.getPassesByLab1().hide();
+             sp.getArrowLab1().hide();
+            
+        }
+        
+        if (correspPart) {
+           
+            sp.getArrCityLab2().hide();
+            sp.getArrTime2().hide();
+            sp.getDepCityLab2().hide();
+            sp.getDepTime2().hide();
+            sp.getPassedByCityBox2().hide();
+            sp.getPassesByLab2().hide();
+            sp.getArrowLab2().hide();
+            sp.getCorrespondanceLab().hide();
+        }
+    }
+    
+    public static void showSearchResultPage(SearchPage sp, Boolean noCorresPart, Boolean correspPart) {
+        
+        if (noCorresPart) {
+            sp.getArrCityLab1().show();
+            sp.getArrTime1().show();
+            sp.getDepCityLabel1().show();
+            sp.getDepTime1().show();
+            sp.getPassedByCityBox1().show();
+            sp.getPassesByLab1().show();
+            sp.getArrowLab1().show();
+        }
+        
+        if (correspPart) {
+            
+            sp.getArrCityLab2().show();
+            sp.getArrTime2().show();
+            sp.getDepCityLab2().show();
+            sp.getDepTime2().show();
+            sp.getPassedByCityBox2().show();
+            sp.getPassesByLab2().show();
+            sp.getArrowLab2().show();
+            sp.getCorrespondanceLab().show();
+        }
+    }
+    
     public static void showSearchTripPage() {
         SearchPage sp = new SearchPage();
+        
+        hideSearchResultPage(sp, Boolean.TRUE, Boolean.TRUE);
+        sp.getBookButton().disable();
+        
         sp.show();
     }
     
     public static void showSearchTripResults(List<Trip> lt, SearchPage sp, boolean next) {
-        if (lt.isEmpty())
+        if (lt.isEmpty()) {
+            hideSearchResultPage(sp, Boolean.TRUE, Boolean.TRUE);
+            sp.getBookButton().disable();
             return;
+        }
+        System.out.println(lt.get(1).getListChuncks());
+        sp.getBookButton().enable();
+        showSearchResultPage(sp, Boolean.TRUE, Boolean.FALSE);
         Integer tripIndex = Integer.parseInt(sp.getTripIndex().getText()) - 1;
         if (next)
             tripIndex = (tripIndex + 1)%lt.size();
@@ -193,8 +255,66 @@ public class ViewUpdater {
         Integer newIndex = tripIndex + 1;
         sp.getTripIndex().setText(newIndex.toString());
         sp.getTotaltrips().setText("/" + lt.size());
+        
         Trip tshow = lt.get(tripIndex);
-        sp.getDepCityLabel1().setText(tshow.getListChuncks().get(0).getCityDeparture().getCityName());
-        sp.getArrCityLab1().setText(tshow.getListChuncks().get(lt.size()-1).getCityArrival().getCityName());
+        List<TrajectoryChunck> ltc = tshow.getListChuncks();
+        Integer lastChunckCorresp = 0;
+        if (tshow.getCorrespondanceBool()) {
+            Integer trajectId = ltc.get(0).getTrajectoryId();
+            while(trajectId.equals(ltc.get(lastChunckCorresp).getTrajectoryId())) {
+                lastChunckCorresp++;
+            }
+        } else {
+            lastChunckCorresp = ltc.size();
+        }
+        System.out.println(lastChunckCorresp + " lastChucnkCorresp");
+        sp.getDepCityLabel1().setText(ltc.get(0).getCityDeparture().getCityName());
+        sp.getArrCityLab1().setText(ltc.get(lastChunckCorresp-1).getCityArrival().getCityName());
+        Integer passByCityNum = lastChunckCorresp-1;
+        if (passByCityNum == 0) {
+            sp.getPassesByLab1().setText("Direct Travel");
+        } else {
+            sp.getPassesByLab1().setText("Passes by " + passByCityNum + " cities");
+        }
+        
+        sp.getPassedByCityBox1().removeAllItems();
+        for (int i = 0; i < lastChunckCorresp -1; i++) {
+            sp.getPassedByCityBox1().addItem(tshow.getListChuncks().get(i).getCityArrival().getCityName());
+        }
+        sp.getDepTime1().setText(ltc.get(0).getSectionStartDate().toString());
+        LocalDateTime ldtLastChunck = ltc.get(lastChunckCorresp - 1).getSectionStartDate();
+        ldtLastChunck = ldtLastChunck.plusMinutes(ltc.get(lastChunckCorresp-1).getTravelDuration());
+        ldtLastChunck = ldtLastChunck.plusMinutes(ltc.get(lastChunckCorresp-1).getSectionWaitingDelay());
+        sp.getArrTime1().setText(ldtLastChunck.toString());
+        
+        sp.getTripPriceLab().setText(tshow.getPrice().toString());
+        
+        if (lastChunckCorresp == tshow.getListChuncks().size()) {
+            hideSearchResultPage(sp, Boolean.FALSE, Boolean.TRUE);
+            return;
+        }
+        
+        showSearchResultPage(sp, Boolean.FALSE, Boolean.TRUE);
+        Integer lastChunck = tshow.getListChuncks().size()-1;
+        
+        sp.getDepCityLab2().setText(ltc.get(lastChunckCorresp).getCityDeparture().getCityName());
+        sp.getArrCityLab2().setText(ltc.get(lastChunck - 1).getCityArrival().getCityName());
+        Integer passByCityNum2 = lastChunck - lastChunckCorresp;
+        if (passByCityNum2 == 0) {
+            sp.getPassesByLab2().setText("Direct Travel");
+        } else {
+            sp.getPassesByLab2().setText("Passes by " + passByCityNum2 + " cities");
+        }
+        
+        sp.getPassedByCityBox2().removeAllItems();
+        for (int i = lastChunckCorresp; i < lastChunck; i++) {
+            sp.getPassedByCityBox2().addItem(tshow.getListChuncks().get(i).getCityArrival().getCityName());
+        }
+        sp.getDepTime2().setText(ltc.get(lastChunckCorresp).getSectionStartDate().toString());
+        ldtLastChunck = ltc.get(lastChunck - 1).getSectionStartDate();
+        ldtLastChunck = ldtLastChunck.plusMinutes(ltc.get(lastChunck-1).getTravelDuration());
+        ldtLastChunck = ldtLastChunck.plusMinutes(ltc.get(lastChunck-1).getSectionWaitingDelay());
+        sp.getArrTime2().setText(ldtLastChunck.toString());
+        
     }
 }

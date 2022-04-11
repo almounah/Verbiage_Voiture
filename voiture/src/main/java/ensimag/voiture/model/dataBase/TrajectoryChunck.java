@@ -117,7 +117,7 @@ public class TrajectoryChunck {
 
     @Override
     public String toString() {
-        return "Chunck:" + cityDeparture.getCityName() + "-->" + cityArrival.getCityName();
+        return trajectoryId + " -> Chunck:" + cityDeparture.getCityName() + "-->" + cityArrival.getCityName();
     }
     
     

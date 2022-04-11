@@ -46,12 +46,12 @@ public class SearchPage extends javax.swing.JFrame {
         arrCityLab1 = new javax.swing.JLabel();
         nextButt = new javax.swing.JButton();
         prevButt = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
+        arrowLab1 = new javax.swing.JLabel();
         passedByCityBox1 = new javax.swing.JComboBox<>();
         passesByLab1 = new javax.swing.JLabel();
         depTime1 = new javax.swing.JTextField();
         arrTime1 = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
+        arrowLab2 = new javax.swing.JLabel();
         passesByLab2 = new javax.swing.JLabel();
         depTime2 = new javax.swing.JTextField();
         arrTime2 = new javax.swing.JTextField();
@@ -59,11 +59,11 @@ public class SearchPage extends javax.swing.JFrame {
         depCityLab2 = new javax.swing.JLabel();
         arrCityLab2 = new javax.swing.JLabel();
         correspondanceLab = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        bookButton = new javax.swing.JButton();
         tripPriceLab = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Departure:");
 
@@ -98,7 +98,7 @@ public class SearchPage extends javax.swing.JFrame {
 
         prevButt.setText("Previous Trip");
 
-        jLabel6.setText("------------------------------------->");
+        arrowLab1.setText("------------------------------------->");
 
         passesByLab1.setText("Passes by 4 cities");
 
@@ -106,7 +106,7 @@ public class SearchPage extends javax.swing.JFrame {
 
         arrTime1.setEditable(false);
 
-        jLabel8.setText("------------------------------------->");
+        arrowLab2.setText("------------------------------------->");
 
         passesByLab2.setText("Passes by 4 cities");
 
@@ -121,7 +121,7 @@ public class SearchPage extends javax.swing.JFrame {
         correspondanceLab.setText("1 Correspondance");
         correspondanceLab.setFont(new java.awt.Font("Cantarell", 2, 14)); // NOI18N
 
-        jButton4.setText("Book trip");
+        bookButton.setText("Book trip");
 
         tripPriceLab.setEditable(false);
 
@@ -146,7 +146,7 @@ public class SearchPage extends javax.swing.JFrame {
                                 .addGap(8, 8, 8)
                                 .addComponent(depCityLab2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(arrowLab2, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(100, 100, 100))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(167, 167, 167)
@@ -197,7 +197,7 @@ public class SearchPage extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(prevButt)
                                         .addGap(53, 53, 53)
-                                        .addComponent(jButton4))
+                                        .addComponent(bookButton))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
@@ -209,7 +209,7 @@ public class SearchPage extends javax.swing.JFrame {
                                                     .addGap(59, 59, 59)
                                                     .addComponent(totaltrips, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(arrowLab1, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(arrCityLab1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
@@ -250,7 +250,7 @@ public class SearchPage extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(depCityLabel1)
                             .addComponent(arrCityLab1)
-                            .addComponent(jLabel6))
+                            .addComponent(arrowLab1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(passedByCityBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -264,7 +264,7 @@ public class SearchPage extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(depCityLab2)
                             .addComponent(arrCityLab2)
-                            .addComponent(jLabel8))
+                            .addComponent(arrowLab2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(passedByCityBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -281,7 +281,7 @@ public class SearchPage extends javax.swing.JFrame {
                             .addComponent(tripPriceLab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel13))
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4)
+                        .addComponent(bookButton)
                         .addContainerGap())))
         );
 
@@ -290,7 +290,7 @@ public class SearchPage extends javax.swing.JFrame {
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
-        ButtonHandler.notifySearchForTrips(arrCityEntered.getText(), depCityEntered.getText(),
+        ButtonHandler.notifySearchForTrips(depCityEntered.getText(), arrCityEntered.getText(),
                                            startDateEntered.datePicker.getDate(),
                                            startDateEntered.timePicker.getTime(), this, true);
     }//GEN-LAST:event_searchButtonActionPerformed
@@ -341,19 +341,19 @@ public class SearchPage extends javax.swing.JFrame {
     private javax.swing.JLabel arrCityLab2;
     private javax.swing.JTextField arrTime1;
     private javax.swing.JTextField arrTime2;
+    private javax.swing.JLabel arrowLab1;
+    private javax.swing.JLabel arrowLab2;
+    private javax.swing.JButton bookButton;
     private javax.swing.JLabel correspondanceLab;
     private javax.swing.JTextField depCityEntered;
     private javax.swing.JLabel depCityLab2;
     private javax.swing.JLabel depCityLabel1;
     private javax.swing.JTextField depTime1;
     private javax.swing.JTextField depTime2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JButton nextButt;
     private javax.swing.JComboBox<String> passedByCityBox1;
     private javax.swing.JComboBox<String> passedByCityBox2;
@@ -453,6 +453,18 @@ public class SearchPage extends javax.swing.JFrame {
 
     public JTextField getTripPriceLab() {
         return tripPriceLab;
+    }
+
+    public JLabel getArrowLab1() {
+        return arrowLab1;
+    }
+
+    public JLabel getArrowLab2() {
+        return arrowLab2;
+    }
+
+    public JButton getBookButton() {
+        return bookButton;
     }
     
 
