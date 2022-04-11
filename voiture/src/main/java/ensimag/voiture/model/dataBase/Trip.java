@@ -4,7 +4,9 @@
  */
 package ensimag.voiture.model.dataBase;
 
+import ensimag.voiture.model.QueriesRunner;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -23,6 +25,25 @@ public class Trip {
         price = 0.0;
     }
     
+    public void addTripToDB() {
+        String query = "INSERT INTO carPool (tripId, mailUser) VALUES (?, ?)";
+        List param = Arrays.asList(tripId, User.getEmail());
+        List<String> paramType = Arrays.asList("Integer", "String");
+        
+        QueriesRunner.QuerySetter(query, param, paramType, false);
+        query = "INSERT INTO tripPlan (tripId, trajectId, sectionId) VALUES (?, ?, ?)";
+        paramType = Arrays.asList("Integer", "Integer", "Integer");
+        String query2 = "UPDATE sections SET availableSeats = availableSeats - 1 WHERE trajectId = ? AND sectionId = ?";
+        List<String> paramType2 = Arrays.asList("Integer", "Integer");
+        List param2;
+        for (TrajectoryChunck tc : listChuncks) {
+            param = Arrays.asList(tripId, tc.getTrajectoryId(), tc.getSectionId());
+            param2 = Arrays.asList(tc.getTrajectoryId(), tc.getSectionId());
+            QueriesRunner.QuerySetter(query, param, paramType, false);
+            QueriesRunner.QuerySetter(query2, param2, paramType2, false);
+        }
+        QueriesRunner.commit();
+    }
     public void addChunckToTrip(TrajectoryChunck tc) {
         listChuncks.add(tc);
     }

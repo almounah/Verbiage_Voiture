@@ -125,10 +125,11 @@ public class QueriesRunner {
             pstatement.executeUpdate();
             rslt = true;
         } catch (SQLException e) {
+            rollback();
             System.out.println(e);
         } finally {
             try {
-                if (close) {
+                if (close && !connection.isClosed()) {
                     connection.close();
                     System.out.println("Connection Closed");
                 }

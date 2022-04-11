@@ -157,4 +157,10 @@ public class ButtonHandler {
     public static void notifyShowNextTrip(SearchPage sp, boolean next) {
         ViewUpdater.showSearchTripResults(Search.getLt(), sp, next);
     }
+    
+    public static void notifyBooktrip(SearchPage sp) {
+        Trip tr = Search.getLt().get(Integer.parseInt(sp.getTripIndex().getText()));
+        tr.addTripToDB();
+        sp.dispose();
+    }
 }

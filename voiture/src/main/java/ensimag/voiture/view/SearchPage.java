@@ -122,6 +122,11 @@ public class SearchPage extends javax.swing.JFrame {
         correspondanceLab.setFont(new java.awt.Font("Cantarell", 2, 14)); // NOI18N
 
         bookButton.setText("Book trip");
+        bookButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bookButtonActionPerformed(evt);
+            }
+        });
 
         tripPriceLab.setEditable(false);
 
@@ -299,6 +304,11 @@ public class SearchPage extends javax.swing.JFrame {
         // TODO add your handling code here:
         ButtonHandler.notifyShowNextTrip(this, true);
     }//GEN-LAST:event_nextButtActionPerformed
+
+    private void bookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButtonActionPerformed
+        // TODO add your handling code here:
+        ButtonHandler.notifyBooktrip(this);
+    }//GEN-LAST:event_bookButtonActionPerformed
 
     /**
      * @param args the command line arguments

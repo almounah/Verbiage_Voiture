@@ -233,7 +233,7 @@ public class ViewUpdater {
         SearchPage sp = new SearchPage();
         
         hideSearchResultPage(sp, Boolean.TRUE, Boolean.TRUE);
-        sp.getBookButton().disable();
+        sp.getBookButton().setEnabled(false);
         
         sp.show();
     }
@@ -241,11 +241,10 @@ public class ViewUpdater {
     public static void showSearchTripResults(List<Trip> lt, SearchPage sp, boolean next) {
         if (lt.isEmpty()) {
             hideSearchResultPage(sp, Boolean.TRUE, Boolean.TRUE);
-            sp.getBookButton().disable();
+            sp.getBookButton().setEnabled(false);
             return;
         }
-        System.out.println(lt.get(1).getListChuncks());
-        sp.getBookButton().enable();
+        sp.getBookButton().setEnabled(true);
         showSearchResultPage(sp, Boolean.TRUE, Boolean.FALSE);
         Integer tripIndex = Integer.parseInt(sp.getTripIndex().getText()) - 1;
         if (next)
