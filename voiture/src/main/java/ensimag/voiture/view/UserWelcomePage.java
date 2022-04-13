@@ -53,6 +53,11 @@ public class UserWelcomePage extends javax.swing.JFrame {
         });
 
         viewTripButton.setText("View Upcoming Trips");
+        viewTripButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewTripButtonActionPerformed(evt);
+            }
+        });
 
         proposeTrajButton.setText("Manage Proposed Trajectory");
         proposeTrajButton.addActionListener(new java.awt.event.ActionListener() {
@@ -145,6 +150,11 @@ public class UserWelcomePage extends javax.swing.JFrame {
         // TODO add your handling code here:
         ButtonHandler.notifyClosedBeforeFinish();
     }//GEN-LAST:event_formWindowClosing
+
+    private void viewTripButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewTripButtonActionPerformed
+        // TODO add your handling code here:
+        ButtonHandler.notifyShowUpcomingTrip();
+    }//GEN-LAST:event_viewTripButtonActionPerformed
 
     /**
      * @param args the command line arguments

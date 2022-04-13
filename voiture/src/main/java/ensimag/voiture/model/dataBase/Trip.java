@@ -5,9 +5,11 @@
 package ensimag.voiture.model.dataBase;
 
 import ensimag.voiture.model.QueriesRunner;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -17,7 +19,8 @@ public class Trip {
     private Integer tripId;
     private Double price;
     private List<TrajectoryChunck> listChuncks;
-    private Boolean correspondanceBool;
+    private Boolean correspondanceBool = false;
+    private String driverFirstName;
 
     public Trip(Integer tripId) {
         this.tripId = tripId;
@@ -44,8 +47,13 @@ public class Trip {
         }
         QueriesRunner.commit();
     }
+    
     public void addChunckToTrip(TrajectoryChunck tc) {
         listChuncks.add(tc);
+    }
+    
+    public void addChunckToTrip(TrajectoryChunck tc, Integer pos) {
+        listChuncks.add(pos, tc);
     }
 
     public void setPrice(Double price) {

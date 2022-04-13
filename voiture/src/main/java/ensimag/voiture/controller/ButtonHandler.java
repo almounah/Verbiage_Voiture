@@ -18,6 +18,7 @@ import ensimag.voiture.view.CarHomePage;
 import ensimag.voiture.view.LoginPage;
 import ensimag.voiture.view.SearchPage;
 import ensimag.voiture.view.TrajectoryHomePage;
+import ensimag.voiture.view.ViewTripPage;
 import java.sql.Savepoint;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -162,5 +163,14 @@ public class ButtonHandler {
         Trip tr = Search.getLt().get(Integer.parseInt(sp.getTripIndex().getText()));
         tr.addTripToDB();
         sp.dispose();
+    }
+    
+    public static void notifyShowUpcomingTrip() {
+        User.getUserListOfTripsDB();
+        ViewUpdater.showBookedTrip(User.getListTrip());
+    }
+    
+    public static void notifyShowNextUpcomingTrip(boolean next, ViewTripPage vtp) {
+        ViewUpdater.showBookedTrip(User.getListTrip(), vtp, next);
     }
 }

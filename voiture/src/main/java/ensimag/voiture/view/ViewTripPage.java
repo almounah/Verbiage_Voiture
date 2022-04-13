@@ -5,6 +5,10 @@
 package ensimag.voiture.view;
 
 import ensimag.voiture.controller.ButtonHandler;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -51,17 +55,17 @@ public class ViewTripPage extends javax.swing.JFrame {
         depTime2 = new javax.swing.JTextField();
         arrTime2 = new javax.swing.JTextField();
         passedByCityBox2 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        validateButt1 = new javax.swing.JButton();
+        validateButt2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         depCityLab2.setText("DepCity");
 
         arrCityLab2.setText("ArrCity");
 
-        correspondanceLab.setText("1 Correspondance");
         correspondanceLab.setFont(new java.awt.Font("Cantarell", 2, 14)); // NOI18N
+        correspondanceLab.setText("1 Correspondance");
 
         bookButton.setText("Cancel Trip");
         bookButton.addActionListener(new java.awt.event.ActionListener() {
@@ -70,8 +74,8 @@ public class ViewTripPage extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Search Result");
         jLabel3.setFont(new java.awt.Font("Cantarell", 1, 24)); // NOI18N
+        jLabel3.setText("Search Result");
 
         tripPriceLab.setEditable(false);
 
@@ -95,6 +99,11 @@ public class ViewTripPage extends javax.swing.JFrame {
         });
 
         prevButt.setText("Previous Trip");
+        prevButt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                prevButtActionPerformed(evt);
+            }
+        });
 
         arrowLab1.setText("------------------------------------->");
 
@@ -112,9 +121,9 @@ public class ViewTripPage extends javax.swing.JFrame {
 
         arrTime2.setEditable(false);
 
-        jButton1.setText("Validate and Pay");
+        validateButt1.setText("Validate and Pay");
 
-        jButton2.setText("Validate and Pay");
+        validateButt2.setText("Validate and Pay");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -142,10 +151,6 @@ public class ViewTripPage extends javax.swing.JFrame {
                                 .addComponent(arrCityLab1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel3)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(prevButt)
-                                .addGap(53, 53, 53)
-                                .addComponent(bookButton))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGap(167, 167, 167)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(passesByLab2)
@@ -156,14 +161,6 @@ public class ViewTripPage extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(arrCityLab2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tripPriceLab, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(57, 57, 57)
-                        .addComponent(nextButt)
-                        .addGap(123, 123, 123))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
@@ -172,19 +169,34 @@ public class ViewTripPage extends javax.swing.JFrame {
                                 .addComponent(passedByCityBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(arrTime1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel13)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(182, 182, 182)
+                                            .addComponent(passedByCityBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(depTime2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(182, 182, 182)
-                                        .addComponent(passedByCityBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(depTime2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
-                                .addComponent(arrTime2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(0, 50, Short.MAX_VALUE)
+                                        .addComponent(arrTime2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(tripPriceLab, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE)))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(2, 2, 2))))
+                            .addComponent(validateButt2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(validateButt1, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(2, 2, 2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(prevButt)
+                        .addGap(119, 119, 119)
+                        .addComponent(bookButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(nextButt)
+                        .addGap(26, 26, 26))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(163, 163, 163)
                 .addComponent(correspondanceLab, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -211,40 +223,40 @@ public class ViewTripPage extends javax.swing.JFrame {
                     .addComponent(passedByCityBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(depTime1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(arrTime1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                    .addComponent(validateButt1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addComponent(correspondanceLab)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(passesByLab2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(depCityLab2)
+                    .addComponent(arrCityLab2)
+                    .addComponent(arrowLab2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(passesByLab2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(depCityLab2)
-                            .addComponent(arrCityLab2)
-                            .addComponent(arrowLab2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nextButt)
+                        .addGap(26, 26, 26))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(passedByCityBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(depTime2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(arrTime2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2))
+                            .addComponent(validateButt2))
+                        .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(50, 50, 50)
                                 .addComponent(prevButt)
-                                .addGap(21, 21, 21))
+                                .addGap(18, 18, 18))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(nextButt)
-                                .addGap(19, 19, 19))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tripPriceLab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel13))
-                        .addGap(18, 18, 18)
-                        .addComponent(bookButton)))
-                .addContainerGap())
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel13)
+                                    .addComponent(tripPriceLab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(bookButton)
+                                .addContainerGap())))))
         );
 
         pack();
@@ -256,7 +268,14 @@ public class ViewTripPage extends javax.swing.JFrame {
 
     private void nextButtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtActionPerformed
         // TODO add your handling code here:
+        ButtonHandler.notifyShowNextUpcomingTrip(true, this);
     }//GEN-LAST:event_nextButtActionPerformed
+
+    private void prevButtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prevButtActionPerformed
+        // TODO add your handling code here:
+        ButtonHandler.notifyShowNextUpcomingTrip(false, this);
+
+    }//GEN-LAST:event_prevButtActionPerformed
 
     /**
      * @param args the command line arguments
@@ -306,8 +325,6 @@ public class ViewTripPage extends javax.swing.JFrame {
     private javax.swing.JLabel depCityLabel1;
     private javax.swing.JTextField depTime1;
     private javax.swing.JTextField depTime2;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JButton nextButt;
@@ -319,5 +336,108 @@ public class ViewTripPage extends javax.swing.JFrame {
     private javax.swing.JTextField totaltrips;
     private javax.swing.JTextField tripIndex;
     private javax.swing.JTextField tripPriceLab;
+    private javax.swing.JButton validateButt1;
+    private javax.swing.JButton validateButt2;
     // End of variables declaration//GEN-END:variables
+
+    public JLabel getArrCityLab1() {
+        return arrCityLab1;
+    }
+
+    public JLabel getArrCityLab2() {
+        return arrCityLab2;
+    }
+
+    public JTextField getArrTime1() {
+        return arrTime1;
+    }
+
+    public JTextField getArrTime2() {
+        return arrTime2;
+    }
+
+    public JLabel getArrowLab1() {
+        return arrowLab1;
+    }
+
+    public JLabel getArrowLab2() {
+        return arrowLab2;
+    }
+
+    public JButton getBookButton() {
+        return bookButton;
+    }
+
+    public JLabel getCorrespondanceLab() {
+        return correspondanceLab;
+    }
+
+    public JLabel getDepCityLab2() {
+        return depCityLab2;
+    }
+
+    public JLabel getDepCityLabel1() {
+        return depCityLabel1;
+    }
+
+    public JTextField getDepTime1() {
+        return depTime1;
+    }
+
+    public JTextField getDepTime2() {
+        return depTime2;
+    }
+
+    public JButton getjButton1() {
+        return validateButt1;
+    }
+
+    public JButton getjButton2() {
+        return validateButt2;
+    }
+
+    public JLabel getjLabel13() {
+        return jLabel13;
+    }
+
+    public JLabel getjLabel3() {
+        return jLabel3;
+    }
+
+    public JButton getNextButt() {
+        return nextButt;
+    }
+
+    public JComboBox<String> getPassedByCityBox1() {
+        return passedByCityBox1;
+    }
+
+    public JComboBox<String> getPassedByCityBox2() {
+        return passedByCityBox2;
+    }
+
+    public JLabel getPassesByLab1() {
+        return passesByLab1;
+    }
+
+    public JLabel getPassesByLab2() {
+        return passesByLab2;
+    }
+
+    public JButton getPrevButt() {
+        return prevButt;
+    }
+
+    public JTextField getTotaltrips() {
+        return totaltrips;
+    }
+
+    public JTextField getTripIndex() {
+        return tripIndex;
+    }
+
+    public JTextField getTripPriceLab() {
+        return tripPriceLab;
+    }
+    
 }

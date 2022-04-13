@@ -19,6 +19,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import oracle.sql.TIMESTAMP;
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +42,7 @@ public class User {
     private static float userWallet;
     private static List<Car> carOwned = new ArrayList<Car>();
     private static List<Trajectory> listProposedTraj = new ArrayList<Trajectory>();
+    private static List<Trip> listTrip = new ArrayList<>();
 
 
 
@@ -205,4 +208,63 @@ public class User {
     public static List<Trajectory> getListProposedTraj() {
         return listProposedTraj;
     }
+    
+    public static void getUserListOfTripsDB() {
+        listTrip = new ArrayList<>();
+        String query = 
+                "Select tp.tripId, tp.trajectId, max(tp.sectionId), min(tp.sectionId), t.drivenLicenseCar, u.USERFIRSTNAME\n" +
+                "FROM\n" +
+                "TRIPPLAN tp, carPool cp, Trajectory t, userInfo u\n" +
+                "WHERE\n" +
+                "tp.tripId = cp.tripId AND\n" +
+                "cp.mailUser = ? AND\n" +
+                "tp.trajectId = t.trajectId AND\n" +
+                "u.mailUser = t.driverMail\n" +
+                "GROUP BY tp.tripId, tp.trajectId, t.drivenLicenseCar, u.USERFIRSTNAME\n";
+        List param = Arrays.asList(User.getEmail());
+        List<String> paramType = Arrays.asList("String");
+
+        List<Trip> lt = new ArrayList<>();
+        Map<Integer, List> rsltMap = QueriesRunner.QueryGetter(query, param, paramType);
+        for (Map.Entry<Integer, List> tripInfo : rsltMap.entrySet()) {
+            Integer tripId = ((BigDecimal) tripInfo.getValue().get(0)).intValue();
+            Integer trajectId = ((BigDecimal) tripInfo.getValue().get(1)).intValue();
+            Integer maxChunck = ((BigDecimal) tripInfo.getValue().get(2)).intValue();
+            Integer minChunck = ((BigDecimal) tripInfo.getValue().get(3)).intValue();
+            String drivenCarLicense = (String) tripInfo.getValue().get(4);
+            String userFirstName = (String) tripInfo.getValue().get(5);
+
+            Trajectory traj1 = new Trajectory(trajectId, null, drivenCarLicense);
+            List<TrajectoryChunck> chunckList = traj1.getTrajectoryInforFromDB(trajectId);
+
+            Trip t = new Trip(tripId);
+            for (Trip temp:listTrip) {
+                if (temp.getTripId().equals(t.getTripId())) {
+                    t = temp;
+                    t.setCorrespondanceBool(true);
+                    listTrip.remove(temp);
+                    break;
+                }
+            }
+            Integer addIndex = t.getListChuncks().size();
+            if (!t.getListChuncks().isEmpty()) {
+                String arrCity1 = t.getListChuncks().get(t.getListChuncks().size()-1).getCityArrival().getCityName();
+                String depCity2 = chunckList.get(minChunck).getCityDeparture().getCityName();
+                if (!arrCity1.equals(depCity2)) {
+                    addIndex = 0;
+                }
+            }
+            for (int i = maxChunck; i >= minChunck; i--) {
+                t.addChunckToTrip(chunckList.get(i-1), addIndex);
+            }
+            User.listTrip.add(t);
+
+        }
+        System.out.println(User.listTrip);
+    }
+
+    public static List<Trip> getListTrip() {
+        return listTrip;
+    }
+    
 }
