@@ -249,7 +249,7 @@ public class User {
             Integer addIndex = t.getListChuncks().size();
             if (!t.getListChuncks().isEmpty()) {
                 String arrCity1 = t.getListChuncks().get(t.getListChuncks().size()-1).getCityArrival().getCityName();
-                String depCity2 = chunckList.get(minChunck).getCityDeparture().getCityName();
+                String depCity2 = chunckList.get(minChunck-1).getCityDeparture().getCityName();
                 if (!arrCity1.equals(depCity2)) {
                     addIndex = 0;
                 }

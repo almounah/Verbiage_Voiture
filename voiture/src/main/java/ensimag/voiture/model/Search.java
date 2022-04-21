@@ -29,6 +29,7 @@ public class Search {
     private static List<Trip> lt = new ArrayList<>();
     
     public static List<Trip> searchForTripNoCorresp(String cityDep, String cityArr, LocalDateTime startTime) {
+        lt = new ArrayList<>();
         String query = 
                     "Select " +
                     "DISTINCT s1.trajectId, " +
@@ -111,7 +112,7 @@ public class Search {
     }
     
     public static List<Trip> searchForTripOneCorresp(String cityDep, String cityArr, LocalDateTime startTime){
-        lt = new ArrayList<>();
+        
         String query =
                 "Select DISTINCT s1.trajectId, s2.sectionId, s1.sectionId, c1.carFiscalPower, c1.carEnergy, t1.drivenLicenseCar, u1.mailUser," +
                 " s4.trajectId, s4.sectionId, s5.sectionId, c2.carFiscalPower, c2.carEnergy, t2.drivenLicenseCar, u2.mailUser" +

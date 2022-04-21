@@ -160,7 +160,7 @@ public class ButtonHandler {
     }
     
     public static void notifyBooktrip(SearchPage sp) {
-        Trip tr = Search.getLt().get(Integer.parseInt(sp.getTripIndex().getText()));
+        Trip tr = Search.getLt().get(Integer.parseInt(sp.getTripIndex().getText())-1);
         tr.addTripToDB();
         sp.dispose();
     }
