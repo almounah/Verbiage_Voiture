@@ -380,6 +380,10 @@ public class ViewUpdater {
         vtp.show();
     }
     
+    public static void ShowValidateAndPay() {
+        //ViewValidadedTrip vtrp = new ViewValidadedTrip(); 
+    }
+    
     public static void showBookedTrip(List<Trip> lt, ViewTripPage sp, boolean next) {
         if (lt.isEmpty()) {
             return;

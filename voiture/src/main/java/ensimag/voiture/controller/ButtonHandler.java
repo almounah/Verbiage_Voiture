@@ -80,6 +80,24 @@ public class ButtonHandler {
         
         
     }
+
+
+    // Debite l'argent du passager
+    // Ajoute l'argent au conducteur
+    // Enleve une place disponible au trajet
+    // Ajoute le trajet dans les trajets du passager
+    // Ajoute un passager dans le trajet 
+    // Update la vue
+    /* @params 
+    */
+    public static void notifyValidateAndPay(Integer tripIndex ) {
+        // TODO
+       // Trouver le trip qui corresponds a tripIndex 
+       // Rajouter un passager dans le trip
+       // Debiter l'argent du passager
+       // Qui est le passager, quel parametre ? 
+       // ViewUpdater.ShowValidateAndPay();
+    }
     
     public static void notifyViewTrajectory() {
         User.getListOfTrajectoryDB();
