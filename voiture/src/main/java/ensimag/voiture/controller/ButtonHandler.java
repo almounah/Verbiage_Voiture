@@ -25,6 +25,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
+import javax.swing.JTextField;
+
 /**
  *
  * @author almounah
@@ -90,7 +92,7 @@ public class ButtonHandler {
     // Update la vue
     /* @params 
     */
-    public static void notifyValidateAndPay(Integer tripIndex ) {
+    public static void notifyValidateAndPay(JTextField tripIndex ) {
         // TODO
        // Trouver le trip qui corresponds a tripIndex 
        // Rajouter un passager dans le trip
