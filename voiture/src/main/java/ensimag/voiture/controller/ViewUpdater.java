@@ -51,6 +51,7 @@ public class ViewUpdater {
         userProfile.getEnteredEmail().setText(User.getEmail());
         userProfile.getEnteredFName().setText(User.getFirstName());
         userProfile.getEnteredLastName().setText(User.getLastName());
+        userProfile.getWalletEnteredText().setText(User.getUserWallet().toString());
         userProfile.show();
         
     }
@@ -384,7 +385,6 @@ public class ViewUpdater {
         if (lt.isEmpty()) {
             return;
         }
-        sp.getBookButton().setEnabled(true);
         showSearchResultPage(sp, Boolean.TRUE, Boolean.FALSE);
         Integer tripIndex = Integer.parseInt(sp.getTripIndex().getText()) - 1;
         if (next)

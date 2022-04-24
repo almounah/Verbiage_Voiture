@@ -182,7 +182,7 @@ public class User {
         return lastName;
     }
 
-    public static float getUserWallet() {
+    public static Float getUserWallet() {
         return userWallet;
     }
 
@@ -194,7 +194,7 @@ public class User {
         User.lastName = lastName;
     }
 
-    public static void setWalletl(int Walletl) {
+    public static void setWalletl(float Walletl) {
         User.userWallet = Walletl;
     }
 
@@ -275,5 +275,18 @@ public class User {
     public static void cancelTraj(int trajIndex) {
         listProposedTraj.get(trajIndex).cancel();
         listProposedTraj.remove(trajIndex);
+    }
+    
+    public static void updateWallet(float newWallet) {
+        String query = "Update userInfo set userWallet = ? where mailUser = ?";
+        List param = new ArrayList<>();
+        param.add(newWallet);
+        param.add(email);
+        
+        List<String> paramType = new ArrayList<>(
+            List.of("Float", "String"));
+        
+        QueriesRunner.QuerySetter(query, param, paramType, true);
+        userWallet = newWallet;
     }
 }

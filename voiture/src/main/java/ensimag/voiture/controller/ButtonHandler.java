@@ -48,6 +48,11 @@ public class ButtonHandler {
         return false;
     }
     
+    public static void notifyUpdateWallet(String walletText) {
+        User.updateWallet(Float.parseFloat(walletText));
+        ViewUpdater.viewProfile();
+    }
+    
     public static boolean notifyRegister(String email, String pass,
                                          String city, String firstName,
                                          String lastName) {

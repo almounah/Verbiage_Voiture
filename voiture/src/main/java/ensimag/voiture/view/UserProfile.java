@@ -4,6 +4,7 @@
  */
 package ensimag.voiture.view;
 
+import ensimag.voiture.controller.ButtonHandler;
 import javax.swing.JTextField;
 
 /**
@@ -37,6 +38,8 @@ public class UserProfile extends javax.swing.JFrame {
         enteredCity = new javax.swing.JTextField();
         enteredEmail = new javax.swing.JTextField();
         updateProfileButton = new javax.swing.JButton();
+        walletEnteredText = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -53,36 +56,54 @@ public class UserProfile extends javax.swing.JFrame {
 
         enteredLastName.setEditable(false);
 
+        enteredCity.setEditable(false);
+
+        enteredEmail.setEditable(false);
+
         updateProfileButton.setText("Update Profile");
+        updateProfileButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateProfileButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Wallet");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lastNameLab, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(firstnameLab, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addComponent(cityLab, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(enteredCity, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
-                            .addComponent(enteredFName)
-                            .addComponent(enteredLastName)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(emailLab)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(enteredEmail)))
-                .addGap(71, 71, 71))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(updateProfileButton)
-                .addGap(130, 130, 130))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(walletEnteredText, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(updateProfileButton)
+                                .addGap(59, 59, 59))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(66, 66, 66)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lastNameLab, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(firstnameLab, javax.swing.GroupLayout.Alignment.TRAILING))
+                                    .addComponent(cityLab, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(enteredCity, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                                    .addComponent(enteredFName)
+                                    .addComponent(enteredLastName)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(emailLab)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(enteredEmail)))))
+                .addGap(71, 71, 71))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,12 +125,22 @@ public class UserProfile extends javax.swing.JFrame {
                     .addComponent(emailLab)
                     .addComponent(enteredEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(walletEnteredText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addComponent(updateProfileButton)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addGap(24, 24, 24))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void updateProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateProfileButtonActionPerformed
+        // TODO add your handling code here:
+        ButtonHandler.notifyUpdateWallet(walletEnteredText.getText());
+        this.dispose();
+    }//GEN-LAST:event_updateProfileButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -155,8 +186,10 @@ public class UserProfile extends javax.swing.JFrame {
     private javax.swing.JTextField enteredFName;
     private javax.swing.JTextField enteredLastName;
     private javax.swing.JLabel firstnameLab;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lastNameLab;
     private javax.swing.JButton updateProfileButton;
+    private javax.swing.JTextField walletEnteredText;
     // End of variables declaration//GEN-END:variables
 
     public JTextField getEnteredCity() {
@@ -174,4 +207,9 @@ public class UserProfile extends javax.swing.JFrame {
     public JTextField getEnteredLastName() {
         return enteredLastName;
     }
+
+    public JTextField getWalletEnteredText() {
+        return walletEnteredText;
+    }
+    
 }
