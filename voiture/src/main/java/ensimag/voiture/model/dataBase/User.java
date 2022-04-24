@@ -43,10 +43,15 @@ public class User {
     private static List<Car> carOwned = new ArrayList<Car>();
     private static List<Trajectory> listProposedTraj = new ArrayList<Trajectory>();
     private static List<Trip> listTrip = new ArrayList<>();
+    
+    private static User userInstance = new User();
 
 
-
-    public User() {
+    private User() {
+    }
+    
+    public static User getInstance() {
+        return userInstance;
     }
     
     

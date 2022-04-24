@@ -35,7 +35,6 @@ public class ViewTripPage extends javax.swing.JFrame {
         depCityLab2 = new javax.swing.JLabel();
         arrCityLab2 = new javax.swing.JLabel();
         correspondanceLab = new javax.swing.JLabel();
-        bookButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         tripPriceLab = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
@@ -66,13 +65,6 @@ public class ViewTripPage extends javax.swing.JFrame {
 
         correspondanceLab.setFont(new java.awt.Font("Cantarell", 2, 14)); // NOI18N
         correspondanceLab.setText("1 Correspondance");
-
-        bookButton.setText("Cancel Trip");
-        bookButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bookButtonActionPerformed(evt);
-            }
-        });
 
         jLabel3.setFont(new java.awt.Font("Cantarell", 1, 24)); // NOI18N
         jLabel3.setText("Search Result");
@@ -192,8 +184,6 @@ public class ViewTripPage extends javax.swing.JFrame {
                         .addGap(2, 2, 2))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(prevButt)
-                        .addGap(119, 119, 119)
-                        .addComponent(bookButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(nextButt)
                         .addGap(26, 26, 26))))
@@ -254,17 +244,11 @@ public class ViewTripPage extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel13)
                                     .addComponent(tripPriceLab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addComponent(bookButton)
-                                .addContainerGap())))))
+                                .addGap(49, 49, 49))))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void bookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bookButtonActionPerformed
 
     private void nextButtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtActionPerformed
         // TODO add your handling code here:
@@ -319,7 +303,6 @@ public class ViewTripPage extends javax.swing.JFrame {
     private javax.swing.JTextField arrTime2;
     private javax.swing.JLabel arrowLab1;
     private javax.swing.JLabel arrowLab2;
-    private javax.swing.JButton bookButton;
     private javax.swing.JLabel correspondanceLab;
     private javax.swing.JLabel depCityLab2;
     private javax.swing.JLabel depCityLabel1;
@@ -364,9 +347,6 @@ public class ViewTripPage extends javax.swing.JFrame {
         return arrowLab2;
     }
 
-    public JButton getBookButton() {
-        return bookButton;
-    }
 
     public JLabel getCorrespondanceLab() {
         return correspondanceLab;

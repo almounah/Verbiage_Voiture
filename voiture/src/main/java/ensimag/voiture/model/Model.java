@@ -4,6 +4,8 @@
  */
 package ensimag.voiture.model;
 
+import ensimag.voiture.model.dataBase.User;
+
 /**
  *
  * @author almounah
@@ -12,11 +14,13 @@ public class Model {
     private QueriesRunner queriesRunner;
     private TimeCalculator timeCalculator;
     private Search search;
+    private User user;
 
     public Model() {
         this.queriesRunner = new QueriesRunner();
         this.timeCalculator = new TimeCalculator();
         this.search = new Search();
+        this.user = User.getInstance();
     }
     
 }

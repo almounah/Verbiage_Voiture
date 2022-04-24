@@ -16,7 +16,6 @@ import ensimag.voiture.view.View;
 public class Controller {
     private ButtonHandler butHandler;
     private ViewUpdater viewUpdater;
-    private User user;
     private View view;
     private Model model;
     
@@ -25,7 +24,6 @@ public class Controller {
         this.viewUpdater = new ViewUpdater(view);
         this.butHandler = new ButtonHandler(viewUpdater);
         this.model = model;
-        this.user = new User();
         this.view = view;
     }
     

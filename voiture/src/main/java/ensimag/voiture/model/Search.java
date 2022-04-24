@@ -11,6 +11,7 @@ import ensimag.voiture.model.dataBase.User;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ import oracle.sql.TIMESTAMP;
  */
 public class Search {
     private static List<Trip> lt = new ArrayList<>();
+    private static final DecimalFormat df = new DecimalFormat("0.00");
     
     public static List<Trip> searchForTripNoCorresp(String cityDep, String cityArr, LocalDateTime startTime) {
         lt = new ArrayList<>();
@@ -109,7 +111,7 @@ public class Search {
             totDistance += tc.getTravelDistance();
         }
         
-        return kmprice*totDistance;
+        return Math.round(kmprice*totDistance*100)/100.0;
     }
     
     public static List<Trip> searchForTripOneCorresp(String cityDep, String cityArr, LocalDateTime startTime){

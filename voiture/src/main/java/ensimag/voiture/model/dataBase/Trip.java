@@ -57,6 +57,7 @@ public class Trip {
     }
 
     public void setPrice(Double price) {
+        
         this.price = price;
     }
 
