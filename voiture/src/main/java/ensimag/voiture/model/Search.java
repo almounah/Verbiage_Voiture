@@ -95,7 +95,7 @@ public class Search {
                 t.addChunckToTrip(chunckList.get(i-1));
             }
             
-            t.setPrice(calculateSingleTripPrice(chunckList, carEnergy, carFiscalPower));
+            t.setPrice(calculateSingleTripPrice(t.getListChuncks(), carEnergy, carFiscalPower));
             t.setCorrespondanceBool(false);
             tripList.add(t);
         }
@@ -143,7 +143,8 @@ public class Search {
                 " s4.sectionId <= s6.sectionId AND" +
                 " s6.sectionId <= s5.sectionId) AND" +
                 " POWER(POWER(s4.latDeparture - s1.longArrival,2)+POWER(s1.latArrival - s4.longDeparture,2), 0.5)<100 AND" +
-                " s4.sectionStartDate - s1.sectionStartDate + NUMTODSINTERVAL(s1.travelDuration, 'minute') < NUMTODSINTERVAL(60, 'minute'))" +
+                " s4.sectionStartDate - s1.sectionStartDate - NUMTODSINTERVAL(s1.travelDuration, 'minute') < NUMTODSINTERVAL(60, 'minute')" +
+                " AND s4.sectionStartDate > (s1.sectionStartDate + NUMTODSINTERVAL(s1.travelDuration, 'minute')))" +
                 " AND" +
                 " t1.driverMail = u1.mailUser AND" +
                 " 0 not IN (Select availableSeats" +
@@ -196,13 +197,16 @@ public class Search {
                 t.addChunckToTrip(chunckList1.get(i-1));
             }
             t.setCorrespondanceBool(true);
-
+            t.setPrice(calculateSingleTripPrice(chunckList1, carEnergy1, carFiscalPower1));
+            
+            List<TrajectoryChunck> temp = new ArrayList<>();
             for (int i = startIndex2; i <= endIndex2; i++) {
-                t.addChunckToTrip(chunckList2.get(i-1));
+                temp.add(chunckList2.get(i-1));
             }
             
-            t.setPrice(calculateSingleTripPrice(chunckList1, carEnergy1, carFiscalPower1)
-                       + calculateSingleTripPrice(chunckList2, carEnergy2, carFiscalPower2));
+            t.getListChuncks().addAll(temp);
+            
+            t.setPrice(t.getPrice() + calculateSingleTripPrice(temp, carEnergy2, carFiscalPower2));
             tripList.add(t);
             
         }

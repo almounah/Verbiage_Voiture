@@ -212,7 +212,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Cantarell" size="24" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Search Result"/>
+        <Property name="text" type="java.lang.String" value="My Trips"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tripPriceLab">

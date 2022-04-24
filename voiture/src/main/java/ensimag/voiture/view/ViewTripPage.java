@@ -67,7 +67,7 @@ public class ViewTripPage extends javax.swing.JFrame {
         correspondanceLab.setText("1 Correspondance");
 
         jLabel3.setFont(new java.awt.Font("Cantarell", 1, 24)); // NOI18N
-        jLabel3.setText("Search Result");
+        jLabel3.setText("My Trips");
 
         tripPriceLab.setEditable(false);
 
