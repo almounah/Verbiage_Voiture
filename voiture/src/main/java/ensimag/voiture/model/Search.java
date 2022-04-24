@@ -62,10 +62,11 @@ public class Search {
                     "s3.trajectId = s1.trajectId " +
                     "AND s2.sectionId <= s3.sectionId " +
                     "AND s3.sectionId <= s1.sectionId) " +
-                    "AND s2.sectionStartDate - ? < NUMTODSINTERVAL(1, 'day') ";
+                    "AND s2.sectionStartDate - ? < NUMTODSINTERVAL(1, 'day') " +
+                    "AND s2.sectionStartDate - ? > NUMTODSINTERVAL(-1, 'day')";
 
-        List param = Arrays.asList(cityArr, cityDep, Timestamp.valueOf(startTime));
-        List<String> paramType = Arrays.asList("String", "String", "Date");
+        List param = Arrays.asList(cityArr, cityDep, Timestamp.valueOf(startTime), Timestamp.valueOf(startTime));
+        List<String> paramType = Arrays.asList("String", "String", "Date", "Date");
         
         Map<Integer, List> trajRes = QueriesRunner.QueryGetter(query, param, paramType);
         List<Trip> tripList = new ArrayList<>();
@@ -130,7 +131,7 @@ public class Search {
                 " s4.trajectId = s5.trajectId AND" +
                 " NOT s4.trajectId = s1.trajectId AND" +
                 " c2.licensePlate = t2.drivenLicenseCar AND" +
-                " NOT c2.licensePlate = c1.licensePlate AND" +
+                //" NOT c2.licensePlate = c1.licensePlate AND" +
                 " t2.driverMail = u2.mailUser AND" +
                 " s5.cityArrival=? AND" +
                 " s4.sectionId <= s5.sectionId AND " +
@@ -140,7 +141,7 @@ public class Search {
                 " s4.sectionId <= s6.sectionId AND" +
                 " s6.sectionId <= s5.sectionId) AND" +
                 " POWER(POWER(s4.latDeparture - s1.longArrival,2)+POWER(s1.latArrival - s4.longDeparture,2), 0.5)<100 AND" +
-                " s4.sectionStartDate - s1.sectionStartDate + NUMTODSINTERVAL(s1.travelDuration * 60, 'SECOND') < NUMTODSINTERVAL(60, 'minute'))" +
+                " s4.sectionStartDate - s1.sectionStartDate + NUMTODSINTERVAL(s1.travelDuration, 'minute') < NUMTODSINTERVAL(60, 'minute'))" +
                 " AND" +
                 " t1.driverMail = u1.mailUser AND" +
                 " 0 not IN (Select availableSeats" +
@@ -148,9 +149,11 @@ public class Search {
                 " WHERE s3.trajectId = s1.trajectId AND" +
                 " s2.sectionId <= s3.sectionId AND" +
                 " s3.sectionId <= s1.sectionId)" +
-                " AND s2.sectionId <= s1.sectionId ";
-        List param = Arrays.asList(cityDep, cityArr);
-        List<String> paramType = Arrays.asList("String", "String");
+                " AND s2.sectionId <= s1.sectionId AND " + 
+                " s2.sectionStartDate - ? < NUMTODSINTERVAL(1, 'day') " +
+                "AND s2.sectionStartDate - ? > NUMTODSINTERVAL(-1, 'day')";;
+        List param = Arrays.asList(cityDep, cityArr, Timestamp.valueOf(startTime), Timestamp.valueOf(startTime));
+        List<String> paramType = Arrays.asList("String", "String", "Date", "Date");
         System.out.println(query);
         Map<Integer, List> trajRes = QueriesRunner.QueryGetter(query, param, paramType);
         List<Trip> tripList = new ArrayList<>();

@@ -54,7 +54,9 @@ ensimag/voiture/view/ViewTripPage$2.class
 ensimag/voiture/view/UserProfile.class
 ensimag/voiture/model/CarEnergy.class
 ensimag/voiture/view/UserWelcomePage$1.class
+ensimag/voiture/view/ViewTripPage$5.class
 ensimag/voiture/view/AddTrajPage$1.class
+ViewValidatedTrip.class
 ensimag/voiture/view/View.class
 ensimag/voiture/view/AddTrajPage.class
 ensimag/voiture/view/TrajectoryHomePage$5.class

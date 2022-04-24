@@ -267,4 +267,8 @@ public class User {
         return listTrip;
     }
     
+    public static void cancelTraj(int trajIndex) {
+        listProposedTraj.get(trajIndex).cancel();
+        listProposedTraj.remove(trajIndex);
+    }
 }

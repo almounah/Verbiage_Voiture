@@ -173,4 +173,9 @@ public class ButtonHandler {
     public static void notifyShowNextUpcomingTrip(boolean next, ViewTripPage vtp) {
         ViewUpdater.showBookedTrip(User.getListTrip(), vtp, next);
     }
+    
+    public static void notifyCancelTrajectory(int trajIndex) {
+        User.cancelTraj(trajIndex);
+        ViewUpdater.showTrajectory();
+    }
 }

@@ -123,6 +123,39 @@ public class Trajectory {
         this.trajectoryChunckList = trajectoryChunckList;
     }
     
-    
+    public void cancel() {
+        String query = "Select tripId from tripPlan where trajectId = ?";
+        List param = new ArrayList<>();
+        param.add(trajectoryId);
+        List<String> paramType = new ArrayList<>();
+        paramType.add("Integer");
+
+        Map<Integer, List> chunckList = QueriesRunner.QueryGetter(query, param, paramType);
+        
+        for (Map.Entry<Integer, List> chunckInfo : chunckList.entrySet()) {
+            Integer tripId = ((BigDecimal) chunckInfo.getValue().get(0)).intValue();
+            query = "DELETE FROM tripPlan where tripId = ?";
+            param = new ArrayList<>();
+            param.add(tripId);
+            QueriesRunner.QuerySetter(query, param, paramType, false);
+        }
+        
+        for (Map.Entry<Integer, List> chunckInfo : chunckList.entrySet()) {
+            Integer tripId = ((BigDecimal) chunckInfo.getValue().get(0)).intValue();
+            query = "DELETE FROM carPool where tripId = ?";
+            param = new ArrayList<>();
+            param.add(tripId);
+            QueriesRunner.QuerySetter(query, param, paramType, false);
+        }
+        
+        query = "Delete FROM sections where trajectId = ?";
+        param = new ArrayList<>();
+        param.add(trajectoryId);
+        QueriesRunner.QuerySetter(query, param, paramType, false);
+        
+        query = "Delete FROM trajectory where trajectId = ?";
+        QueriesRunner.QuerySetter(query, param, paramType, false);
+        QueriesRunner.commit();
+    }
     
 }
