@@ -18,6 +18,7 @@ import java.util.Map;
 public class Trip {
     private Integer tripId;
     private Double price;
+    private Double firstChunckPrice;
     private List<TrajectoryChunck> listChuncks;
     private Boolean correspondanceBool = false;
     private String driverFirstName;
@@ -89,8 +90,52 @@ public class Trip {
     public String toString() {
         return listChuncks.toString();
     }
+
+    public void setFirstChunckPrice(Double firstChunckPrice) {
+        this.firstChunckPrice = firstChunckPrice;
+    }
     
-    
+    public void validatePay() {
+        float prix = 0;
+        Integer trajId= listChuncks.get(0).getTrajectoryId();
+        if (correspondanceBool) {
+            prix = firstChunckPrice.floatValue();
+            correspondanceBool = false;
+
+            price = price - firstChunckPrice;
+        } else {
+            prix = price.floatValue();
+        }
+        for (TrajectoryChunck ch : listChuncks) {
+            if (ch.getTrajectoryId().equals(trajId)) {
+                listChuncks.remove(ch);
+            }
+        }
+        String query = "Update userInfo\n" +
+                        "set userWallet = userWallet + ?\n" +
+                        "where mailUser IN (\n" +
+                        "Select distinct drivermail\n" +
+                        "From Trajectory tj, TRIPPLAN tp \n" +
+                        "WHERE\n" +
+                        "tj.trajectId = tp.trajectId AND tripId=? and tp.trajectId = ?)";
+        List param = Arrays.asList(prix, tripId, trajId);
+        List<String> paramType = Arrays.asList("Float", "Integer", "Integer");
+        QueriesRunner.QuerySetter(query, param, paramType, false);
+        query = "Delete From tripPlan\n" +
+                        "\n" +
+                        "where trajectId = ? AND tripId=?";
+        param = Arrays.asList(trajId, tripId);
+        paramType = Arrays.asList("Integer", "Integer");
+        QueriesRunner.QuerySetter(query, param, paramType, false);
+        if (listChuncks.isEmpty()) {
+            query = "Delete from carPool where tripId = ?";
+            param = Arrays.asList(trajId);
+            paramType = Arrays.asList("Integer");
+            QueriesRunner.QuerySetter(query, param, paramType, true);
+        }
+
+        
+    }
     
     
 }

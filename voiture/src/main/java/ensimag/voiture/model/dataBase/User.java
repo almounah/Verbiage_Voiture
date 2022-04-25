@@ -289,4 +289,10 @@ public class User {
         QueriesRunner.QuerySetter(query, param, paramType, true);
         userWallet = newWallet;
     }
+    
+    public static void validateTrip(Integer tripIndex) {
+        listTrip.get(tripIndex).validatePay();
+        if (listTrip.get(tripIndex).getListChuncks().isEmpty())
+            listTrip.remove(tripIndex);
+    }
 }

@@ -372,6 +372,7 @@ public class ViewUpdater {
         ldtLastChunck = ldtLastChunck.plusMinutes(ltc.get(lastChunck).getTravelDuration());
         ldtLastChunck = ldtLastChunck.plusMinutes(ltc.get(lastChunck).getSectionWaitingDelay());
         sp.getArrTime2().setText(ldtLastChunck.toString());
+        sp.getTripPriceLab().setText(tshow.getPrice().toString());
         
     }
     

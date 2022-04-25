@@ -114,6 +114,11 @@ public class ViewTripPage extends javax.swing.JFrame {
         arrTime2.setEditable(false);
 
         validateButt1.setText("Validate and Pay");
+        validateButt1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                validateButt1ActionPerformed(evt);
+            }
+        });
 
         validateButt2.setText("Validate and Pay");
 
@@ -260,6 +265,12 @@ public class ViewTripPage extends javax.swing.JFrame {
         ButtonHandler.notifyShowNextUpcomingTrip(false, this);
 
     }//GEN-LAST:event_prevButtActionPerformed
+
+    private void validateButt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validateButt1ActionPerformed
+        // TODO add your handling code here:
+        ButtonHandler.notifyValidateAndPay(tripIndex.getText());
+        this.dispose();
+    }//GEN-LAST:event_validateButt1ActionPerformed
 
     /**
      * @param args the command line arguments

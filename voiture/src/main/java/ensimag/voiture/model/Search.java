@@ -198,7 +198,7 @@ public class Search {
             }
             t.setCorrespondanceBool(true);
             t.setPrice(calculateSingleTripPrice(chunckList1, carEnergy1, carFiscalPower1));
-            
+            t.setFirstChunckPrice(calculateSingleTripPrice(chunckList1, carEnergy1, carFiscalPower1));
             List<TrajectoryChunck> temp = new ArrayList<>();
             for (int i = startIndex2; i <= endIndex2; i++) {
                 temp.add(chunckList2.get(i-1));
