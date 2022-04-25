@@ -17,7 +17,7 @@ import java.util.Map;
  */
 public class Trip {
     private Integer tripId;
-    private Double price;
+    private Double price = 0.0;
     private Double firstChunckPrice;
     private List<TrajectoryChunck> listChuncks;
     private Boolean correspondanceBool = false;
@@ -104,13 +104,17 @@ public class Trip {
 
             price = price - firstChunckPrice;
         } else {
+            
             prix = price.floatValue();
+            System.out.println(prix + price);
         }
-        for (TrajectoryChunck ch : listChuncks) {
+         List<TrajectoryChunck> listChuncksCopy = new ArrayList<>();
+        for (TrajectoryChunck ch : listChuncksCopy) {
             if (ch.getTrajectoryId().equals(trajId)) {
-                listChuncks.remove(ch);
+                listChuncksCopy.add(ch);
             }
         }
+        listChuncks.removeAll(listChuncksCopy);
         String query = "Update userInfo\n" +
                         "set userWallet = userWallet + ?\n" +
                         "where mailUser IN (\n" +

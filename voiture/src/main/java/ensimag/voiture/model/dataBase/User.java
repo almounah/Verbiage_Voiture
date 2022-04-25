@@ -9,6 +9,7 @@ package ensimag.voiture.model.dataBase;
 
 import ensimag.voiture.model.QueriesRunner;
 import ensimag.voiture.model.CarEnergy;
+import ensimag.voiture.model.Search;
 import ensimag.voiture.model.dataBase.Car;
 import ensimag.voiture.view.TrajectoryHomePage;
 import java.math.BigDecimal;
@@ -217,15 +218,16 @@ public class User {
     public static void getUserListOfTripsDB() {
         listTrip = new ArrayList<>();
         String query = 
-                "Select tp.tripId, tp.trajectId, max(tp.sectionId), min(tp.sectionId), t.drivenLicenseCar, u.USERFIRSTNAME\n" +
+                "Select tp.tripId, tp.trajectId, max(tp.sectionId), min(tp.sectionId), t.drivenLicenseCar, u.USERFIRSTNAME, c.CARENERGY, c.CARFISCALPOWER\n" +
                 "FROM\n" +
-                "TRIPPLAN tp, carPool cp, Trajectory t, userInfo u\n" +
+                "TRIPPLAN tp, carPool cp, Trajectory t, userInfo u, carInfo c\n" +
                 "WHERE\n" +
                 "tp.tripId = cp.tripId AND\n" +
                 "cp.mailUser = ? AND\n" +
+                "t.drivenLicenseCar = c.LICENSEPLATE AND\n" +
                 "tp.trajectId = t.trajectId AND\n" +
                 "u.mailUser = t.driverMail\n" +
-                "GROUP BY tp.tripId, tp.trajectId, t.drivenLicenseCar, u.USERFIRSTNAME\n";
+                "GROUP BY tp.tripId, tp.trajectId, t.drivenLicenseCar, u.USERFIRSTNAME, c.CARFISCALPOWER, c.CarEnergy, c.LICENSEPLATE\n";
         List param = Arrays.asList(User.getEmail());
         List<String> paramType = Arrays.asList("String");
 
@@ -238,7 +240,9 @@ public class User {
             Integer minChunck = ((BigDecimal) tripInfo.getValue().get(3)).intValue();
             String drivenCarLicense = (String) tripInfo.getValue().get(4);
             String userFirstName = (String) tripInfo.getValue().get(5);
-
+            CarEnergy c = CarEnergy.valueOf((String) tripInfo.getValue().get(6));
+            Float fisc = ((BigDecimal) tripInfo.getValue().get(7)).floatValue();
+            
             Trajectory traj1 = new Trajectory(trajectId, null, drivenCarLicense);
             List<TrajectoryChunck> chunckList = traj1.getTrajectoryInforFromDB(trajectId);
 
@@ -261,6 +265,7 @@ public class User {
             }
             for (int i = maxChunck; i >= minChunck; i--) {
                 t.addChunckToTrip(chunckList.get(i-1), addIndex);
+                t.setPrice(t.getPrice() + Search.calculateSingleTripPrice(chunckList, c, fisc));
             }
             User.listTrip.add(t);
 

@@ -344,8 +344,8 @@ public class ViewUpdater {
         ldtLastChunck = ldtLastChunck.plusMinutes(ltc.get(lastChunckCorresp-1).getSectionWaitingDelay());
         sp.getArrTime1().setText(ldtLastChunck.toString());
         
+        System.out.println("From view" + tshow.getPrice().toString());
         sp.getTripPriceLab().setText(tshow.getPrice().toString());
-        
         if (lastChunckCorresp == tshow.getListChuncks().size()) {
             hideSearchResultPage(sp, Boolean.FALSE, Boolean.TRUE);
             return;
@@ -372,7 +372,7 @@ public class ViewUpdater {
         ldtLastChunck = ldtLastChunck.plusMinutes(ltc.get(lastChunck).getTravelDuration());
         ldtLastChunck = ldtLastChunck.plusMinutes(ltc.get(lastChunck).getSectionWaitingDelay());
         sp.getArrTime2().setText(ldtLastChunck.toString());
-        sp.getTripPriceLab().setText(tshow.getPrice().toString());
+        
         
     }
     
