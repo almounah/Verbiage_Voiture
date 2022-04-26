@@ -186,6 +186,6 @@ public class ButtonHandler {
     
     public static void notifyValidateAndPay(String tripIndex) {
         User.validateTrip(Integer.parseInt(tripIndex)-1);
-        ViewUpdater.showBookedTrip(User.getListTrip());
+        notifyShowUpcomingTrip();
     }
 }

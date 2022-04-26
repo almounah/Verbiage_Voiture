@@ -114,6 +114,9 @@ public class Trip {
                 listChuncksCopy.add(ch);
             }
         }
+        if (prix > User.getUserWallet()) {
+            return;
+        }
         listChuncks.removeAll(listChuncksCopy);
         String query = "Update userInfo\n" +
                         "set userWallet = userWallet + ?\n" +
@@ -130,6 +133,13 @@ public class Trip {
                         "where trajectId = ? AND tripId=?";
         param = Arrays.asList(trajId, tripId);
         paramType = Arrays.asList("Integer", "Integer");
+        QueriesRunner.QuerySetter(query, param, paramType, false);
+        
+        query = "Update userInfo\n" +
+                "set userWallet = userWallet - ?\n" +
+                "where mailUser = ?";
+        param = Arrays.asList(prix, User.getEmail());
+        paramType = Arrays.asList("Float", "String");
         QueriesRunner.QuerySetter(query, param, paramType, false);
         if (listChuncks.isEmpty()) {
             query = "Delete from carPool where tripId = ?";

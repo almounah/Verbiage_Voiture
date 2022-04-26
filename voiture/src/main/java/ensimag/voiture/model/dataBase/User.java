@@ -262,11 +262,15 @@ public class User {
                 if (!arrCity1.equals(depCity2)) {
                     addIndex = 0;
                 }
+                t.setFirstChunckPrice(t.getPrice());
             }
+            List<TrajectoryChunck> tempTc = new ArrayList<>();
             for (int i = maxChunck; i >= minChunck; i--) {
                 t.addChunckToTrip(chunckList.get(i-1), addIndex);
-                t.setPrice(t.getPrice() + Search.calculateSingleTripPrice(chunckList, c, fisc));
+                tempTc.add(chunckList.get(i-1));
             }
+            t.setPrice(t.getPrice() + Search.calculateSingleTripPrice(tempTc, c, fisc));
+
             User.listTrip.add(t);
 
         }

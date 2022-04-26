@@ -403,6 +403,9 @@ public class ViewUpdater {
             Integer trajectId = ltc.get(0).getTrajectoryId();
             while(trajectId.equals(ltc.get(lastChunckCorresp).getTrajectoryId())) {
                 lastChunckCorresp++;
+            
+            showSearchResultPage(sp, Boolean.FALSE, Boolean.TRUE);
+            System.out.println("Yes correspnd");
             }
         } else {
             lastChunckCorresp = ltc.size();
@@ -429,7 +432,7 @@ public class ViewUpdater {
         
         sp.getTripPriceLab().setText(tshow.getPrice().toString());
         
-        if (lastChunckCorresp == tshow.getListChuncks().size()) {
+        if (!tshow.getCorrespondanceBool()) {
             hideSearchResultPage(sp, Boolean.FALSE, Boolean.TRUE);
             return;
         }
