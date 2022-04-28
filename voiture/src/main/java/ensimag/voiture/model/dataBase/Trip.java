@@ -139,6 +139,7 @@ public class Trip {
         param = Arrays.asList(prix, User.getEmail());
         paramType = Arrays.asList("Float", "String");
         QueriesRunner.QuerySetter(query, param, paramType, false);
+        User.setWalletl(User.getUserWallet()-prix);
         if (listChuncks.isEmpty()) {
             query = "Delete from carPool where tripId = ?";
             param = Arrays.asList(trajId);
