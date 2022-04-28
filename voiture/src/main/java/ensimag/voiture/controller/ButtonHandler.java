@@ -19,11 +19,9 @@ import ensimag.voiture.view.LoginPage;
 import ensimag.voiture.view.SearchPage;
 import ensimag.voiture.view.TrajectoryHomePage;
 import ensimag.voiture.view.ViewTripPage;
-import java.sql.Savepoint;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.List;
 
 /**
  *

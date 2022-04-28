@@ -8,7 +8,6 @@ package ensimag.voiture.model.dataBase;
 
 import ensimag.voiture.model.QueriesRunner;
 import ensimag.voiture.model.CarEnergy;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

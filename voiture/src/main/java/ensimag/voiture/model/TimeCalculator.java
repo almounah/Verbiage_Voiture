@@ -4,9 +4,7 @@
  */
 package ensimag.voiture.model;
 
-import ensimag.voiture.model.dataBase.TrajectoryChunck;
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  *

@@ -10,24 +10,11 @@ package ensimag.voiture.model.dataBase;
 import ensimag.voiture.model.QueriesRunner;
 import ensimag.voiture.model.CarEnergy;
 import ensimag.voiture.model.Search;
-import ensimag.voiture.model.dataBase.Car;
-import ensimag.voiture.view.TrajectoryHomePage;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.sql.Date;
-import java.sql.SQLException;
-import java.time.LocalDate;
-import oracle.sql.TIMESTAMP;
-import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 /**

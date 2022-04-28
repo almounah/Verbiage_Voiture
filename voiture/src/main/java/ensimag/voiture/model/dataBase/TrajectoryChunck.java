@@ -8,15 +8,9 @@ package ensimag.voiture.model.dataBase;
 
 import ensimag.voiture.model.QueriesRunner;
 import ensimag.voiture.model.TimeCalculator;
-import ensimag.voiture.model.dataBase.Car;
-import java.nio.charset.Charset;
-import java.security.MessageDigest;
 import java.util.Arrays;
-import java.sql.Date;
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
 
 /**

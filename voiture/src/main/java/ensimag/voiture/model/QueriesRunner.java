@@ -1,14 +1,10 @@
 package ensimag.voiture.model;
 
 import java.util.List;
-import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Savepoint;
-import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,7 +12,6 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import oracle.jdbc.*;
-import oracle.jdbc.dcn.*;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license

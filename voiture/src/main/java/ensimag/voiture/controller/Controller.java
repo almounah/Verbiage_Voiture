@@ -5,8 +5,6 @@
 package ensimag.voiture.controller;
 
 import ensimag.voiture.model.Model;
-import ensimag.voiture.model.QueriesRunner;
-import ensimag.voiture.model.dataBase.User;
 import ensimag.voiture.view.View;
 
 /**

@@ -7,21 +7,14 @@ package ensimag.voiture.model;
 import ensimag.voiture.model.dataBase.Trajectory;
 import ensimag.voiture.model.dataBase.TrajectoryChunck;
 import ensimag.voiture.model.dataBase.Trip;
-import ensimag.voiture.model.dataBase.User;
 import java.math.BigDecimal;
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import oracle.sql.TIMESTAMP;
-
 /**
  *
  * @author almounah
