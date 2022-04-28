@@ -1,6 +1,6 @@
 # Projet SGBD
 
-This project is a part of the [Ensimag Working Group](http://datascience.codeforsanfrancisco.org). You can find the subject in its entirety at the following address [main chamilo](https://github.com/sfbrigade/data-science-wg).
+This project is a part of the [Ensimag Working Group](https://ensimag.grenoble-inp.fr/). You can find the subject in its entirety at the following address [main chamilo](https://chamilo.grenoble-inp.fr/courses/PHELMA4PMIPBD1/index.php).
 
 #### -- Project Status: [Completed]
 
